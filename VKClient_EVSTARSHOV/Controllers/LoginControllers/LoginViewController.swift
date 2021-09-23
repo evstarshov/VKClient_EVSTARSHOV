@@ -18,6 +18,7 @@ class LoginViewController: UIViewController {
     @IBOutlet var loginTitleView: UILabel!
     @IBOutlet var passwordTitleView: UILabel!
     @IBOutlet var titleView: UIImageView!
+    private let animator = Animator()
     
         override func viewDidLoad() {
             super.viewDidLoad()
@@ -25,6 +26,7 @@ class LoginViewController: UIViewController {
             animateTitleAppearing()
             animateFieldsAppearing()
             animateAuthButton()
+            transitioningDelegate = self
         }
     // ----------- Поля логин, пароль и кнопка входа
     
@@ -36,9 +38,12 @@ class LoginViewController: UIViewController {
     @IBAction func loginButtonPressed(_ sender: Any) {
         if isValid() {
             print("Login")
-            performSegue(
-                withIdentifier: "loginSegue",
-                sender: nil)
+            let navController = UIStoryboard(
+                name: "Main",
+                bundle: nil)
+                .instantiateViewController(withIdentifier: "FriendsNavController")
+            navController.transitioningDelegate = self
+            present(navController, animated: true)
         } else {
             showAlert()
         }
@@ -143,3 +148,13 @@ class LoginViewController: UIViewController {
 
 }
 
+extension LoginViewController: UIViewControllerTransitioningDelegate {
+    
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        animator
+    }
+    
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        animator
+    }
+}

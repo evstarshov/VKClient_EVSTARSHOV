@@ -159,18 +159,18 @@
             <objects>
                 <viewController storyboardIdentifier="AvatarVievControllerID" id="zKM-0D-J9v" customClass="AvatarVievController" customModule="VKClient_EVSTARSHOV" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="bll-Rg-ZsQ">
-                        <rect key="frame" x="0.0" y="0.0" width="390" height="790"/>
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PHL-Rj-B6t" customClass="AvatarBackShadow" customModule="VKClient_EVSTARSHOV" customModuleProvider="target">
-                                <rect key="frame" x="10" y="10" width="370" height="618"/>
+                                <rect key="frame" x="10" y="98" width="370" height="530"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="it3-Wd-eWb">
-                                        <rect key="frame" x="0.0" y="0.0" width="370" height="618"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="370" height="530"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     </view>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="THA-jX-ecS">
-                                        <rect key="frame" x="0.0" y="3" width="370" height="612"/>
+                                        <rect key="frame" x="0.0" y="3" width="370" height="524"/>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -185,10 +185,10 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8go-Px-9Qu">
-                                <rect key="frame" x="10" y="633" width="370" height="66"/>
+                                <rect key="frame" x="10" y="633" width="370" height="71"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="9e6-tP-MyN">
-                                        <rect key="frame" x="94" y="16" width="182" height="34"/>
+                                        <rect key="frame" x="94" y="16" width="182" height="39"/>
                                     </stackView>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -202,7 +202,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1bf-rz-JT5">
-                                <rect key="frame" x="10" y="700" width="370" height="29"/>
+                                <rect key="frame" x="10" y="705" width="370" height="29"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HQH-qf-htw">
                                         <rect key="frame" x="5" y="5" width="154" height="20"/>
@@ -313,7 +313,7 @@
         <!--Друзья-->
         <scene sceneID="wcq-93-Psy">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="0QU-yC-Cke" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="FriendsNavController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="0QU-yC-Cke" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Друзья" id="41c-oJ-KxX"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="6t6-C8-Zvh">
@@ -457,7 +457,7 @@
             <objects>
                 <tableViewController id="gEG-0g-awd" customClass="FriendsTableViewController" customModule="VKClient_EVSTARSHOV" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Kv8-Ef-ezQ">
-                        <rect key="frame" x="0.0" y="0.0" width="390" height="790"/>
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <view key="tableHeaderView" contentMode="scaleToFill" id="u4k-Ur-4Pn" customClass="FriendsTableHeader" customModule="VKClient_EVSTARSHOV" customModuleProvider="target">
@@ -516,7 +516,7 @@
             <objects>
                 <viewController id="dKy-gn-yNh" customClass="AddFriendViewController" customModule="VKClient_EVSTARSHOV" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Vhz-CV-rmB">
-                        <rect key="frame" x="0.0" y="0.0" width="390" height="790"/>
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Введите имя" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Ri5-eE-9ky">
@@ -580,7 +580,7 @@
             <objects>
                 <collectionViewController id="FM5-Qn-jxe" customClass="FriendsCollectionViewController" customModule="VKClient_EVSTARSHOV" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="7Gq-qe-hSh">
-                        <rect key="frame" x="0.0" y="0.0" width="390" height="790"/>
+                        <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <collectionViewLayout key="collectionViewLayout" id="piN-k5-qTY" customClass="CollectionLayout" customModule="VKClient_EVSTARSHOV" customModuleProvider="target"/>
@@ -715,7 +715,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="uzo-wP-3dm"/>
+        <segue reference="a1H-5k-ZLM"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="circle.fill" catalog="system" width="128" height="121"/>
