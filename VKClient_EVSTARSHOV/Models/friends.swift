@@ -25,7 +25,7 @@ class Friends {
 var friendsArray = [
     Friends(image: UIImage(named: "Alena"),
             name: "Алена ",
-            secondname: "Харитонова ",
+            secondname: "Харитонова",
             groups: "Cлавянки",
             gallery: [PhotoGallery(galleryImage: UIImage(named: "1"), description: "подружка"), PhotoGallery(galleryImage: UIImage(named: "7"), description: "контент")]),
     Friends(image: UIImage(named: "Elena")!,

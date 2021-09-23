@@ -35,6 +35,7 @@
 		3A72C91526E90A41006A8480 /* NewsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A72C91426E90A41006A8480 /* NewsTableViewCell.xib */; };
 		3A72C91726E9B3AF006A8480 /* CommentNewsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A72C91626E9B3AF006A8480 /* CommentNewsTableViewController.swift */; };
 		3AC0C52626D76B0D00AB3DB5 /* FriendsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC0C52526D76B0D00AB3DB5 /* FriendsTableViewController.swift */; };
+		3AEB128326FC826D0067A954 /* Animator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AEB128226FC826D0067A954 /* Animator.swift */; };
 		3AFA188A26ED10360078E60D /* LaunchScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFA188926ED10360078E60D /* LaunchScreenViewController.swift */; };
 		3AFA189426F1F57C0078E60D /* FriendsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AFA189326F1F57C0078E60D /* FriendsTableViewCell.xib */; };
 /* End PBXBuildFile section */
@@ -70,6 +71,7 @@
 		3A72C91426E90A41006A8480 /* NewsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewsTableViewCell.xib; sourceTree = "<group>"; };
 		3A72C91626E9B3AF006A8480 /* CommentNewsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentNewsTableViewController.swift; sourceTree = "<group>"; };
 		3AC0C52526D76B0D00AB3DB5 /* FriendsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsTableViewController.swift; sourceTree = "<group>"; };
+		3AEB128226FC826D0067A954 /* Animator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animator.swift; sourceTree = "<group>"; };
 		3AFA188926ED10360078E60D /* LaunchScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenViewController.swift; sourceTree = "<group>"; };
 		3AFA189326F1F57C0078E60D /* FriendsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FriendsTableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -167,6 +169,7 @@
 				3A4E8BAC26D7DB4F003B01B5 /* groups.swift */,
 				3A72C90A26E8B9D2006A8480 /* NewsModel.swift */,
 				3A10AD4226F25EEE00FE755F /* ShadowsAndBorders.swift */,
+				3AEB128226FC826D0067A954 /* Animator.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -319,6 +322,7 @@
 				3A0E22AE26DE37F900970B82 /* UIColor + Ext.swift in Sources */,
 				3A0E22A226D9F96E00970B82 /* FriendsCollectionViewController.swift in Sources */,
 				3A10AD4026F2538800FE755F /* CollectionViewLayout.swift in Sources */,
+				3AEB128326FC826D0067A954 /* Animator.swift in Sources */,
 				3A4E8BA426D79D84003B01B5 /* friends.swift in Sources */,
 				3A72C8F926E7417B006A8480 /* AddFriendViewController.swift in Sources */,
 				3A4E8BAD26D7DB4F003B01B5 /* groups.swift in Sources */,
