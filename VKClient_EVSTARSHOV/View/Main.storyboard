@@ -47,7 +47,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ANK-hc-ZPQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-834" y="55"/>
+            <point key="canvasLocation" x="-1112" y="55"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -313,7 +313,7 @@
         <!--Друзья-->
         <scene sceneID="wcq-93-Psy">
             <objects>
-                <navigationController storyboardIdentifier="FriendsNavController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="0QU-yC-Cke" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="FriendsNavController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="0QU-yC-Cke" customClass="CustomNavController" customModule="VKClient_EVSTARSHOV" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Друзья" id="41c-oJ-KxX"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="6t6-C8-Zvh">
@@ -497,7 +497,7 @@
                     <navigationItem key="navigationItem" id="Z4k-np-Hrf">
                         <barButtonItem key="leftBarButtonItem" title="Item" image="arrowshape.turn.up.backward" catalog="system" id="ugt-48-2y5">
                             <connections>
-                                <segue destination="xi6-KJ-cje" kind="unwind" unwindAction="loginScreenWithUnwindSegue:" id="XtO-28-MVC"/>
+                                <segue destination="xi6-KJ-cje" kind="unwind" unwindAction="loginScreenWithUnwindSegue:" id="8de-NY-ef5"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="za5-Sr-g5Y">
@@ -584,7 +584,7 @@
         <!--Friends Collection View Controller-->
         <scene sceneID="wKv-ie-JP7">
             <objects>
-                <collectionViewController id="FM5-Qn-jxe" customClass="FriendsCollectionViewController" customModule="VKClient_EVSTARSHOV" customModuleProvider="target" sceneMemberID="viewController">
+                <collectionViewController storyboardIdentifier="FriendCollection" id="FM5-Qn-jxe" customClass="FriendsCollectionViewController" customModule="VKClient_EVSTARSHOV" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="7Gq-qe-hSh">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

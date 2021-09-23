@@ -5,6 +5,7 @@ import UIKit
 enum SwipeDirection {
     case left
     case right
+    case down
 }
 
 class AvatarVievController: UIViewController {
@@ -209,6 +210,14 @@ class AvatarVievController: UIViewController {
                 currentIndex += 1
                 showImage = true
             }
+        case .down:
+            let friendCollection = UIStoryboard(
+                name: "Main",
+                bundle: nil)
+                .instantiateViewController(withIdentifier: "FriendCollection")
+            //friendCollection.transitioningDelegate = AvatarVievController
+            present(friendCollection, animated: true)
+        
         }
 
         if showImage {
