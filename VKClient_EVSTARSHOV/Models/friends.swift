@@ -23,7 +23,7 @@ class Friends {
 }
 
 var friendsArray = [
-    Friends(image: UIImage(named: "Alena")!,
+    Friends(image: UIImage(named: "Alena"),
             name: "Алена ",
             secondname: "Харитонова ",
             groups: "Cлавянки",
@@ -31,11 +31,11 @@ var friendsArray = [
     Friends(image: UIImage(named: "Elena")!,
             name: "Елена ", secondname: "Филатова",
             groups: "Спортсменки", gallery: [PhotoGallery(galleryImage: UIImage(named: "2"), description: "я"), PhotoGallery(galleryImage: UIImage(named: "7"), description: "киса")]),
-    Friends(image: UIImage(named: "Maria")!,
+    Friends(image: UIImage(named: "Maria"),
             name: "Мария ", secondname: "Кичук",
             groups: "Отличницы",
             gallery: [PhotoGallery(galleryImage: UIImage(named: "3"), description: "типа я"), PhotoGallery(galleryImage: UIImage(named: "4"), description: "с подружкой")]),
-    Friends(image: UIImage(named: "Natalia")!,
+    Friends(image: UIImage(named: "Natalia"),
             name: "Наталья ",
             secondname: "Харитонова",
             groups: "Cлавянки",
