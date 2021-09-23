@@ -12,6 +12,7 @@ class FriendsTableViewController: UITableViewController {
     @IBOutlet var searchFriendsBar: UISearchBar!
     @IBOutlet var tableViewHeader: FriendsTableHeader!
     
+    private let animator = Animator()
     private var sectionTitles: [String] = []
     
     private var friends = [Friends]() {
@@ -80,6 +81,8 @@ class FriendsTableViewController: UITableViewController {
         tableViewHeader.imageView.contentMode = .scaleAspectFill
         tableView.tableHeaderView = tableViewHeader
         sortingFriends()
+        
+        navigationController?.delegate = self
         
     }
     
@@ -189,6 +192,25 @@ extension FriendsTableViewController: UISearchBarDelegate {
     }
 
 }
-// ---- Расширения для работы поисковой строки
+// ---- Расширения для работы анимации в NavigationController
+
+extension FriendsTableViewController: UINavigationControllerDelegate {
+    func navigationController (
+    _ navigationController: UINavigationController,
+    animationControllerFor operation: UINavigationController.Operation,
+    from fromVC: UIViewController,
+    to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        switch operation {
+        case .pop:
+           return animator
+        case .push:
+            return PushAnimation()
+        case .none:
+            return nil
+        @unknown default:
+            return nil
+        }
+    }
+}
 
 

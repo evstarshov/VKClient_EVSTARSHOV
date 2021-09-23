@@ -495,6 +495,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="Z4k-np-Hrf">
+                        <barButtonItem key="leftBarButtonItem" title="Item" image="arrowshape.turn.up.backward" catalog="system" id="ugt-48-2y5">
+                            <connections>
+                                <segue destination="xi6-KJ-cje" kind="unwind" unwindAction="loginScreenWithUnwindSegue:" id="XtO-28-MVC"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="za5-Sr-g5Y">
                             <connections>
                                 <segue destination="dKy-gn-yNh" kind="show" id="FPp-fS-K08"/>
@@ -508,6 +513,7 @@
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3pW-MY-E03" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="xi6-KJ-cje" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2641.5384615384614" y="-436.49289099526067"/>
         </scene>
@@ -718,6 +724,7 @@
         <segue reference="a1H-5k-ZLM"/>
     </inferredMetricsTieBreakers>
     <resources>
+        <image name="arrowshape.turn.up.backward" catalog="system" width="128" height="106"/>
         <image name="circle.fill" catalog="system" width="128" height="121"/>
         <image name="heart" width="860" height="792"/>
         <image name="vk" width="900" height="900"/>
