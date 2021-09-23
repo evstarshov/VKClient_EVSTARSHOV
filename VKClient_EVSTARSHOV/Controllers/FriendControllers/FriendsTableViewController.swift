@@ -202,7 +202,7 @@ extension FriendsTableViewController: UINavigationControllerDelegate {
     to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         switch operation {
         case .pop:
-           return animator
+           return PopAnimation()
         case .push:
             return PushAnimation()
         case .none:
