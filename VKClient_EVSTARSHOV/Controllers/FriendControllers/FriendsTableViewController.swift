@@ -12,6 +12,7 @@ class FriendsTableViewController: UITableViewController {
     @IBOutlet var searchFriendsBar: UISearchBar!
     @IBOutlet var tableViewHeader: FriendsTableHeader!
     
+
     private var sectionTitles: [String] = []
     
     private var friends = [Friends]() {
@@ -80,6 +81,8 @@ class FriendsTableViewController: UITableViewController {
         tableViewHeader.imageView.contentMode = .scaleAspectFill
         tableView.tableHeaderView = tableViewHeader
         sortingFriends()
+        
+
         
     }
     
@@ -189,6 +192,6 @@ extension FriendsTableViewController: UISearchBarDelegate {
     }
 
 }
-// ---- Расширения для работы поисковой строки
+
 
 

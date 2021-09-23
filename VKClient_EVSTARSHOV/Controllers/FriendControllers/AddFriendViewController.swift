@@ -35,7 +35,7 @@ class AddFriendViewController: UIViewController {
             present(alertController, animated: true, completion: nil)
         }
         else {
-//            friendsArray.append(Friends(image: nil, name: addNameTextField.text! + " ", secondname: addSecondNameTextField.text!, groups: addGroupTextField.text!, gallery: "", description: ""))
+            friendsArray.append(Friends(image: nil, name: addNameTextField.text! + " ", secondname: addSecondNameTextField.text!, groups: addGroupTextField.text!, gallery: nil))
             performSegue(withIdentifier: "friendAddedSegue", sender: pressOkButton)
         }
     }
