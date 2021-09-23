@@ -26,6 +26,7 @@ class LoginViewController: UIViewController {
             animateFieldsAppearing()
             animateAuthButton()
         }
+    // ----------- Поля логин, пароль и кнопка входа
     
     @IBAction func loginScreen(unwindSegue: UIStoryboardSegue) {
         loginTextField.text = ""
@@ -43,6 +44,7 @@ class LoginViewController: UIViewController {
         }
     }
     
+    // -------- Всплывающее окно при неправильном вводе пароля
     
     private func showAlert() {
         let alertController = UIAlertController(
@@ -62,6 +64,8 @@ class LoginViewController: UIViewController {
                 completion: nil)
     }
     
+    // ---- Переход на следующий экран
+    
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         if identifier == "loginSegue" {
             return isValid()
@@ -70,6 +74,7 @@ class LoginViewController: UIViewController {
         }
     }
 
+    // ----- Проверка правильности ввода логина и пароля
     
     func isValid() -> Bool {
         if loginTextField.text == ""
