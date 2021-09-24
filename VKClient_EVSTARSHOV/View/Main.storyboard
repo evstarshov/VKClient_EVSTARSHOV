@@ -119,7 +119,7 @@
         <!--Avatar Viev Controller-->
         <scene sceneID="ko1-F3-1EN">
             <objects>
-                <viewController storyboardIdentifier="AvatarVievControllerID" id="zKM-0D-J9v" customClass="AvatarVievController" customModule="VKClient_EVSTARSHOV" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AvatarVievControllerID" useStoryboardIdentifierAsRestorationIdentifier="YES" id="zKM-0D-J9v" customClass="AvatarVievController" customModule="VKClient_EVSTARSHOV" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="bll-Rg-ZsQ">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -264,6 +264,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QpH-m4-xcn">
+                                <rect key="frame" x="16" y="129" width="358" height="576"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6Jg-zg-9JF">
                                 <rect key="frame" x="16" y="129" width="358" height="586"/>
                             </imageView>
@@ -280,6 +285,7 @@
                     <navigationItem key="navigationItem" id="HEd-Vg-faT"/>
                     <connections>
                         <outlet property="fullScreen" destination="6Jg-zg-9JF" id="ecU-Y0-50p"/>
+                        <outlet property="slider" destination="QpH-m4-xcn" id="Fo2-4S-lmX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uQw-vb-6Le" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
