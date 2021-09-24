@@ -38,6 +38,7 @@
 		3AEB128326FC826D0067A954 /* Animator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AEB128226FC826D0067A954 /* Animator.swift */; };
 		3AEB128526FC98FA0067A954 /* NavigationControllerAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AEB128426FC98FA0067A954 /* NavigationControllerAnimation.swift */; };
 		3AEB128726FCAC800067A954 /* CustomNavContriller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AEB128626FCAC800067A954 /* CustomNavContriller.swift */; };
+		3AEB128926FCD4E50067A954 /* AvatarFullScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AEB128826FCD4E50067A954 /* AvatarFullScreenViewController.swift */; };
 		3AFA188A26ED10360078E60D /* LaunchScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFA188926ED10360078E60D /* LaunchScreenViewController.swift */; };
 		3AFA189426F1F57C0078E60D /* FriendsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AFA189326F1F57C0078E60D /* FriendsTableViewCell.xib */; };
 /* End PBXBuildFile section */
@@ -76,6 +77,7 @@
 		3AEB128226FC826D0067A954 /* Animator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animator.swift; sourceTree = "<group>"; };
 		3AEB128426FC98FA0067A954 /* NavigationControllerAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationControllerAnimation.swift; sourceTree = "<group>"; };
 		3AEB128626FCAC800067A954 /* CustomNavContriller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavContriller.swift; sourceTree = "<group>"; };
+		3AEB128826FCD4E50067A954 /* AvatarFullScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarFullScreenViewController.swift; sourceTree = "<group>"; };
 		3AFA188926ED10360078E60D /* LaunchScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenViewController.swift; sourceTree = "<group>"; };
 		3AFA189326F1F57C0078E60D /* FriendsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FriendsTableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -203,6 +205,7 @@
 				3A0E22A126D9F96E00970B82 /* FriendsCollectionViewController.swift */,
 				3A0E22A926DE26B800970B82 /* AvatarVievController.swift */,
 				3A72C8F826E7417B006A8480 /* AddFriendViewController.swift */,
+				3AEB128826FCD4E50067A954 /* AvatarFullScreenViewController.swift */,
 			);
 			path = FriendControllers;
 			sourceTree = "<group>";
@@ -334,6 +337,7 @@
 				3A72C8F926E7417B006A8480 /* AddFriendViewController.swift in Sources */,
 				3A4E8BAD26D7DB4F003B01B5 /* groups.swift in Sources */,
 				3A0E22A026D7EA8800970B82 /* GroupTableViewController.swift in Sources */,
+				3AEB128926FCD4E50067A954 /* AvatarFullScreenViewController.swift in Sources */,
 				3AEB128526FC98FA0067A954 /* NavigationControllerAnimation.swift in Sources */,
 				3A72C8FC26E76DB4006A8480 /* FriendsTableHeader.swift in Sources */,
 			);

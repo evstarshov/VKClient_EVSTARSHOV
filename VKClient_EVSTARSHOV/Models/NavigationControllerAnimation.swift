@@ -8,7 +8,7 @@
 import UIKit
 
 final class PushAnimation: NSObject, UIViewControllerAnimatedTransitioning {
-    private let animateTime = 0.5
+    private let animateTime = 1.0
     
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
         animateTime
@@ -23,8 +23,7 @@ final class PushAnimation: NSObject, UIViewControllerAnimatedTransitioning {
         transitionContext.containerView.addSubview(destination.view)
         destination.view.frame = transitionContext.containerView.frame
         destination.view.transform = CGAffineTransform(
-            translationX: source.view.bounds.width,
-            y: 0)
+            rotationAngle: .pi/2)
         
         UIView.animateKeyframes(
             withDuration: animateTime,
@@ -86,11 +85,7 @@ final class PopAnimation: NSObject, UIViewControllerAnimatedTransitioning {
         destination.view.frame = transitionContext.containerView.frame
         
         destination.view.transform = CGAffineTransform(
-            translationX: -250,
-            y: 0)
-            .concatenating(CGAffineTransform(
-                            scaleX: 0.8,
-                            y: 0.8))
+            rotationAngle: -(.pi)/2)
         
         UIView.animateKeyframes(
             withDuration: animateTime,

@@ -12,6 +12,11 @@ class FriendsCollectionViewController: UICollectionViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+//        collectionView.register(
+//            UINib(
+//                           nibName: "FriendsCollectionCell",
+//                            bundle: nil),
+//            forCellWithReuseIdentifier: "PhotoCell")
     }
 
     // ------ Получение количества ячеек из массива
@@ -53,8 +58,8 @@ class FriendsCollectionViewController: UICollectionViewController {
 //        print(image)
 //
 //        let avatarVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "AvatarVievControllerID") as! AvatarVievController
-////                   navigationController?.pushViewController(avatarVC, animated: true)
-////        avatarVC.modalPresentationStyle = .fullScreen
+//                   navigationController?.pushViewController(avatarVC, animated: true)
+//        avatarVC.modalPresentationStyle = .fullScreen
 //        present(avatarVC, animated: true)
 //        avatarVC.friend = image
 //    }

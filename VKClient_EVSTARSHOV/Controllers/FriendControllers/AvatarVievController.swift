@@ -6,6 +6,7 @@ enum SwipeDirection {
     case left
     case right
     case down
+    case up
 }
 
 class AvatarVievController: UIViewController {
@@ -16,7 +17,6 @@ class AvatarVievController: UIViewController {
     @IBOutlet var avatarLabel: UILabel!
     @IBOutlet var likeButton: UIButton!
     @IBOutlet var likeLabel: UILabel!
-    //private var imageView: UIImageView?
     private var indicatorImages = [UIImageView]()
     var likes = 0
     private var friend: Friends?
@@ -155,8 +155,9 @@ class AvatarVievController: UIViewController {
         }
         
     }
-
     
+    
+
     // --------- Блок анимаций перелистывания
     
     
@@ -189,6 +190,10 @@ class AvatarVievController: UIViewController {
             if abs(translation.x) > 50 {
                 changeSlide(direction: translation.x > 0 ? SwipeDirection.left : SwipeDirection.right)
             }
+            else if abs(translation.y) > 50 {
+                changeSlide(direction: translation.y > 0 ? SwipeDirection.down : SwipeDirection.up)
+            }
+            
         default:
             return
         }
@@ -211,12 +216,23 @@ class AvatarVievController: UIViewController {
                 showImage = true
             }
         case .down:
-            let friendCollection = UIStoryboard(
-                name: "Main",
-                bundle: nil)
-                .instantiateViewController(withIdentifier: "FriendCollection")
-            //friendCollection.transitioningDelegate = AvatarVievController
-            present(friendCollection, animated: true)
+            print("Swiped Down, presenting FriendsCollectionVC")
+                        let friendCollection = UIStoryboard(
+                            name: "Main",
+                            bundle: nil)
+                            .instantiateViewController(withIdentifier: "friendTable")
+                        //friendCollection.transitioningDelegate = AvatarVievController
+                        present(friendCollection, animated: true)
+            friendCollection.modalTransitionStyle = .coverVertical
+            
+        case .up:
+            print("Swiped UP, presenting FriendsTableVC")
+//            let friendCollection = UIStoryboard(
+//                name: "Main",
+//                bundle: nil)
+//                .instantiateViewController(withIdentifier: "friendTable")
+//            //friendCollection.transitioningDelegate = AvatarVievController
+//            present(friendCollection, animated: true)
         
         }
 
@@ -236,6 +252,16 @@ class AvatarVievController: UIViewController {
         }
     }
     
-
+    // ------ Переход на экран с полноразмерной фото
+    
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//            guard let selectedImage = segue.destination as? AvatarVievController
+//            else {return}
+//            let indexPath = sender as! IndexPath
+//        let selectedIndex = currentIndex
+//        selectedImage.setImage(images: avatarImage, indexAt: currentIndex)
+//        }
+//
+//    }
 
 }

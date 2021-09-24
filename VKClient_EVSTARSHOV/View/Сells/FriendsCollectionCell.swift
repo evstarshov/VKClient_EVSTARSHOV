@@ -11,17 +11,18 @@ class FriendsCollectionCell: UICollectionViewCell {
 
     @IBOutlet var friendsLabel: UILabel!
     @IBOutlet var friendsImageView: UIImageView!
-
     
+    private let animator = Animator()
     
     override func awakeFromNib() {
         let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapCollectionImageView))
         friendsImageView.addGestureRecognizer(gestureRecognizer)
         friendsImageView.isUserInteractionEnabled = true
-//        performSegue(
-//            withIdentifier: "avatarSegue",
-//            sender: nil)
-//    
+
+    }
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
     }
     
     func configureGallery(with mygallery: PhotoGallery){
