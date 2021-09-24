@@ -217,13 +217,15 @@ class AvatarVievController: UIViewController {
             }
         case .down:
             print("Swiped Down, presenting FriendsCollectionVC")
+            
+            
                         let friendCollection = UIStoryboard(
                             name: "Main",
                             bundle: nil)
                             .instantiateViewController(withIdentifier: "friendTable")
                         //friendCollection.transitioningDelegate = AvatarVievController
-                        present(friendCollection, animated: true)
-            friendCollection.modalTransitionStyle = .coverVertical
+            show(friendCollection, sender: nil)
+
             
         case .up:
             print("Swiped UP, presenting FriendsTableVC")
@@ -254,14 +256,15 @@ class AvatarVievController: UIViewController {
     
     // ------ Переход на экран с полноразмерной фото
     
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//            guard let selectedImage = segue.destination as? AvatarVievController
-//            else {return}
-//            let indexPath = sender as! IndexPath
-//        let selectedIndex = currentIndex
-//        selectedImage.setImage(images: avatarImage, indexAt: currentIndex)
-//        }
-//
-//    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+            guard let selectedImage = segue.destination as? AvatarVievController
+            else {return}
+            let indexPath = sender as! IndexPath
+        let selectedIndex = currentIndex
+//        selectedImage.configureAvatarFull(fullimage: imagesArray, selectIndex: currentIndex)
+        performSegue(withIdentifier: "segueAvatarFull", sender: avatarImage)
+        }
 
-}
+    }
+
+
