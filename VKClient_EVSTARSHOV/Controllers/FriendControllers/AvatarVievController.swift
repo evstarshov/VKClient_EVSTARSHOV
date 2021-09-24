@@ -17,9 +17,10 @@ class AvatarVievController: UIViewController {
     @IBOutlet var avatarLabel: UILabel!
     @IBOutlet var likeButton: UIButton!
     @IBOutlet var likeLabel: UILabel!
+    private let animator = Animator()
     private var indicatorImages = [UIImageView]()
     var likes = 0
-    private var friend: Friends?
+//    private var friend: Friends?
     private var imagesArray: [PhotoGallery] = []
     private var currentIndex: Int = 0 {
         didSet {
@@ -62,6 +63,10 @@ class AvatarVievController: UIViewController {
             action: #selector(swipePan(_:)))
         avatarImage?.isUserInteractionEnabled = true
         avatarImage?.addGestureRecognizer(panGR)
+        
+        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imagePressed(_:)))
+        avatarImage.addGestureRecognizer(gestureRecognizer)
+        avatarImage.isUserInteractionEnabled = true
     }
     
    // ------ индикатор слайдов
@@ -216,7 +221,7 @@ class AvatarVievController: UIViewController {
                 showImage = true
             }
         case .down:
-            print("Swiped Down, presenting FriendsCollectionVC")
+            print("Swiped Down, presenting FriendsTableVC")
             
             
                         let friendCollection = UIStoryboard(
@@ -228,7 +233,7 @@ class AvatarVievController: UIViewController {
 
             
         case .up:
-            print("Swiped UP, presenting FriendsTableVC")
+            print("Swiped UP, do nothing")
 //            let friendCollection = UIStoryboard(
 //                name: "Main",
 //                bundle: nil)
@@ -256,15 +261,52 @@ class AvatarVievController: UIViewController {
     
     // ------ Переход на экран с полноразмерной фото
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-            guard let selectedImage = segue.destination as? AvatarVievController
-            else {return}
-            let indexPath = sender as! IndexPath
-        let selectedIndex = currentIndex
-//        selectedImage.configureAvatarFull(fullimage: imagesArray, selectIndex: currentIndex)
-        performSegue(withIdentifier: "segueAvatarFull", sender: avatarImage)
-        }
-
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//            guard let selectedImage = segue.destination as? AvatarVievController
+//            else {return}
+//            //let indexPath = sender as! IndexPath
+//        let selectedIndex = currentIndex
+//        selectedImage.configureAv
+//        performSegue(withIdentifier: "segueAvatarFull", sender: avatarImage)
+//        }
+//
+//    }
+    
+    @objc func imagePressed(_ sender: Any) {
+        print("Image tapped. Presenting Full Image")
+        avatarImage.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
+            UIView.animate(
+                withDuration: 1.0,
+                delay: 0,
+                usingSpringWithDamping: 0.4,
+                initialSpringVelocity: 0.2,
+                options: .curveEaseOut,
+                animations: {
+                    self.avatarImage.transform = CGAffineTransform(scaleX: 1, y: 1)
+                },
+                completion: nil)
+        
+        
+        let fullImage = imagesArray
+        let selected = currentIndex
+        let ImageController = UIStoryboard(
+            name: "Main",
+            bundle: nil)
+            .instantiateViewController(withIdentifier: "fullAvatarImage") as! AvatarFullScreenViewController
+        ImageController.transitioningDelegate = self
+        ImageController.avatarFull(fullimage: fullImage, selectIndex: currentIndex)
+        present(ImageController, animated: true)
+        
     }
+}
 
-
+extension AvatarVievController: UIViewControllerTransitioningDelegate {
+    
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        animator
+    }
+    
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        animator
+    }
+}
