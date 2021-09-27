@@ -281,6 +281,5 @@ class AvatarVievController: UIViewController {
         ImageController.modalPresentationStyle = .automatic
         ImageController.avatarFull(fullimage: fullImage, selectIndex: selected)
         show(ImageController, sender: nil)
-        
     }
 }

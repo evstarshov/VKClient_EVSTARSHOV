@@ -9,11 +9,7 @@ import UIKit
 
 class AllGroupsTableViewController: UITableViewController {
     
-    var groups = [
-        Groups(groupname: "Спортсменки", groupimage: UIImage(named: "Спортсменка")),
-        Groups(groupname: "Славянки", groupimage: UIImage(named: "Славянка")),
-        Groups(groupname: "Отличницы", groupimage: UIImage(named: "Отличница"))
-    ]
+    var groups = groupsArray
 
     override func viewDidLoad() {
         super.viewDidLoad()

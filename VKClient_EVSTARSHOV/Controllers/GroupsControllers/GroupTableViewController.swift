@@ -40,7 +40,9 @@ class GroupTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         searchGroupBar.delegate = self
+        sort(groupsArray)
     }
+    
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         filteredGroups.count
@@ -89,7 +91,8 @@ extension GroupTableViewController {
             }
         }
         letters.sort()
-        
+        print(sortedGroups)
         return (letters, sortedGroups)
+        
     }
 }
