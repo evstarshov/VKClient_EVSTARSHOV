@@ -9,11 +9,7 @@ import UIKit
 
 class AllGroupsTableViewController: UITableViewController {
     
-    var groups = [
-        Groups(groupname: "Спортсменки", groupimage: UIImage(named: "Спортсменка")),
-        Groups(groupname: "Славянки", groupimage: UIImage(named: "Славянка")),
-        Groups(groupname: "Отличницы", groupimage: UIImage(named: "Отличница"))
-    ]
+    var groups = groupsArray
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,3 +44,24 @@ class AllGroupsTableViewController: UITableViewController {
     }
     }
 
+extension AllGroupsTableViewController {
+    private func sort(_ groupsArray: [Groups]) -> (characters: [Character], sortedGroups: [Character: [Groups]]) {
+        var letters = [Character]()
+        var sortedGroups = [Character: [Groups]]()
+        
+        groupsArray.forEach { group in
+            guard let character = group.groupname.first else { return }
+            if var thisCharGroups = sortedGroups[character] {
+                thisCharGroups.append(group)
+                sortedGroups[character] = thisCharGroups
+            } else {
+                sortedGroups[character] = [group]
+                letters.append(character)
+            }
+        }
+        letters.sort()
+        print(sortedGroups)
+        return (letters, sortedGroups)
+        
+    }
+}

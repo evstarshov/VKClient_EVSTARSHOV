@@ -6,6 +6,7 @@ enum SwipeDirection {
     case left
     case right
     case down
+    case up
 }
 
 class AvatarVievController: UIViewController {
@@ -16,10 +17,9 @@ class AvatarVievController: UIViewController {
     @IBOutlet var avatarLabel: UILabel!
     @IBOutlet var likeButton: UIButton!
     @IBOutlet var likeLabel: UILabel!
-    //private var imageView: UIImageView?
+    private let animator = Animator()
     private var indicatorImages = [UIImageView]()
     var likes = 0
-    private var friend: Friends?
     private var imagesArray: [PhotoGallery] = []
     private var currentIndex: Int = 0 {
         didSet {
@@ -27,9 +27,6 @@ class AvatarVievController: UIViewController {
             changeSliderIndicator()
         }
     }
-    
-    
-    //private var imageLabel: UILabel?
 
     //------------ Конфигурирование UIImage, UILabel
     
@@ -62,6 +59,10 @@ class AvatarVievController: UIViewController {
             action: #selector(swipePan(_:)))
         avatarImage?.isUserInteractionEnabled = true
         avatarImage?.addGestureRecognizer(panGR)
+        
+        let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imagePressed(_:)))
+        avatarImage.addGestureRecognizer(gestureRecognizer)
+        avatarImage.isUserInteractionEnabled = true
     }
     
    // ------ индикатор слайдов
@@ -155,8 +156,9 @@ class AvatarVievController: UIViewController {
         }
         
     }
-
     
+    
+
     // --------- Блок анимаций перелистывания
     
     
@@ -189,6 +191,9 @@ class AvatarVievController: UIViewController {
             if abs(translation.x) > 50 {
                 changeSlide(direction: translation.x > 0 ? SwipeDirection.left : SwipeDirection.right)
             }
+            else if abs(translation.y) > 50 {
+                changeSlide(direction: translation.y > 0 ? SwipeDirection.down : SwipeDirection.up)
+            }
         default:
             return
         }
@@ -211,12 +216,18 @@ class AvatarVievController: UIViewController {
                 showImage = true
             }
         case .down:
-            let friendCollection = UIStoryboard(
-                name: "Main",
-                bundle: nil)
-                .instantiateViewController(withIdentifier: "FriendCollection")
-            //friendCollection.transitioningDelegate = AvatarVievController
-            present(friendCollection, animated: true)
+            print("Swiped Down, presenting FriendsTableVC")
+            
+            
+                        let friendCollection = UIStoryboard(
+                            name: "Main",
+                            bundle: nil)
+                            .instantiateViewController(withIdentifier: "friendTable")
+            show(friendCollection, sender: nil)
+
+            
+        case .up:
+            print("Swiped UP, do nothing")
         
         }
 
@@ -236,6 +247,32 @@ class AvatarVievController: UIViewController {
         }
     }
     
-
-
+    // ------ Переход на экран с полноразмерной фото
+    
+    
+    @objc func imagePressed(_ sender: Any) {
+        print("Image tapped. Presenting Full Image")
+        avatarImage.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
+            UIView.animate(
+                withDuration: 1.0,
+                delay: 0,
+                usingSpringWithDamping: 0.4,
+                initialSpringVelocity: 0.2,
+                options: .curveEaseOut,
+                animations: {
+                    self.avatarImage.transform = CGAffineTransform(scaleX: 1, y: 1)
+                },
+                completion: nil)
+        
+        
+        let fullImage = imagesArray
+        let selected = currentIndex
+        let ImageController = UIStoryboard(
+            name: "Main",
+            bundle: nil)
+            .instantiateViewController(withIdentifier: "fullAvatarImage") as! AvatarFullScreenViewController
+        ImageController.modalPresentationStyle = .automatic
+        ImageController.avatarFull(fullimage: fullImage, selectIndex: selected)
+        show(ImageController, sender: nil)
+    }
 }
