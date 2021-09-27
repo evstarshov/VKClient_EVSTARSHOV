@@ -44,3 +44,24 @@ class AllGroupsTableViewController: UITableViewController {
     }
     }
 
+extension AllGroupsTableViewController {
+    private func sort(_ groupsArray: [Groups]) -> (characters: [Character], sortedGroups: [Character: [Groups]]) {
+        var letters = [Character]()
+        var sortedGroups = [Character: [Groups]]()
+        
+        groupsArray.forEach { group in
+            guard let character = group.groupname.first else { return }
+            if var thisCharGroups = sortedGroups[character] {
+                thisCharGroups.append(group)
+                sortedGroups[character] = thisCharGroups
+            } else {
+                sortedGroups[character] = [group]
+                letters.append(character)
+            }
+        }
+        letters.sort()
+        print(sortedGroups)
+        return (letters, sortedGroups)
+        
+    }
+}

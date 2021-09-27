@@ -44,5 +44,5 @@ class FriendsCollectionCell: UICollectionViewCell {
                     self.friendsImageView.transform = CGAffineTransform(scaleX: 1, y: 1)
                 },
                 completion: nil)
-        }
+    }
 }

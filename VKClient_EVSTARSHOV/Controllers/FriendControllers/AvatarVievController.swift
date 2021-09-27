@@ -223,18 +223,11 @@ class AvatarVievController: UIViewController {
                             name: "Main",
                             bundle: nil)
                             .instantiateViewController(withIdentifier: "friendTable")
-                        //friendCollection.transitioningDelegate = AvatarVievController
             show(friendCollection, sender: nil)
 
             
         case .up:
             print("Swiped UP, do nothing")
-//            let friendCollection = UIStoryboard(
-//                name: "Main",
-//                bundle: nil)
-//                .instantiateViewController(withIdentifier: "friendTable")
-//            //friendCollection.transitioningDelegate = AvatarVievController
-//            present(friendCollection, animated: true)
         
         }
 
