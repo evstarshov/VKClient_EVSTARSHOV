@@ -39,17 +39,17 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i7J-CL-IDJ" customClass="AvatarView" customModule="VKClient_EVSTARSHOV" customModuleProvider="target">
-                        <rect key="frame" x="4" y="9" width="30" height="30"/>
+                        <rect key="frame" x="4" y="8" width="32" height="32"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0Zp-eG-jz1" customClass="AvatarImage" customModule="VKClient_EVSTARSHOV" customModuleProvider="target">
-                                <rect key="frame" x="1" y="2" width="27" height="27"/>
+                                <rect key="frame" x="1" y="2" width="32" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="30" id="AkY-eb-JzH"/>
-                            <constraint firstAttribute="width" constant="30" id="tvH-5Z-swN"/>
+                            <constraint firstAttribute="height" constant="32" id="AkY-eb-JzH"/>
+                            <constraint firstAttribute="width" constant="32" id="tvH-5Z-swN"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -65,9 +65,10 @@
                     <constraint firstAttribute="bottomMargin" secondItem="xPR-Og-90S" secondAttribute="bottom" constant="-99" id="Q41-Jc-Lfa"/>
                     <constraint firstItem="xPR-Og-90S" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="225.5" id="j3r-r5-dRR"/>
                     <constraint firstItem="5ZA-qz-hjQ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="11.5" id="m3F-al-5xF"/>
-                    <constraint firstItem="i7J-CL-IDJ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="9" id="o32-1x-oRE"/>
-                    <constraint firstItem="5ZA-qz-hjQ" firstAttribute="leading" secondItem="i7J-CL-IDJ" secondAttribute="trailing" constant="10" id="seH-Jb-7Fw"/>
-                    <constraint firstItem="i7J-CL-IDJ" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="wQc-LN-sDZ"/>
+                    <constraint firstItem="i7J-CL-IDJ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="o32-1x-oRE"/>
+                    <constraint firstItem="5ZA-qz-hjQ" firstAttribute="leading" secondItem="i7J-CL-IDJ" secondAttribute="trailing" constant="8" id="seH-Jb-7Fw"/>
+                    <constraint firstItem="xj9-Vh-pDR" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="u2H-3G-Qsn"/>
+                    <constraint firstItem="i7J-CL-IDJ" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" constant="2" id="wQc-LN-sDZ"/>
                     <constraint firstAttribute="bottom" secondItem="i7J-CL-IDJ" secondAttribute="bottom" constant="4" id="xhU-Zc-7VC"/>
                 </constraints>
             </tableViewCellContentView>
