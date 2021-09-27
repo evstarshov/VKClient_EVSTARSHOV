@@ -38,12 +38,7 @@ class LoginViewController: UIViewController {
     @IBAction func loginButtonPressed(_ sender: Any) {
         if isValid() {
             print("Login")
-            let navController = UIStoryboard(
-                name: "Main",
-                bundle: nil)
-                .instantiateViewController(withIdentifier: "FriendsNavController")
-            navController.transitioningDelegate = self
-            present(navController, animated: true)
+            performSegue(withIdentifier: "loginSegue", sender: nil)
         } else {
             showAlert()
         }
