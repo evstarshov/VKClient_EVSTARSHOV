@@ -164,7 +164,7 @@ class FriendsTableViewController: UITableViewController {
     
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        74.0
+        54.0
     }
     // ------ Блок анимации
     
