@@ -11,7 +11,6 @@
 		3A0E22A226D9F96E00970B82 /* FriendsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0E22A126D9F96E00970B82 /* FriendsCollectionViewController.swift */; };
 		3A0E22A426DE147B00970B82 /* FriendsCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0E22A326DE147B00970B82 /* FriendsCollectionCell.swift */; };
 		3A0E22AA26DE26B800970B82 /* AvatarVievController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0E22A926DE26B800970B82 /* AvatarVievController.swift */; };
-		3A0E22AC26DE2E3E00970B82 /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0E22AB26DE2E3E00970B82 /* CollectionViewController.swift */; };
 		3A0E22AE26DE37F900970B82 /* UIColor + Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0E22AD26DE37F900970B82 /* UIColor + Ext.swift */; };
 		3A10AD4026F2538800FE755F /* CollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A10AD3F26F2538800FE755F /* CollectionViewLayout.swift */; };
 		3A10AD4326F25EEE00FE755F /* ShadowsAndBorders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A10AD4226F25EEE00FE755F /* ShadowsAndBorders.swift */; };
@@ -48,7 +47,6 @@
 		3A0E22A126D9F96E00970B82 /* FriendsCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsCollectionViewController.swift; sourceTree = "<group>"; };
 		3A0E22A326DE147B00970B82 /* FriendsCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsCollectionCell.swift; sourceTree = "<group>"; };
 		3A0E22A926DE26B800970B82 /* AvatarVievController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarVievController.swift; sourceTree = "<group>"; };
-		3A0E22AB26DE2E3E00970B82 /* CollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewController.swift; sourceTree = "<group>"; };
 		3A0E22AD26DE37F900970B82 /* UIColor + Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor + Ext.swift"; sourceTree = "<group>"; };
 		3A10AD3F26F2538800FE755F /* CollectionViewLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewLayout.swift; sourceTree = "<group>"; };
 		3A10AD4226F25EEE00FE755F /* ShadowsAndBorders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowsAndBorders.swift; sourceTree = "<group>"; };
@@ -152,7 +150,6 @@
 				3A72C8FD26E78243006A8480 /* TableSectionHeaderFooter */,
 				3A72C8FA26E76C33006A8480 /* TableHeaders */,
 				3A4E8BA626D7A5D6003B01B5 /* Main.storyboard */,
-				3A0E22AB26DE2E3E00970B82 /* CollectionViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -314,7 +311,6 @@
 				3A72C90B26E8B9D2006A8480 /* NewsModel.swift in Sources */,
 				3AFA188A26ED10360078E60D /* LaunchScreenViewController.swift in Sources */,
 				3A10AD4326F25EEE00FE755F /* ShadowsAndBorders.swift in Sources */,
-				3A0E22AC26DE2E3E00970B82 /* CollectionViewController.swift in Sources */,
 				3A3F00BD26D3E23A00CA9303 /* TabbarNavigationViewController.swift in Sources */,
 				3A72C8FF26E782A3006A8480 /* AllFriendsSectionHeader.swift in Sources */,
 				3A72C91726E9B3AF006A8480 /* CommentNewsTableViewController.swift in Sources */,
