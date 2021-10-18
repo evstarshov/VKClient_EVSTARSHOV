@@ -33,6 +33,7 @@
 		3A72C91026E90665006A8480 /* NewsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A72C90E26E90665006A8480 /* NewsTableViewCell.swift */; };
 		3A72C91526E90A41006A8480 /* NewsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A72C91426E90A41006A8480 /* NewsTableViewCell.xib */; };
 		3A72C91726E9B3AF006A8480 /* CommentNewsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A72C91626E9B3AF006A8480 /* CommentNewsTableViewController.swift */; };
+		3AB4D839271D8DBB00BD4589 /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB4D838271D8DBB00BD4589 /* Account.swift */; };
 		3AC0C52626D76B0D00AB3DB5 /* FriendsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC0C52526D76B0D00AB3DB5 /* FriendsTableViewController.swift */; };
 		3AEB128326FC826D0067A954 /* Animator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AEB128226FC826D0067A954 /* Animator.swift */; };
 		3AEB128526FC98FA0067A954 /* NavigationControllerAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AEB128426FC98FA0067A954 /* NavigationControllerAnimation.swift */; };
@@ -71,6 +72,7 @@
 		3A72C90E26E90665006A8480 /* NewsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsTableViewCell.swift; sourceTree = "<group>"; };
 		3A72C91426E90A41006A8480 /* NewsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewsTableViewCell.xib; sourceTree = "<group>"; };
 		3A72C91626E9B3AF006A8480 /* CommentNewsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentNewsTableViewController.swift; sourceTree = "<group>"; };
+		3AB4D838271D8DBB00BD4589 /* Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
 		3AC0C52526D76B0D00AB3DB5 /* FriendsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsTableViewController.swift; sourceTree = "<group>"; };
 		3AEB128226FC826D0067A954 /* Animator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animator.swift; sourceTree = "<group>"; };
 		3AEB128426FC98FA0067A954 /* NavigationControllerAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationControllerAnimation.swift; sourceTree = "<group>"; };
@@ -130,6 +132,7 @@
 		3A12704526C7E38C0015E7B2 /* VKClient_EVSTARSHOV */ = {
 			isa = PBXGroup;
 			children = (
+				3AB4D837271D8D8800BD4589 /* ClientServer */,
 				3A4E8BA226D79D58003B01B5 /* Models */,
 				3A12704626C7E38C0015E7B2 /* AppDelegate.swift */,
 				3A12704826C7E38C0015E7B2 /* SceneDelegate.swift */,
@@ -193,6 +196,14 @@
 				3A72C8FE26E782A3006A8480 /* AllFriendsSectionHeader.swift */,
 			);
 			path = TableSectionHeaderFooter;
+			sourceTree = "<group>";
+		};
+		3AB4D837271D8D8800BD4589 /* ClientServer */ = {
+			isa = PBXGroup;
+			children = (
+				3AB4D838271D8DBB00BD4589 /* Account.swift */,
+			);
+			path = ClientServer;
 			sourceTree = "<group>";
 		};
 		3AFA188D26F1DE2C0078E60D /* FriendControllers */ = {
@@ -317,6 +328,7 @@
 				3A12704B26C7E38C0015E7B2 /* LoginViewController.swift in Sources */,
 				3A12704726C7E38C0015E7B2 /* AppDelegate.swift in Sources */,
 				3A72C90126E7BE2C006A8480 /* AllGroupsTableViewController.swift in Sources */,
+				3AB4D839271D8DBB00BD4589 /* Account.swift in Sources */,
 				3A4E8BAA26D7A862003B01B5 /* FriendsTableViewCell.swift in Sources */,
 				3A72C91026E90665006A8480 /* NewsTableViewCell.swift in Sources */,
 				3A0E22AA26DE26B800970B82 /* AvatarVievController.swift in Sources */,
