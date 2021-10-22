@@ -37,6 +37,7 @@
 		3ADA876E27228AE200AAAAEB /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADA876D27228AE200AAAAEB /* LoginViewController.swift */; };
 		3ADA87712722AFB900AAAAEB /* FriendsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADA87702722AFB900AAAAEB /* FriendsAPI.swift */; };
 		3ADA87732722BBC200AAAAEB /* PhotoAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADA87722722BBC200AAAAEB /* PhotoAPI.swift */; };
+		3ADA87752722DE8400AAAAEB /* GroupsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADA87742722DE8400AAAAEB /* GroupsAPI.swift */; };
 		3AEB128326FC826D0067A954 /* Animator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AEB128226FC826D0067A954 /* Animator.swift */; };
 		3AEB128526FC98FA0067A954 /* NavigationControllerAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AEB128426FC98FA0067A954 /* NavigationControllerAnimation.swift */; };
 		3AEB128726FCAC800067A954 /* CustomNavContriller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AEB128626FCAC800067A954 /* CustomNavContriller.swift */; };
@@ -79,6 +80,7 @@
 		3ADA876D27228AE200AAAAEB /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		3ADA87702722AFB900AAAAEB /* FriendsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsAPI.swift; sourceTree = "<group>"; };
 		3ADA87722722BBC200AAAAEB /* PhotoAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoAPI.swift; sourceTree = "<group>"; };
+		3ADA87742722DE8400AAAAEB /* GroupsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsAPI.swift; sourceTree = "<group>"; };
 		3AEB128226FC826D0067A954 /* Animator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animator.swift; sourceTree = "<group>"; };
 		3AEB128426FC98FA0067A954 /* NavigationControllerAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationControllerAnimation.swift; sourceTree = "<group>"; };
 		3AEB128626FCAC800067A954 /* CustomNavContriller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavContriller.swift; sourceTree = "<group>"; };
@@ -224,6 +226,7 @@
 				3AB4D838271D8DBB00BD4589 /* Account.swift */,
 				3ADA87702722AFB900AAAAEB /* FriendsAPI.swift */,
 				3ADA87722722BBC200AAAAEB /* PhotoAPI.swift */,
+				3ADA87742722DE8400AAAAEB /* GroupsAPI.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -413,6 +416,7 @@
 				3AFA188A26ED10360078E60D /* LaunchScreenViewController.swift in Sources */,
 				3A10AD4326F25EEE00FE755F /* ShadowsAndBorders.swift in Sources */,
 				3A3F00BD26D3E23A00CA9303 /* TabbarNavigationViewController.swift in Sources */,
+				3ADA87752722DE8400AAAAEB /* GroupsAPI.swift in Sources */,
 				3A72C8FF26E782A3006A8480 /* AllFriendsSectionHeader.swift in Sources */,
 				3ADA876E27228AE200AAAAEB /* LoginViewController.swift in Sources */,
 				3A72C91726E9B3AF006A8480 /* CommentNewsTableViewController.swift in Sources */,
