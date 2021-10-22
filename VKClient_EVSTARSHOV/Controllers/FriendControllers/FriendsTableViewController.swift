@@ -15,6 +15,8 @@ class FriendsTableViewController: UITableViewController {
     private var friends = friendsArray
     private var groupedFriends: [Int:[Friends]] = [:]
     
+    let friendsService = FriendsAPI()
+    
     // --- Сортировка друзей по букве
     func sortingFriends() {
         var characters: [String.Element] = []
@@ -66,6 +68,9 @@ class FriendsTableViewController: UITableViewController {
         tableViewHeader.imageView.image = UIImage(named: "tableHeader3")
         tableViewHeader.imageView.contentMode = .scaleAspectFill
         tableView.tableHeaderView = tableViewHeader
+        friendsService.getFriends { friends in
+            print("Got friends in VC")
+        }
         sortingFriends()
     }
     
