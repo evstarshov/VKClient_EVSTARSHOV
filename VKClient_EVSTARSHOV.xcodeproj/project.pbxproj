@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -36,6 +36,7 @@
 		3AC0C52626D76B0D00AB3DB5 /* FriendsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC0C52526D76B0D00AB3DB5 /* FriendsTableViewController.swift */; };
 		3ADA876E27228AE200AAAAEB /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADA876D27228AE200AAAAEB /* LoginViewController.swift */; };
 		3ADA87712722AFB900AAAAEB /* FriendsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADA87702722AFB900AAAAEB /* FriendsAPI.swift */; };
+		3ADA87732722BBC200AAAAEB /* PhotoAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADA87722722BBC200AAAAEB /* PhotoAPI.swift */; };
 		3AEB128326FC826D0067A954 /* Animator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AEB128226FC826D0067A954 /* Animator.swift */; };
 		3AEB128526FC98FA0067A954 /* NavigationControllerAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AEB128426FC98FA0067A954 /* NavigationControllerAnimation.swift */; };
 		3AEB128726FCAC800067A954 /* CustomNavContriller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AEB128626FCAC800067A954 /* CustomNavContriller.swift */; };
@@ -77,6 +78,7 @@
 		3AC0C52526D76B0D00AB3DB5 /* FriendsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsTableViewController.swift; sourceTree = "<group>"; };
 		3ADA876D27228AE200AAAAEB /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		3ADA87702722AFB900AAAAEB /* FriendsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsAPI.swift; sourceTree = "<group>"; };
+		3ADA87722722BBC200AAAAEB /* PhotoAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoAPI.swift; sourceTree = "<group>"; };
 		3AEB128226FC826D0067A954 /* Animator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animator.swift; sourceTree = "<group>"; };
 		3AEB128426FC98FA0067A954 /* NavigationControllerAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationControllerAnimation.swift; sourceTree = "<group>"; };
 		3AEB128626FCAC800067A954 /* CustomNavContriller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavContriller.swift; sourceTree = "<group>"; };
@@ -106,7 +108,6 @@
 				E76E30CB2FC2DF443DAC599E /* Pods-VKClient_EVSTARSHOV.debug.xcconfig */,
 				96A427C97CAA6FCC966B7A32 /* Pods-VKClient_EVSTARSHOV.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -222,6 +223,7 @@
 			children = (
 				3AB4D838271D8DBB00BD4589 /* Account.swift */,
 				3ADA87702722AFB900AAAAEB /* FriendsAPI.swift */,
+				3ADA87722722BBC200AAAAEB /* PhotoAPI.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -436,6 +438,7 @@
 				3A0E22A026D7EA8800970B82 /* GroupTableViewController.swift in Sources */,
 				3AEB128926FCD4E50067A954 /* AvatarFullScreenViewController.swift in Sources */,
 				3AEB128526FC98FA0067A954 /* NavigationControllerAnimation.swift in Sources */,
+				3ADA87732722BBC200AAAAEB /* PhotoAPI.swift in Sources */,
 				3A72C8FC26E76DB4006A8480 /* FriendsTableHeader.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

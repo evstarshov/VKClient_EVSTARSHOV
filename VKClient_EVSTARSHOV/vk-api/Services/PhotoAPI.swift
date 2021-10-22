@@ -1,5 +1,5 @@
 //
-//  FriendsAPI.swift
+//  PhotoAPI.swift
 //  VKClient_EVSTARSHOV
 //
 //  Created by Евгений Старшов on 22.10.2021.
@@ -8,28 +8,29 @@
 import Foundation
 import Alamofire
 
-struct Friend {
+struct Photo {
     
 }
 
-// Получение списка друзей, запрос к серверу
-
-final class FriendsAPI {
+final class PhotoAPI {
     
     let baseURL = "https://api.vk.com/method"
     let token = Account.shared.token
     let userId = Account.shared.userId
+    let album = "profile"
     let version = "5.81"
+    let photoId = ""
     
-    func getFriends(completion: @escaping([Friend]) -> ()) {
-        let method = "/friends.get"
+    func getPhotos(completion: @escaping([Photo]) -> ()) {
+        let method = "/photos.get"
         let parameters: Parameters = [
-            "user_id": userId,
-            "order": "name",
+            "owner_id": userId,
+            "album_id": album,
+            "photo_ids": photoId,
             
             "access_token": token,
-            "fields": "photo_50, photo_100",
-            "count": 10,
+            "extended": "photos.getAll",
+            "count": 2,
             "v": version
         ]
         

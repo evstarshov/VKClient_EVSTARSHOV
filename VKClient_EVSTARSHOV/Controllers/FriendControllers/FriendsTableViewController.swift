@@ -16,6 +16,7 @@ class FriendsTableViewController: UITableViewController {
     private var groupedFriends: [Int:[Friends]] = [:]
     
     let friendsService = FriendsAPI()
+    let photoService = PhotoAPI()
     
     // --- Сортировка друзей по букве
     func sortingFriends() {
@@ -70,6 +71,9 @@ class FriendsTableViewController: UITableViewController {
         tableView.tableHeaderView = tableViewHeader
         friendsService.getFriends { friends in
             print("Got friends in VC")
+        }
+        photoService.getPhotos { photos in
+            print("Got photo in VC")
         }
         sortingFriends()
     }
