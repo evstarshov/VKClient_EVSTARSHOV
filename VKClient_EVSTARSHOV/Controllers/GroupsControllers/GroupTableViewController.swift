@@ -40,6 +40,9 @@ class GroupTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         searchGroupBar.delegate = self
+        
+        //Получение JSON
+        
         groupsService.getGroups { groups in
             print("Got groups in VC")
         }

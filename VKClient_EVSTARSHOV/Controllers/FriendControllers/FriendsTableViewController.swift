@@ -69,12 +69,16 @@ class FriendsTableViewController: UITableViewController {
         tableViewHeader.imageView.image = UIImage(named: "tableHeader3")
         tableViewHeader.imageView.contentMode = .scaleAspectFill
         tableView.tableHeaderView = tableViewHeader
+        
+        // ----- Получение JSON
         friendsService.getFriends { friends in
             print("Got friends in VC")
         }
         photoService.getPhotos { photos in
             print("Got photo in VC")
         }
+        
+        // Сортировка
         sortingFriends()
     }
     
