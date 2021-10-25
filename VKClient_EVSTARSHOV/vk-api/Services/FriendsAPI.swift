@@ -36,7 +36,10 @@ final class FriendsAPI {
         let url = baseURL + method
         
         AF.request(url, method: .get, parameters: parameters).responseJSON { response in
-            print(response.value)
+            
+            debugPrint(response.data?.prettyJSON)
+            
+            //print(response.value)
         }
     }
 }
