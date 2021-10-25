@@ -471,8 +471,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="searchFriendsBar" destination="Azy-wv-EhN" id="zvg-Qe-URT"/>
-                        <outlet property="tableViewHeader" destination="u4k-Ur-4Pn" id="XHd-0H-DIY"/>
+                        <outlet property="tableViewHeader" destination="u4k-Ur-4Pn" id="3Ft-aW-by4"/>
                         <segue destination="FM5-Qn-jxe" kind="show" identifier="showPhotoSegue" id="mjF-zQ-EMw"/>
                     </connections>
                 </tableViewController>

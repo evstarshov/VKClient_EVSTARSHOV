@@ -1,9 +1,3 @@
-//
-//  Data+PrettyJSON.swift
-//  clientserver-1641
-//
-//  Created by Artur Igberdin on 21.10.2021.
-//
 
 import Foundation
 
