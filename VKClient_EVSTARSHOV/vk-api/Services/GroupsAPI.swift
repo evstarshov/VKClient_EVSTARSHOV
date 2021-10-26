@@ -19,10 +19,8 @@ final class GroupsAPI {
         let parameters: Parameters = [
             "user_id": userId,
             "extended": 1,
-            
-            
             "access_token": token,
-            "fields": "city, country, place, members_count, counters",
+            "fields": "name, photo_100",
             "count": 10,
             "v": version
         ]
@@ -37,8 +35,8 @@ final class GroupsAPI {
             do {
                 
                 let GroupsJSON = try JSONDecoder().decode(GroupsJSON.self, from: data)
-                let groups: [Group] = GroupsJSON.response.groupItems
-                completion(groups)
+                let mygroups: [Group] = GroupsJSON.response.items
+                completion(mygroups)
                 
             } catch {
                 print(error)

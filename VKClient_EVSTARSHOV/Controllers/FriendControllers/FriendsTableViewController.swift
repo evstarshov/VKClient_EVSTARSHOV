@@ -25,6 +25,8 @@ class FriendsTableViewController: UITableViewController {
         tableViewHeader.imageView.image = UIImage(named: "tableHeader3")
         tableViewHeader.imageView.contentMode = .scaleAspectFill
         tableView.tableHeaderView = tableViewHeader
+        
+        // Получение списка друзей из JSON
       
                 friendsService.getFriends { [weak self] friends in
                     self?.myfriends = friends

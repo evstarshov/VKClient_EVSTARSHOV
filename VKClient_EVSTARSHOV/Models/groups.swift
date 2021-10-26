@@ -6,9 +6,7 @@
 //
 
 import UIKit
-
-
-
+import Alamofire
 import Foundation
 
 // MARK: - Welcome
@@ -19,7 +17,7 @@ struct GroupsJSON: Codable {
 // MARK: - Response
 struct GroupsResponse: Codable {
     let count: Int
-    let groupItems: [Group]
+    let items: [Group]
 }
 
 // MARK: - Item
@@ -46,7 +44,7 @@ struct Group: Codable {
         case photo200 = "photo_200"
         case isAdmin = "is_admin"
         case photo100 = "photo_100"
-        case name
+        case name = "name"
         case screenName = "screen_name"
     }
 }
