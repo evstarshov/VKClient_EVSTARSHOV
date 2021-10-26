@@ -8,11 +8,6 @@
 import Foundation
 import Alamofire
 
-struct Group {
-    
-}
-
-
 final class GroupsAPI {
     let baseURL = "https://api.vk.com/method"
     let token = Account.shared.token
@@ -35,7 +30,19 @@ final class GroupsAPI {
         let url = baseURL + method
         
         AF.request(url, method: .get, parameters: parameters).responseJSON { response in
-            print(response.value)
+
+            guard let data = response.data else { return }
+            debugPrint(response.data?.prettyJSON as Any)
+            
+            do {
+                
+                let GroupsJSON = try JSONDecoder().decode(GroupsJSON.self, from: data)
+                let groups: [Group] = GroupsJSON.response.groupItems
+                completion(groups)
+                
+            } catch {
+                print(error)
+            }
         }
     }
 }

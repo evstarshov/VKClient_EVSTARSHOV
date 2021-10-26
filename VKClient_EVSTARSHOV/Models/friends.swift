@@ -5,6 +5,41 @@ struct PhotoGallery {
     let description: String?
 }
 
+struct FriendsJSON: Codable {
+    let response: FriendsResponse
+}
+
+// MARK: - Response
+struct FriendsResponse: Codable {
+    let count: Int
+    let items: [Friend]
+}
+
+// MARK: - Item
+struct Friend: Codable {
+    let id: Int
+    let lastName: String
+    let photo50: String
+    let trackCode, firstName: String
+    let photo100: String
+    let deactivated: String?
+    
+    var fullName: String {
+        firstName + " " + lastName
+    }
+
+    enum CodingKeys: String, CodingKey {
+        case id
+        case lastName = "last_name"
+        case photo50 = "photo_50"
+        case trackCode = "track_code"
+        case firstName = "first_name"
+        case photo100 = "photo_100"
+        case deactivated
+    }
+}
+
+
 
 class Friends {
     let image: UIImage?
@@ -41,14 +76,6 @@ var friendsArray = [
             groups: "Cлавянки",
             gallery: [PhotoGallery(galleryImage: UIImage(named: "5"), description: "сестричка"), PhotoGallery(galleryImage: UIImage(named: "6"), description: "я опять"), PhotoGallery(galleryImage: UIImage(named: "8"), description: "просто аниме баба для контента"), PhotoGallery(galleryImage: UIImage(named: "9"), description: "тоже аниме баба для контента")])
     ]
-//var friendsArray = [
-//    Friends(image: UIImage(named: "Алена")!, name: "Алена ", secondname: "Харитонова ", groups: "Cлавянки"),
-//    Friends(image: UIImage(named: "Елена")!, name: "Елена ", secondname: "Филатова", groups: "Спортсменки"),
-//    Friends(image: UIImage(named: "Мария")!, name: "Мария ", secondname: "Кичук", groups: "Отличницы"),
-//    Friends(image: UIImage(named: "Наталья")!, name: "Наталья ", secondname: "Харитонова", groups: "Cлавянки")
-//    ]
-//
-
 
 extension Friends: Equatable {
     static func == (lhs: Friends, rhs: Friends) -> Bool {
@@ -57,29 +84,3 @@ extension Friends: Equatable {
     
 }
 
-//let galleryArray: [PhotoGallery] = [
-//
-//    PhotoGallery(galleryImage: UIImage(named: "1"), description: "подружка"),
-//    PhotoGallery(galleryImage: UIImage(named: "2"), description: "с подружкой"),
-//    PhotoGallery(galleryImage: UIImage(named: "3"), description: "сестричка"),
-//    PhotoGallery(galleryImage: UIImage(named: "4"), description: "киса"),
-//    PhotoGallery(galleryImage: UIImage(named: "5"), description: "я"),
-//    PhotoGallery(galleryImage: UIImage(named: "6"), description: "просто кошкодевочка"),
-//    PhotoGallery(galleryImage: UIImage(named: "7"), description: "просто надо что то для контента"),
-//
-//
-//]
-
-
-
-
-
-//let imagecollectionArray:[UIImage] = [
-//    UIImage(named: "1")!,
-//    UIImage(named: "2")!,
-//    UIImage(named: "3")!,
-//    UIImage(named: "4")!,
-//    UIImage(named: "5")!,
-//    UIImage(named: "6")!,
-//    UIImage(named: "7")!,
-//]
