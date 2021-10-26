@@ -38,6 +38,8 @@ class AlbumsCollectionViewController: UICollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
          guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoCell", for: indexPath) as?  AlbumCollectionCell
          else {return UICollectionViewCell()}
+        
+        cell.configureGallery(with: myalbums[indexPath.item])
 
         return cell
     }

@@ -59,6 +59,6 @@ struct Likes: Codable {
 // MARK: - Size
 struct Size: Codable {
     let width, height: Int
-    let url: String
+    let url: URL
     let type: String
 }

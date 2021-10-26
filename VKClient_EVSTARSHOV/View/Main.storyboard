@@ -278,7 +278,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dub-w2-0Mj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1286" y="-770"/>
+            <point key="canvasLocation" x="777" y="-827"/>
         </scene>
         <!--Друзья-->
         <scene sceneID="wcq-93-Psy">

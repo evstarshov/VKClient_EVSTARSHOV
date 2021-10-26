@@ -12,6 +12,7 @@ class AlbumCollectionCell: UICollectionViewCell {
     @IBOutlet var friendsLabel: UILabel!
     @IBOutlet var friendsImageView: UIImageView!
     
+    
     private let animator = Animator()
     
     override func awakeFromNib() {
@@ -25,9 +26,9 @@ class AlbumCollectionCell: UICollectionViewCell {
         
     }
     
-    func configureGallery(with mygallery: Size){
-        friendsLabel.text = nil
-        friendsImageView.image = nil
+    func configureGallery(with mygallery: Photo){
+        friendsLabel.text = mygallery.text
+        friendsImageView.loadImage(url: mygallery.sizes[0].url)
         contentMode = .scaleAspectFill
     }
     
@@ -43,5 +44,20 @@ class AlbumCollectionCell: UICollectionViewCell {
                     self.friendsImageView.transform = CGAffineTransform(scaleX: 1, y: 1)
                 },
                 completion: nil)
+    }
+}
+
+
+extension UIImageView {
+    func loadImage (url: URL) {
+        DispatchQueue.global().async { [weak self] in
+            if let data = try? Data(contentsOf: url) {
+                if let image = UIImage(data: data) {
+                    DispatchQueue.main.async {
+                        self?.image = image
+                    }
+                }
+            }
+        }
     }
 }
