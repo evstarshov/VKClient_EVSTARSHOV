@@ -1,5 +1,5 @@
 //
-//  FriendsCollectionViewController.swift
+//  AlbumsCollectionViewController.swift
 //  VKClient_EVSTARSHOV
 //
 //  Created by Евгений Старшов on 28.08.2021.
@@ -7,28 +7,28 @@
 
 import UIKit
 
-class FriendsCollectionViewController: UICollectionViewController {
-    var galleryItems: [PhotoGallery] = []
+class AlbumsCollectionViewController: UICollectionViewController {
+    
+    let photoService = PhotoAPI()
+    var myalbums: [Photo] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
-//        collectionView.register(
-//            UINib(
-//                           nibName: "FriendsCollectionCell",
-//                            bundle: nil),
-//            forCellWithReuseIdentifier: "PhotoCell")
+        
+        photoService.getPhotos { [weak self] photos in
+            self?.myalbums = photos
+            self?.collectionView.reloadData()
+        }
+        print("Got photos in VC")
+        print(myalbums)
     }
 
     // ------ Получение количества ячеек из массива
     
-    func configureGal() {
-        if galleryItems.count != 0 {
-            collectionView.reloadData()
-        }
-    }
+
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        galleryItems.count
+        myalbums.count
     }
 
     // ------- Конфигурация ячейки коллекции
@@ -36,14 +36,12 @@ class FriendsCollectionViewController: UICollectionViewController {
 
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoCell", for: indexPath) as?  FriendsCollectionCell
+         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoCell", for: indexPath) as?  AlbumCollectionCell
          else {return UICollectionViewCell()}
 
-        cell.configureGallery(with: galleryItems[indexPath.item])
-    
         return cell
     }
-    
+
 
     
 
@@ -66,13 +64,13 @@ class FriendsCollectionViewController: UICollectionViewController {
     
 
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-            guard let selectedImage = segue.destination as? AvatarVievController
-            else {return}
-            let indexPath = sender as! IndexPath
-        let selectedIndex = galleryItems[indexPath.item]
-        selectedImage.setImage(images: galleryItems, indexAt: indexPath.row)
-        }
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//            guard let selectedImage = segue.destination as? AvatarVievController
+//            else {return}
+//            let indexPath = sender as! IndexPath
+//        let selectedIndex = galleryItems[indexPath.item]
+//        selectedImage.setImage(images: galleryItems, indexAt: indexPath.row)
+//        }
 
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         performSegue(withIdentifier: "avatarSegue", sender: indexPath)
@@ -84,7 +82,7 @@ class FriendsCollectionViewController: UICollectionViewController {
 
 
 // ------- Расширение для размера ячейки
-extension FriendsCollectionViewController: UICollectionViewDelegateFlowLayout {
+extension AlbumsCollectionViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         CGSize(width: 150.0, height: 150.0)
     }

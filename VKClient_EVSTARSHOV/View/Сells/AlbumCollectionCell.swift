@@ -7,7 +7,7 @@
 
 import UIKit
 
-class FriendsCollectionCell: UICollectionViewCell {
+class AlbumCollectionCell: UICollectionViewCell {
 
     @IBOutlet var friendsLabel: UILabel!
     @IBOutlet var friendsImageView: UIImageView!
@@ -25,10 +25,9 @@ class FriendsCollectionCell: UICollectionViewCell {
         
     }
     
-    func configureGallery(with mygallery: PhotoGallery){
-        friendsLabel.text = mygallery.description
-        friendsImageView.image = mygallery.galleryImage
-        //groupLabel.text = friends.secondname
+    func configureGallery(with mygallery: Size){
+        friendsLabel.text = nil
+        friendsImageView.image = nil
         contentMode = .scaleAspectFill
     }
     

@@ -6,8 +6,6 @@
 //
 
 import UIKit
-import Alamofire
-import Foundation
 
 // MARK: - Welcome
 struct GroupsJSON: Codable {

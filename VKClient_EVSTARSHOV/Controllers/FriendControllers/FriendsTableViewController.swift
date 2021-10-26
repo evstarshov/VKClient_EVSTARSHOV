@@ -10,7 +10,6 @@ import UIKit
 class FriendsTableViewController: UITableViewController {
     @IBOutlet var tableViewHeader: FriendsTableHeader!
     let friendsService = FriendsAPI()
-    
     var myfriends: [Friend] = []
     
     override func viewDidLoad() {

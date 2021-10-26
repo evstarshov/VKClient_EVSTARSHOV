@@ -204,7 +204,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7ig-IH-Zzk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5300" y="-436.49289099526067"/>
+            <point key="canvasLocation" x="2597" y="-1612"/>
         </scene>
         <!--Avatar Full Screen View Controller-->
         <scene sceneID="Yle-6O-bdj">
@@ -240,7 +240,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uQw-vb-6Le" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="6560" y="-436.49289099526067"/>
+            <point key="canvasLocation" x="3814" y="-1864"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="lxI-M1-ocD">
@@ -256,11 +256,29 @@
                         <segue destination="0QU-yC-Cke" kind="relationship" relationship="viewControllers" id="gWO-Jl-sKb"/>
                         <segue destination="UD9-qL-6OC" kind="relationship" relationship="viewControllers" id="hfl-oh-gW6"/>
                         <segue destination="1yf-7b-v0l" kind="relationship" relationship="viewControllers" id="4go-P5-b0L"/>
+                        <segue destination="9YM-Rh-7dK" kind="relationship" relationship="viewControllers" id="2JH-DS-Fhj"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KPv-n8-5oC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="777" y="55"/>
+            <point key="canvasLocation" x="777" y="-12"/>
+        </scene>
+        <!--Альбомы-->
+        <scene sceneID="2Tk-UV-A5l">
+            <objects>
+                <navigationController id="9YM-Rh-7dK" customClass="CustomNavController" customModule="VKClient_EVSTARSHOV" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Альбомы" id="dJw-4L-ShW"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="IGv-zQ-zio">
+                        <rect key="frame" x="0.0" y="44" width="390" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="FM5-Qn-jxe" kind="relationship" relationship="rootViewController" id="pZm-DI-HcU"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Dub-w2-0Mj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1286" y="-770"/>
         </scene>
         <!--Друзья-->
         <scene sceneID="wcq-93-Psy">
@@ -301,7 +319,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5zv-48-f7Z" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1674" y="611"/>
+            <point key="canvasLocation" x="1674" y="974"/>
         </scene>
         <!--Group Table View Controller-->
         <scene sceneID="CCt-0w-b69">
@@ -353,7 +371,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aLB-br-mzD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2546" y="611"/>
+            <point key="canvasLocation" x="2545" y="974"/>
         </scene>
         <!--Новости-->
         <scene sceneID="Hkb-F0-y1E">
@@ -472,7 +490,6 @@
                     </navigationItem>
                     <connections>
                         <outlet property="tableViewHeader" destination="u4k-Ur-4Pn" id="XHd-0H-DIY"/>
-                        <segue destination="FM5-Qn-jxe" kind="show" identifier="showPhotoSegue" id="mjF-zQ-EMw"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3pW-MY-E03" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -542,19 +559,19 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wv6-Zr-Lyp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3593.8461538461538" y="-1159.4786729857819"/>
+            <point key="canvasLocation" x="3814" y="-841"/>
         </scene>
-        <!--Friends Collection View Controller-->
+        <!--Альбомы-->
         <scene sceneID="wKv-ie-JP7">
             <objects>
-                <collectionViewController storyboardIdentifier="FriendCollection" useStoryboardIdentifierAsRestorationIdentifier="YES" id="FM5-Qn-jxe" customClass="FriendsCollectionViewController" customModule="VKClient_EVSTARSHOV" customModuleProvider="target" sceneMemberID="viewController">
+                <collectionViewController title="Альбомы" useStoryboardIdentifierAsRestorationIdentifier="YES" id="FM5-Qn-jxe" customClass="AlbumsCollectionViewController" customModule="VKClient_EVSTARSHOV" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="7Gq-qe-hSh">
                         <rect key="frame" x="0.0" y="0.0" width="390" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <collectionViewLayout key="collectionViewLayout" id="piN-k5-qTY" customClass="CollectionLayout" customModule="VKClient_EVSTARSHOV" customModuleProvider="target"/>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PhotoCell" id="Oef-uR-nRc" customClass="FriendsCollectionCell" customModule="VKClient_EVSTARSHOV" customModuleProvider="target">
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PhotoCell" id="Oef-uR-nRc" customClass="AlbumCollectionCell" customModule="VKClient_EVSTARSHOV" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="168" height="170"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="mC1-aS-g4y">
@@ -616,7 +633,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mLf-7M-oQu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3593.8461538461538" y="-436.49289099526067"/>
+            <point key="canvasLocation" x="1674" y="-1611"/>
         </scene>
         <!--All Groups Table View Controller-->
         <scene sceneID="j9H-Ph-off">
@@ -651,7 +668,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sWy-Ug-E60" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="e9w-Cv-uF4" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="3502" y="611"/>
+            <point key="canvasLocation" x="3497" y="974"/>
         </scene>
         <!--Комментарии-->
         <scene sceneID="9PA-Sz-W7W">
