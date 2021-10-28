@@ -10,7 +10,7 @@ import UIKit
 class GroupTableViewController: UITableViewController {
 
     @IBOutlet var searchGroupBar: UISearchBar!
-    
+    let groupsService = GroupsAPI()
     var groups = [Groups]() {
     didSet {
         filteredGroups = groups
@@ -40,6 +40,12 @@ class GroupTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         searchGroupBar.delegate = self
+        
+        //Получение JSON
+        
+        groupsService.getGroups { groups in
+            print("Got groups in VC")
+        }
     }
     
 

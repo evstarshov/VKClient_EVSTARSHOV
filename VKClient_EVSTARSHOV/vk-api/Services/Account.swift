@@ -8,10 +8,11 @@
 import UIKit
 
 final class Account {
+    
     private init() {}
     
     static let shared = Account()
     
-    var token: String = ""
-    var userId: Int = 0
+    var token = ""
+    var userId = ""
 }
