@@ -10,68 +10,54 @@ import UIKit
 class GroupTableViewController: UITableViewController {
 
     @IBOutlet var searchGroupBar: UISearchBar!
-    
-    var groups = [Groups]() {
-    didSet {
-        filteredGroups = groups
-        }
-    }
-    
-    private var filteredGroups = [Groups]() {
-        didSet {
-            tableView.reloadData()
-        }
-    }
-    
-    @IBAction func addGroup(segue: UIStoryboardSegue) {
-        guard
-            segue.identifier == "addGroupSegue",
-        let vc = segue.source as? AllGroupsTableViewController,
-            let index = vc.tableView.indexPathForSelectedRow?.row
-        else { return }
-        let group = vc.groups[index]
-        if !groups.contains(group) {
-            groups.append(group)
-        }
-    }
+    let groupsService = GroupsAPI()
+    var mygroups: [Group] = []
+
+
         
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        searchGroupBar.delegate = self
+        //searchGroupBar.delegate = self
+        
+        //Получение JSON
+        
+        groupsService.getGroups { [weak self] groups in
+            self?.mygroups = groups
+            self?.tableView.reloadData()
+        }
     }
     
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        filteredGroups.count
+        mygroups.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-     let cell = tableView.dequeueReusableCell(
-                withIdentifier: "groupsCell",
-                for: indexPath)
-        cell.textLabel?.text = filteredGroups[indexPath.row].groupname
-        cell.imageView?.image = filteredGroups[indexPath.row].groupimage
-        cell.accessoryType = .disclosureIndicator
-        cell.detailTextLabel?.text = ""
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "groupsCell", for: indexPath)
+        let group = mygroups[indexPath.row]
+        cell.textLabel?.text = group.name
+        
         return cell
     }
-}
+    }
 
-extension GroupTableViewController: UISearchBarDelegate {
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        filterGroups(with: searchText)
-    }
-    
-    private func filterGroups(with text: String) {
-        guard  !text.isEmpty else {
-            filteredGroups = groups
-            tableView.reloadData()
-            return
-        }
-        filteredGroups = groups.filter {
-            $0.groupname.lowercased().contains(text.lowercased()) }
-        }
-    }
+
+//extension GroupTableViewController: UISearchBarDelegate {
+//    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+//        filterGroups(with: searchText)
+//    }
+//    
+//    private func filterGroups(with text: String) {
+//        guard  !text.isEmpty else {
+//            filteredGroups = groups
+//            tableView.reloadData()
+//            return
+//        }
+//        filteredGroups = groups.filter {
+//            $0.groupname.lowercased().contains(text.lowercased()) }
+//        }
+//    }
 
