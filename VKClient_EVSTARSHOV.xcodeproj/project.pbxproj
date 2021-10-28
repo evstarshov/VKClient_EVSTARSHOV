@@ -20,6 +20,7 @@
 		3A12705026C7E38C0015E7B2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A12704F26C7E38C0015E7B2 /* Assets.xcassets */; };
 		3A12705326C7E38C0015E7B2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A12705126C7E38C0015E7B2 /* LaunchScreen.storyboard */; };
 		3A3F00BD26D3E23A00CA9303 /* TabbarNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A3F00BC26D3E23A00CA9303 /* TabbarNavigationViewController.swift */; };
+		3A4543D9272A8DD200C2DF95 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4543D8272A8DD200C2DF95 /* LoginViewController.swift */; };
 		3A4E8BA426D79D84003B01B5 /* friends.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4E8BA326D79D84003B01B5 /* friends.swift */; };
 		3A4E8BA726D7A5D6003B01B5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A4E8BA626D7A5D6003B01B5 /* Main.storyboard */; };
 		3A4E8BAA26D7A862003B01B5 /* FriendsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4E8BA826D7A862003B01B5 /* FriendsTableViewCell.swift */; };
@@ -36,7 +37,6 @@
 		3A990F6B2726DA660048D06F /* Data+PrettyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A990F6A2726DA660048D06F /* Data+PrettyJSON.swift */; };
 		3AB4D839271D8DBB00BD4589 /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB4D838271D8DBB00BD4589 /* Account.swift */; };
 		3AC0C52626D76B0D00AB3DB5 /* FriendsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC0C52526D76B0D00AB3DB5 /* FriendsTableViewController.swift */; };
-		3ADA876E27228AE200AAAAEB /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADA876D27228AE200AAAAEB /* LoginViewController.swift */; };
 		3ADA87712722AFB900AAAAEB /* FriendsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADA87702722AFB900AAAAEB /* FriendsAPI.swift */; };
 		3ADA87732722BBC200AAAAEB /* PhotoAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADA87722722BBC200AAAAEB /* PhotoAPI.swift */; };
 		3ADA87752722DE8400AAAAEB /* GroupsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADA87742722DE8400AAAAEB /* GroupsAPI.swift */; };
@@ -65,6 +65,7 @@
 		3A12705226C7E38C0015E7B2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3A12705426C7E38C0015E7B2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3A3F00BC26D3E23A00CA9303 /* TabbarNavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabbarNavigationViewController.swift; sourceTree = "<group>"; };
+		3A4543D8272A8DD200C2DF95 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		3A4E8BA326D79D84003B01B5 /* friends.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = friends.swift; sourceTree = "<group>"; };
 		3A4E8BA626D7A5D6003B01B5 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		3A4E8BA826D7A862003B01B5 /* FriendsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsTableViewCell.swift; sourceTree = "<group>"; };
@@ -81,7 +82,6 @@
 		3A990F6A2726DA660048D06F /* Data+PrettyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Data+PrettyJSON.swift"; sourceTree = "<group>"; };
 		3AB4D838271D8DBB00BD4589 /* Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
 		3AC0C52526D76B0D00AB3DB5 /* FriendsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsTableViewController.swift; sourceTree = "<group>"; };
-		3ADA876D27228AE200AAAAEB /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		3ADA87702722AFB900AAAAEB /* FriendsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsAPI.swift; sourceTree = "<group>"; };
 		3ADA87722722BBC200AAAAEB /* PhotoAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoAPI.swift; sourceTree = "<group>"; };
 		3ADA87742722DE8400AAAAEB /* GroupsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsAPI.swift; sourceTree = "<group>"; };
@@ -194,6 +194,14 @@
 			path = Controllers;
 			sourceTree = "<group>";
 		};
+		3A4543D7272A8DD200C2DF95 /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				3A4543D8272A8DD200C2DF95 /* LoginViewController.swift */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
 		3A4E8BA226D79D58003B01B5 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -247,19 +255,11 @@
 		3ADA876C272286E200AAAAEB /* vk-api */ = {
 			isa = PBXGroup;
 			children = (
+				3A4543D7272A8DD200C2DF95 /* Modules */,
 				3A990F692726DA660048D06F /* Helpers */,
-				3ADA876F2722AF7D00AAAAEB /* Modules */,
 				3AB4D837271D8D8800BD4589 /* Services */,
 			);
 			path = "vk-api";
-			sourceTree = "<group>";
-		};
-		3ADA876F2722AF7D00AAAAEB /* Modules */ = {
-			isa = PBXGroup;
-			children = (
-				3ADA876D27228AE200AAAAEB /* LoginViewController.swift */,
-			);
-			path = Modules;
 			sourceTree = "<group>";
 		};
 		3AFA188D26F1DE2C0078E60D /* FriendControllers */ = {
@@ -426,13 +426,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A4543D9272A8DD200C2DF95 /* LoginViewController.swift in Sources */,
 				3A72C90B26E8B9D2006A8480 /* NewsModel.swift in Sources */,
 				3AFA188A26ED10360078E60D /* LaunchScreenViewController.swift in Sources */,
 				3A10AD4326F25EEE00FE755F /* ShadowsAndBorders.swift in Sources */,
 				3A3F00BD26D3E23A00CA9303 /* TabbarNavigationViewController.swift in Sources */,
 				3ADA87752722DE8400AAAAEB /* GroupsAPI.swift in Sources */,
 				3A72C8FF26E782A3006A8480 /* AllFriendsSectionHeader.swift in Sources */,
-				3ADA876E27228AE200AAAAEB /* LoginViewController.swift in Sources */,
 				3A72C91726E9B3AF006A8480 /* CommentNewsTableViewController.swift in Sources */,
 				3A12704726C7E38C0015E7B2 /* AppDelegate.swift in Sources */,
 				3A72C90126E7BE2C006A8480 /* AllGroupsTableViewController.swift in Sources */,
