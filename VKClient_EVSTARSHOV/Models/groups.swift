@@ -12,13 +12,13 @@ struct Groups {
     let groupimage: UIImage?
 }
 
-/*
+
 var groupsArray = [
     Groups(groupname: "Спортсменки", groupimage: UIImage(named: "Спортсменка")),
     Groups(groupname: "Славянки", groupimage: UIImage(named: "Славянка")),
     Groups(groupname: "Отличницы", groupimage: UIImage(named: "Отличница"))
 ]
-*/
+
 extension Groups: Equatable {
     static func == (lhs: Self, rhs: Self) -> Bool {
         lhs.groupname == rhs.groupname && lhs.groupimage == rhs.groupimage

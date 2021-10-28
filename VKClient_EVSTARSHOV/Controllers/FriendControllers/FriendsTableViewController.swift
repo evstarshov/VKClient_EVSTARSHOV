@@ -11,30 +11,15 @@ class FriendsTableViewController: UITableViewController {
     
     @IBOutlet var searchFriendsBar: UISearchBar!
     @IBOutlet var tableViewHeader: FriendsTableHeader!
-    
     private var sectionTitles: [String] = []
-    
-    private var friends = [Friends]() {
-        didSet {
-            filteredFriends = friends
-        }
-    }
-    
-    private var filteredFriends = [Friends]() {
-        didSet {
-            tableView.reloadData()
-        }
-    }
-    
-    private var sortedByletter = friendsArray.sorted(by: {$0.secondname < $1.secondname})
-    
+    private var friends = friendsArray
     private var groupedFriends: [Int:[Friends]] = [:]
     
     // --- Сортировка друзей по букве
     func sortingFriends() {
         var characters: [String.Element] = []
         sectionTitles.removeAll()
-        for friend in friendsArray {
+        for friend in friends {
             if let secondNameCharacter = friend.secondname.first {
                 if !characters.contains(secondNameCharacter) {
                     characters.append(secondNameCharacter)
@@ -48,7 +33,7 @@ class FriendsTableViewController: UITableViewController {
         while i < characters.count {
             let character = characters[i]
             var sortedFriends: [Friends]  = []
-            for friend in friendsArray {
+            for friend in friends {
                 if let secondNameCharacter = friend.secondname.first, secondNameCharacter == character {
                     sortedFriends.append(friend)
                 }
@@ -60,7 +45,9 @@ class FriendsTableViewController: UITableViewController {
         groupedFriends = grouped
         tableView.reloadData()
     }
-    // --- Сортировка друзей по букве
+    
+    
+    // --- ViewDidLoad
     
     
     override func viewDidLoad() {
@@ -80,7 +67,6 @@ class FriendsTableViewController: UITableViewController {
         tableViewHeader.imageView.contentMode = .scaleAspectFill
         tableView.tableHeaderView = tableViewHeader
         sortingFriends()
-        
     }
     
     // ----- Загрузка титульного изображения
@@ -161,14 +147,10 @@ class FriendsTableViewController: UITableViewController {
     
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        74.0
+        54.0
     }
     // ------ Блок анимации
-    
 
-    
-    // ------ Блок анимации
-    
 }
 
 // ---- Расширения для работы поисковой строки
@@ -180,15 +162,14 @@ extension FriendsTableViewController: UISearchBarDelegate {
     
     private func filterFriends(with text: String) {
         guard !text.isEmpty else {
-            filteredFriends = friendsArray
+            friends = friendsArray
             tableView.reloadData()
             return
         }
-        
-        filteredFriends = friendsArray.filter { $0.name.lowercased().contains(text.lowercased()) }
+        friends = friendsArray.filter { $0.secondname.lowercased().contains(text.lowercased()) }
+        print(friends)
+        sortingFriends()
     }
 
 }
-// ---- Расширения для работы поисковой строки
-
 

@@ -18,6 +18,7 @@ class LoginViewController: UIViewController {
     @IBOutlet var loginTitleView: UILabel!
     @IBOutlet var passwordTitleView: UILabel!
     @IBOutlet var titleView: UIImageView!
+    private let animator = Animator()
     
         override func viewDidLoad() {
             super.viewDidLoad()
@@ -25,7 +26,9 @@ class LoginViewController: UIViewController {
             animateTitleAppearing()
             animateFieldsAppearing()
             animateAuthButton()
+            transitioningDelegate = self
         }
+    // ----------- Поля логин, пароль и кнопка входа
     
     @IBAction func loginScreen(unwindSegue: UIStoryboardSegue) {
         loginTextField.text = ""
@@ -35,14 +38,13 @@ class LoginViewController: UIViewController {
     @IBAction func loginButtonPressed(_ sender: Any) {
         if isValid() {
             print("Login")
-            performSegue(
-                withIdentifier: "loginSegue",
-                sender: nil)
+            performSegue(withIdentifier: "loginSegue", sender: nil)
         } else {
             showAlert()
         }
     }
     
+    // -------- Всплывающее окно при неправильном вводе пароля
     
     private func showAlert() {
         let alertController = UIAlertController(
@@ -62,6 +64,8 @@ class LoginViewController: UIViewController {
                 completion: nil)
     }
     
+    // ---- Переход на следующий экран
+    
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         if identifier == "loginSegue" {
             return isValid()
@@ -70,6 +74,7 @@ class LoginViewController: UIViewController {
         }
     }
 
+    // ----- Проверка правильности ввода логина и пароля
     
     func isValid() -> Bool {
         if loginTextField.text == ""
@@ -138,3 +143,13 @@ class LoginViewController: UIViewController {
 
 }
 
+extension LoginViewController: UIViewControllerTransitioningDelegate {
+    
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        animator
+    }
+    
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        animator
+    }
+}
