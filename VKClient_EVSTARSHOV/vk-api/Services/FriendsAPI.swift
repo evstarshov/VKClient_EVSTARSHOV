@@ -8,10 +8,6 @@
 import Foundation
 import Alamofire
 
-struct Friend {
-    
-}
-
 // Получение списка друзей, запрос к серверу
 
 final class FriendsAPI {
@@ -21,22 +17,35 @@ final class FriendsAPI {
     let userId = Account.shared.userId
     let version = "5.81"
     
-    func getFriends(completion: @escaping([Friend]) -> ()) {
+    func getFriends(completion: @escaping([Friend])->()) {
+        
         let method = "/friends.get"
+        
         let parameters: Parameters = [
             "user_id": userId,
             "order": "name",
-            
-            "access_token": token,
             "fields": "photo_50, photo_100",
             "count": 10,
+            "access_token": token,
             "v": version
         ]
         
         let url = baseURL + method
         
         AF.request(url, method: .get, parameters: parameters).responseJSON { response in
-            print(response.value)
+
+            guard let data = response.data else { return }
+            debugPrint(response.data?.prettyJSON as Any)
+            
+            do {
+                
+                let friendsJSON = try JSONDecoder().decode(FriendsJSON.self, from: data)
+                let friends: [Friend] = friendsJSON.response.items
+                completion(friends)
+                
+            } catch {
+                print(error)
+            }
         }
     }
 }

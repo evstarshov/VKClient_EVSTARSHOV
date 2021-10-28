@@ -8,9 +8,6 @@
 import Foundation
 import Alamofire
 
-struct Photo {
-    
-}
 
 final class PhotoAPI {
     
@@ -26,18 +23,29 @@ final class PhotoAPI {
         let parameters: Parameters = [
             "owner_id": userId,
             "album_id": album,
-            "photo_ids": photoId,
-            
+            "extended": 1,
+            "count": 10,
+            "no_service_albums": 0,
             "access_token": token,
-            "extended": "photos.getAll",
-            "count": 2,
             "v": version
         ]
         
         let url = baseURL + method
         
         AF.request(url, method: .get, parameters: parameters).responseJSON { response in
-            print(response.value)
+
+            guard let data = response.data else { return }
+            debugPrint(response.data?.prettyJSON as Any)
+            
+            do {
+                
+                let photoJSON = try JSONDecoder().decode(PhotoJSON.self, from: data)
+                let myalbums: [Photo] = photoJSON.response.items
+                completion(myalbums)
+                
+            } catch {
+                print(error)
+            }
         }
     }
 }

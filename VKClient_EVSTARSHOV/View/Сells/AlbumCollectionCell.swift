@@ -7,10 +7,11 @@
 
 import UIKit
 
-class FriendsCollectionCell: UICollectionViewCell {
+class AlbumCollectionCell: UICollectionViewCell {
 
     @IBOutlet var friendsLabel: UILabel!
     @IBOutlet var friendsImageView: UIImageView!
+    
     
     private let animator = Animator()
     
@@ -25,10 +26,9 @@ class FriendsCollectionCell: UICollectionViewCell {
         
     }
     
-    func configureGallery(with mygallery: PhotoGallery){
-        friendsLabel.text = mygallery.description
-        friendsImageView.image = mygallery.galleryImage
-        //groupLabel.text = friends.secondname
+    func configureGallery(with mygallery: Photo){
+        friendsLabel.text = mygallery.text
+        friendsImageView.loadImage(url: mygallery.sizes[2].url)
         contentMode = .scaleAspectFill
     }
     
@@ -44,5 +44,20 @@ class FriendsCollectionCell: UICollectionViewCell {
                     self.friendsImageView.transform = CGAffineTransform(scaleX: 1, y: 1)
                 },
                 completion: nil)
+    }
+}
+
+
+extension UIImageView {
+    func loadImage (url: URL) {
+        DispatchQueue.global().async { [weak self] in
+            if let data = try? Data(contentsOf: url) {
+                if let image = UIImage(data: data) {
+                    DispatchQueue.main.async {
+                        self?.image = image
+                    }
+                }
+            }
+        }
     }
 }

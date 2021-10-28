@@ -8,60 +8,15 @@
 import UIKit
 
 class FriendsTableViewController: UITableViewController {
-    
-    @IBOutlet var searchFriendsBar: UISearchBar!
     @IBOutlet var tableViewHeader: FriendsTableHeader!
-    private var sectionTitles: [String] = []
-    private var friends = friendsArray
-    private var groupedFriends: [Int:[Friends]] = [:]
-    
     let friendsService = FriendsAPI()
-    let photoService = PhotoAPI()
-    
-    // --- Сортировка друзей по букве
-    func sortingFriends() {
-        var characters: [String.Element] = []
-        sectionTitles.removeAll()
-        for friend in friends {
-            if let secondNameCharacter = friend.secondname.first {
-                if !characters.contains(secondNameCharacter) {
-                    characters.append(secondNameCharacter)
-                }
-            }
-        }
-        print(characters)
-        characters.sort()
-        var i = 0
-        var grouped: [Int:[Friends]] = [:]
-        while i < characters.count {
-            let character = characters[i]
-            var sortedFriends: [Friends]  = []
-            for friend in friends {
-                if let secondNameCharacter = friend.secondname.first, secondNameCharacter == character {
-                    sortedFriends.append(friend)
-                }
-            }
-            grouped[i] = sortedFriends
-            sectionTitles.append(String.init(character))
-            i += 1
-        }
-        groupedFriends = grouped
-        tableView.reloadData()
-    }
-    
-    
-    // --- ViewDidLoad
-    
+    var myfriends: [Friend] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        searchFriendsBar.delegate = self
-        tableView.register(
-            UINib(
-                           nibName: "FriendsTableViewCell",
-                            bundle: nil),
-                           forCellReuseIdentifier: "myfriendCell")
-    
+
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+        
         // ----- Загрузка титульного изображения
         
         tableView.register(AllFriendsSectionHeader.self, forHeaderFooterViewReuseIdentifier: "sectionHeader")
@@ -70,119 +25,27 @@ class FriendsTableViewController: UITableViewController {
         tableViewHeader.imageView.contentMode = .scaleAspectFill
         tableView.tableHeaderView = tableViewHeader
         
-        // ----- Получение JSON
-        friendsService.getFriends { friends in
-            print("Got friends in VC")
-        }
-        photoService.getPhotos { photos in
-            print("Got photo in VC")
-        }
-        
-        // Сортировка
-        sortingFriends()
+        // Получение списка друзей из JSON
+      
+                friendsService.getFriends { [weak self] friends in
+                    self?.myfriends = friends
+                    self?.tableView.reloadData()
+                }
     }
-    
-    // ----- Загрузка титульного изображения
 
-    // ----- Наполнение строк элементами массива
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return sectionTitles.count
-    }
-    
+    // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let grouped = groupedFriends[section] {
-            return grouped.count
-        }
-        else {
-        return 0
-        }
+        return myfriends.count
     }
+
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(
-                withIdentifier: "myfriendCell",
-                for: indexPath) as! FriendsTableViewCell
-        guard let grouped = groupedFriends[indexPath.section] else {
-            return UITableViewCell()
-        }
-        let groupedFriend = grouped[indexPath.row]
-        cell.configure(friend: groupedFriend)
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        let friend = myfriends[indexPath.row]
+        cell.textLabel?.text = friend.fullName
+        
         return cell
     }
-    // ----- Наполнение строк элементами массива
     
-    
-   // ----- Титульная строка
-    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        guard let sectionHeader = tableView.dequeueReusableHeaderFooterView(withIdentifier: "sectionHeader") as? AllFriendsSectionHeader
-        else {return nil}
-        sectionHeader.contentView.backgroundColor = .systemBlue
-        return sectionHeader
-    }
-    // ------ Титульная строка
-    
-    
-    // ----- Заголовок для секций
-    
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return sectionTitles[section]
-    }
-    
-    // ----- Заголовок для секций
-    
-    // ------ Переход на экран коллекции
-    
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        defer { tableView.deselectRow(at: indexPath, animated: true)
-        }
-        
-        performSegue(
-            withIdentifier: "showPhotoSegue",
-            sender: indexPath)
-    
-    }
-    
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let selectedFriend = segue.destination as? FriendsCollectionViewController else {return}
-        let indexPath = sender as! IndexPath
-        let friends = groupedFriends[indexPath.section]
-        let friend = friends?[indexPath.row]
-        let togallery = friend?.gallery
-        selectedFriend.galleryItems = togallery!
-        
-    }
-    
-
-
-    
-    // ------ Переход на экран коллекции
-    
-    
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        54.0
-    }
-    // ------ Блок анимации
-
 }
-
-// ---- Расширения для работы поисковой строки
-
-extension FriendsTableViewController: UISearchBarDelegate {
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        filterFriends(with: searchText)
-    }
-    
-    private func filterFriends(with text: String) {
-        guard !text.isEmpty else {
-            friends = friendsArray
-            tableView.reloadData()
-            return
-        }
-        friends = friendsArray.filter { $0.secondname.lowercased().contains(text.lowercased()) }
-        print(friends)
-        sortingFriends()
-    }
-
-}
-
