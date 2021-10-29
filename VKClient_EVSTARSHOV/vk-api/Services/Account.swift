@@ -7,20 +7,8 @@
 
 import UIKit
 import SwiftKeychainWrapper
+import RealmSwift
 
-final class Storage: UIViewController {
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        useKeychain()
-    }
-    
-    func useKeychain() {
-        var token: String? = KeychainWrapper.standard.string(forKey: "token")
-        print(token ?? "")
-        KeychainWrapper.standard.set("qwerty12345", forKey: "token")
-    }
-}
 
 final class Account {
     

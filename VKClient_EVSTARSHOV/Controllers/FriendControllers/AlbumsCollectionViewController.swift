@@ -10,7 +10,7 @@ import UIKit
 class AlbumsCollectionViewController: UICollectionViewController {
     
     let photoService = PhotoAPI()
-    var myalbums: [Photo] = []
+    var myalbums: [PhotoDB] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
