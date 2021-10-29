@@ -6,6 +6,21 @@
 //
 
 import UIKit
+import SwiftKeychainWrapper
+
+final class Storage: UIViewController {
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        useKeychain()
+    }
+    
+    func useKeychain() {
+        var token: String? = KeychainWrapper.standard.string(forKey: "token")
+        print(token ?? "")
+        KeychainWrapper.standard.set("qwerty12345", forKey: "token")
+    }
+}
 
 final class Account {
     
@@ -13,6 +28,20 @@ final class Account {
     
     static let shared = Account()
     
-    var token = ""
-    var userId = ""
+    var token: String {
+            set {
+                KeychainWrapper.standard.set(newValue, forKey: "userId")
+            }
+            get {
+                return KeychainWrapper.standard.string(forKey:"userId") ?? ""
+            }
+    }
+    var userId: Int {
+        set {
+            UserDefaults.standard.set(newValue, forKey: "userId")
+        }
+        get {
+            return UserDefaults.standard.integer(forKey:"userId")
+        }
+    }
 }
