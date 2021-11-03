@@ -18,6 +18,9 @@ class LoginViewController: UIViewController, WKNavigationDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        if !Account.shared.token.isEmpty, Account.shared.userId > 0 {
+            performSegue(withIdentifier: "loginSegue", sender: nil)
+        }
         authToVKAPI()
 
     }
@@ -66,7 +69,7 @@ class LoginViewController: UIViewController, WKNavigationDelegate {
             print(token)
         
         Account.shared.token = token
-        Account.shared.userId = userId
+        Account.shared.userId = Int(userId) ?? 0
             
             performSegue(withIdentifier: "loginSegue", sender: nil)
             

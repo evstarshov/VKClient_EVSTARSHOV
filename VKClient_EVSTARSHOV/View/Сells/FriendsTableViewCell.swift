@@ -11,7 +11,6 @@ class FriendsTableViewCell: UITableViewCell {
 
     @IBOutlet var friendImageAvatar: AvatarImage!
     @IBOutlet var friendNameLabel: UILabel!
-    @IBOutlet var friendGroupLabel: UILabel!
     @IBOutlet var avatarView: AvatarView!
     
     @objc private func tapImageView() {
@@ -42,11 +41,9 @@ class FriendsTableViewCell: UITableViewCell {
         
     }
     
-    func configure(friend: Friends) {
-        friendImageAvatar.image = friend.image
-//      friendGroupImage.image = nil
-        friendNameLabel.text = friend.name + friend.secondname
-        friendGroupLabel.text = friend.groups
+    func configureFriend(with friend: FriendDB) {
+        friendImageAvatar.loadImage(url: friend.photo50)
+        friendNameLabel.text = friend.fullName
         contentMode = .scaleAspectFill
         
     }

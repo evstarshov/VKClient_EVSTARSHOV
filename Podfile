@@ -7,7 +7,9 @@ target 'VKClient_EVSTARSHOV' do
 
 pod 'Alamofire', '~> 5.4'
 pod 'SwiftyJSON', '~> 4.0'
+pod 'Realm'
 pod 'RealmSwift'
+pod 'SwiftKeychainWrapper'
 
   # Pods for VKClient_EVSTARSHOV
 

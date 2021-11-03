@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 // MARK: - Welcome
 struct GroupsJSON: Codable {
@@ -15,20 +16,20 @@ struct GroupsJSON: Codable {
 // MARK: - Response
 struct GroupsResponse: Codable {
     let count: Int
-    let items: [Group]
+    let items: [GroupDB]
 }
 
 // MARK: - Item
-struct Group: Codable {
-    let id, isClosed, isAdvertiser: Int
+class GroupDB: Object, Codable {
+    @objc dynamic var id, isClosed, isAdvertiser: Int
     let type: TypeEnum
     let adminLevel: Int?
-    let isMember: Int
+    @objc dynamic var isMember: Int
     let city: City?
-    let photo50, photo200: String
-    let isAdmin: Int
-    let photo100: String
-    let name, screenName: String
+    @objc dynamic var photo50, photo200: String
+    @objc dynamic var isAdmin: Int
+    @objc dynamic var photo100: String
+    @objc dynamic var name, screenName: String
 
     enum CodingKeys: String, CodingKey {
         case id
@@ -57,6 +58,7 @@ enum TypeEnum: String, Codable {
     case page = "page"
 }
 
+// Тестовые данные
 
 struct Groups {
     let groupname: String

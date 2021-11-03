@@ -10,16 +10,20 @@ import UIKit
 class FriendsTableViewController: UITableViewController {
     @IBOutlet var tableViewHeader: FriendsTableHeader!
     let friendsService = FriendsAPI()
-    var myfriends: [Friend] = []
+    var myfriends: [FriendDB] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "friendsCell")
         
         // ----- Загрузка титульного изображения
         
-        tableView.register(AllFriendsSectionHeader.self, forHeaderFooterViewReuseIdentifier: "sectionHeader")
+        tableView.register(
+            UINib(
+                           nibName: "FriendsTableViewCell",
+                            bundle: nil),
+                           forCellReuseIdentifier: "friendsCell")
         
         tableViewHeader.imageView.image = UIImage(named: "tableHeader3")
         tableViewHeader.imageView.contentMode = .scaleAspectFill
@@ -41,9 +45,9 @@ class FriendsTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+       let cell = tableView.dequeueReusableCell(withIdentifier: "friendsCell", for: indexPath) as! FriendsTableViewCell
         let friend = myfriends[indexPath.row]
-        cell.textLabel?.text = friend.fullName
+        cell.configureFriend(with: friend)
         
         return cell
     }

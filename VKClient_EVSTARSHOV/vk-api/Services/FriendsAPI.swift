@@ -17,7 +17,7 @@ final class FriendsAPI {
     let userId = Account.shared.userId
     let version = "5.81"
     
-    func getFriends(completion: @escaping([Friend])->()) {
+    func getFriends(completion: @escaping([FriendDB])->()) {
         
         let method = "/friends.get"
         
@@ -40,7 +40,7 @@ final class FriendsAPI {
             do {
                 
                 let friendsJSON = try JSONDecoder().decode(FriendsJSON.self, from: data)
-                let friends: [Friend] = friendsJSON.response.items
+                let friends: [FriendDB] = friendsJSON.response.items
                 completion(friends)
                 
             } catch {

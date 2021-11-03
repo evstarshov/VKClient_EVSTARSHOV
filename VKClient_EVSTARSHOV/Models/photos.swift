@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import RealmSwift
 
 // MARK: - Welcome
 struct PhotoJSON: Codable {
@@ -15,20 +16,20 @@ struct PhotoJSON: Codable {
 // MARK: - Response
 struct PhotoResponse: Codable {
     let count: Int
-    let items: [Photo]
+    let items: [PhotoDB]
 }
 
 // MARK: - Item
-struct Photo: Codable {
-    let id: Int
+class PhotoDB: Object, Codable {
+    @objc dynamic var id: Int
     let comments: PhotoComments
     let likes: Likes
     let reposts, tags: PhotoComments
-    let date, ownerID, postID: Int
-    let text: String
+    @objc dynamic var date, ownerID, postID: Int
+    @objc dynamic var text: String
     let sizes: [Size]
-    let hasTags: Bool
-    let albumID, canComment: Int
+    @objc dynamic var hasTags: Bool
+    @objc dynamic var albumID, canComment: Int
 
     enum CodingKeys: String, CodingKey {
         case id, comments, likes, reposts, tags, date

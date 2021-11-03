@@ -1,4 +1,5 @@
 import UIKit
+import RealmSwift
 
 struct PhotoGallery {
     let galleryImage: UIImage?
@@ -12,17 +13,18 @@ struct FriendsJSON: Codable {
 // MARK: - Response
 struct FriendsResponse: Codable {
     let count: Int
-    let items: [Friend]
+    let items: [FriendDB]
 }
 
 // MARK: - Item
-struct Friend: Codable {
-    let id: Int
-    let lastName: String
-    let photo50: String
-    let trackCode, firstName: String
-    let photo100: String
-    let deactivated: String?
+class FriendDB: Object, Codable {
+     
+    @objc dynamic var id: Int
+    @objc dynamic var lastName: String
+    let photo50: URL
+    @objc dynamic var trackCode, firstName: String
+    let photo100: URL
+    @objc dynamic var deactivated: String?
     
     var fullName: String {
         firstName + " " + lastName
