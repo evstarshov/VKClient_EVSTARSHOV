@@ -16,11 +16,11 @@ struct PhotoJSON: Codable {
 // MARK: - Response
 struct PhotoResponse: Codable {
     let count: Int
-    let items: [PhotoDB]
+    let items: [PhotoModel]
 }
 
 // MARK: - Item
-class PhotoDB: Object, Codable {
+class PhotoModel: Object, Codable {
     @objc dynamic var id: Int
     let comments: PhotoComments
     let likes: Likes

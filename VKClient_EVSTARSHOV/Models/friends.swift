@@ -13,11 +13,11 @@ struct FriendsJSON: Codable {
 // MARK: - Response
 struct FriendsResponse: Codable {
     let count: Int
-    let items: [FriendDB]
+    let items: [FriendModel]
 }
 
 // MARK: - Item
-class FriendDB: Object, Codable {
+class FriendModel: Object, Codable {
      
     @objc dynamic var id: Int
     @objc dynamic var lastName: String
@@ -41,7 +41,7 @@ class FriendDB: Object, Codable {
     }
 }
 
-
+// Тестовые данные
 
 class Friends {
     let image: UIImage?

@@ -16,11 +16,11 @@ struct GroupsJSON: Codable {
 // MARK: - Response
 struct GroupsResponse: Codable {
     let count: Int
-    let items: [GroupDB]
+    let items: [GroupModel]
 }
 
 // MARK: - Item
-class GroupDB: Object, Codable {
+class GroupModel: Object, Codable {
     @objc dynamic var id, isClosed, isAdvertiser: Int
     let type: TypeEnum
     let adminLevel: Int?

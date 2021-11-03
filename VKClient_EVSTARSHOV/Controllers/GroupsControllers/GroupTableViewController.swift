@@ -11,7 +11,7 @@ class GroupTableViewController: UITableViewController {
 
     @IBOutlet var searchGroupBar: UISearchBar!
     let groupsService = GroupsAPI()
-    var mygroups: [GroupDB] = []
+    var mygroups: [GroupModel] = []
 
 
         
