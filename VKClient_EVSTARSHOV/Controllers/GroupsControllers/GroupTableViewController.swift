@@ -53,7 +53,7 @@ class GroupTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "groupsCell", for: indexPath)
         let group = mygroups[indexPath.row]
         cell.textLabel?.text = group.name
-        if let groupImage = URL(string: group.photo50) {
+        if let groupImage = URL(string: group.photo100) {
             cell.imageView?.loadImage(url: groupImage)
         }
         
