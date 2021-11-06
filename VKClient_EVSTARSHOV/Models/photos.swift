@@ -42,6 +42,58 @@ class PhotoModel: Object, Codable {
     }
 }
 
+final class PhotoDB {
+    
+    let migration = Realm.Configuration(schemaVersion: 6) //миграция работает как на расширение так и на уделение
+    lazy var mainRealm = try! Realm(configuration: migration)
+    
+    func create(_ photos: [PhotoModel]) {
+        mainRealm.beginWrite()
+        do {
+            mainRealm.add(photos) //добавляем объект в хранилище
+            try mainRealm.commitWrite()
+            print(mainRealm.configuration.fileURL ?? "")
+            
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
+    
+    func read() -> [PhotoModel] {
+        
+        let photos = mainRealm.objects(PhotoModel.self)
+        photos.forEach { print($0.id) }
+        print(mainRealm.configuration.fileURL ?? "")
+        return Array(photos) //враппим Result<> в Array<>
+    }
+    
+    func delete(_ photos: [PhotoModel]) {
+        do {
+            mainRealm.beginWrite()
+            mainRealm.delete(photos)
+            try mainRealm.commitWrite()
+            
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
+    
+    func update(_ photos: [PhotoModel]) {
+        do {
+            let oldPhotos =  mainRealm.objects(PhotoModel.self).filter("id == %@", photos)
+            mainRealm.beginWrite()
+            mainRealm.delete(oldPhotos)
+            mainRealm.add(photos)
+            try mainRealm.commitWrite()
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
+}
+    
+
+    // Тестовые данные
+
 // MARK: - Comments
 struct PhotoComments: Codable {
     let count: Int
