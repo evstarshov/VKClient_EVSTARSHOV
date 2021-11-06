@@ -2,12 +2,13 @@ import UIKit
 import RealmSwift
 import Alamofire
 
-protocol FriendDBProtocol {
+protocol DBProtocol {
     //CRUD - create, read, update, delete
     
     func create(_ friends: [FriendModel])
     func read() -> [FriendModel]
     func delete(_ friends: [FriendModel])
+    func update(_ friends: [FriendModel])
 }
 
 struct FriendsJSON: Codable {
@@ -46,7 +47,7 @@ class FriendModel: Object, Codable {
     let version = "5.81"
 }
 
-class FriendDB: FriendDBProtocol {
+class FriendDB: DBProtocol {
     
     let migration = Realm.Configuration(schemaVersion: 6) //миграция работает как на расширение так и на уделение
     lazy var mainRealm = try! Realm(configuration: migration)
@@ -77,6 +78,18 @@ class FriendDB: FriendDBProtocol {
             mainRealm.delete(friends)
             try mainRealm.commitWrite()
             
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
+    
+    func update(_ friends: [FriendModel]) {
+        do {
+            let oldFriends =  mainRealm.objects(FriendModel.self).filter("id == %@", friends)
+            mainRealm.beginWrite()
+            mainRealm.delete(oldFriends)
+            mainRealm.add(friends)
+            try mainRealm.commitWrite()
         } catch {
             print(error.localizedDescription)
         }

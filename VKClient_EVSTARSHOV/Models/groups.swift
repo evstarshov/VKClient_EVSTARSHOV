@@ -8,6 +8,7 @@
 import UIKit
 import RealmSwift
 
+
 // MARK: - Welcome
 struct GroupsJSON: Codable {
     let response: GroupsResponse
@@ -46,6 +47,57 @@ class GroupModel: Object, Codable {
         case name = "name"
         case screenName = "screen_name"
     }
+}
+
+final class GroupDB {
+    
+    let migration = Realm.Configuration(schemaVersion: 6) //миграция работает как на расширение так и на уделение
+    lazy var mainRealm = try! Realm(configuration: migration)
+    
+    
+    func create(_ groups: [GroupModel]) {
+        mainRealm.beginWrite()
+        do {
+            mainRealm.add(groups) //добавляем объект в хранилище
+            try mainRealm.commitWrite()
+            print(mainRealm.configuration.fileURL ?? "")
+            
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
+    
+    func read() -> [GroupModel] {
+        let groups = mainRealm.objects(GroupModel.self)
+        groups.forEach { print($0.name) }
+        print(mainRealm.configuration.fileURL ?? "")
+        return Array(groups) //враппим Result<> в Array<>
+    }
+    
+    func delete(_ groups: [GroupModel]) {
+        do {
+            mainRealm.beginWrite()
+            mainRealm.delete(groups)
+            try mainRealm.commitWrite()
+            
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
+    
+    func update(_ groups: [GroupModel]) {
+        do {
+            let oldGroups =  mainRealm.objects(GroupModel.self).filter("id == %@", groups)
+            mainRealm.beginWrite()
+            mainRealm.delete(oldGroups)
+            mainRealm.add(groups)
+            try mainRealm.commitWrite()
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
+    
+    
 }
 
 // MARK: - City

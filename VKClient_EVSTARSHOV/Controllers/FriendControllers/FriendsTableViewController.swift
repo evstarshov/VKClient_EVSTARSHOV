@@ -30,15 +30,26 @@ class FriendsTableViewController: UITableViewController {
         tableViewHeader.imageView.image = UIImage(named: "tableHeader3")
         tableViewHeader.imageView.contentMode = .scaleAspectFill
         tableView.tableHeaderView = tableViewHeader
-        //myfriendsDB.delete(friendModel)
         // Получение списка друзей из JSON
+        
+        var numberOfFriends = 0
+        myfriends = myfriendsDB.read()
+        numberOfFriends = myfriendsDB.read().count
+        tableView.reloadData()
+        
+        if numberOfFriends == 0 {
         friendsService.getFriends { [weak self] friends in
             self?.myfriends = friends
             self?.tableView.reloadData()
             self?.myfriendsDB.create(self!.myfriends)
+            numberOfFriends = self!.myfriendsDB.read().count
+            print("Количество друзей получено = \(numberOfFriends)")
+            }
         }
-        myfriends = myfriendsDB.read()
         
+        else if numberOfFriends == myfriendsDB.read().count {
+            print("Количество друзей осталось прежним = \(numberOfFriends)")
+        }
         
     }
 
