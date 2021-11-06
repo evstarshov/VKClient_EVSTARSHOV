@@ -1,9 +1,13 @@
 import UIKit
 import RealmSwift
+import Alamofire
 
-struct PhotoGallery {
-    let galleryImage: UIImage?
-    let description: String?
+protocol FriendDBProtocol {
+    //CRUD - create, read, update, delete
+    
+    func create(_ friends: [FriendModel])
+    func read() -> [FriendModel]
+    func delete(_ friends: [FriendModel])
 }
 
 struct FriendsJSON: Codable {
@@ -19,12 +23,11 @@ struct FriendsResponse: Codable {
 // MARK: - Item
 class FriendModel: Object, Codable {
      
-    @objc dynamic var id: Int
-    @objc dynamic var lastName: String
-    let photo50: URL
-    @objc dynamic var trackCode, firstName: String
-    let photo100: URL
-    @objc dynamic var deactivated: String?
+    let friend = FriendsAPI()
+    @objc dynamic var id: Int = 0
+    @objc dynamic var lastName: String = ""
+    @objc dynamic var firstName: String = ""
+    @objc dynamic var photo100: String = ""
     
     var fullName: String {
         firstName + " " + lastName
@@ -33,15 +36,62 @@ class FriendModel: Object, Codable {
     enum CodingKeys: String, CodingKey {
         case id
         case lastName = "last_name"
-        case photo50 = "photo_50"
-        case trackCode = "track_code"
         case firstName = "first_name"
         case photo100 = "photo_100"
-        case deactivated
+    }
+    
+    let baseURL = "https://api.vk.com/method"
+    let token = Account.shared.token
+    let userId = Account.shared.userId
+    let version = "5.81"
+}
+
+class FriendDB: FriendDBProtocol {
+    
+    let migration = Realm.Configuration(schemaVersion: 6) //миграция работает как на расширение так и на уделение
+    lazy var mainRealm = try! Realm(configuration: migration)
+    
+    func create(_ friends: [FriendModel]) {
+        mainRealm.beginWrite()
+        do {
+            mainRealm.add(friends) //добавляем объект в хранилище
+            try mainRealm.commitWrite()
+            print(mainRealm.configuration.fileURL ?? "")
+            
+        } catch {
+            print(error.localizedDescription)
+        }
+    }
+    
+    func read() -> [FriendModel] {
+        
+        let friends = mainRealm.objects(FriendModel.self)
+        friends.forEach { print($0.lastName) }
+        print(mainRealm.configuration.fileURL ?? "")
+        return Array(friends) //враппим Result<> в Array<>
+    }
+    
+    func delete(_ friends: [FriendModel]) {
+        do {
+            mainRealm.beginWrite()
+            mainRealm.delete(friends)
+            try mainRealm.commitWrite()
+            
+        } catch {
+            print(error.localizedDescription)
+        }
     }
 }
 
 // Тестовые данные
+
+
+
+struct PhotoGallery {
+    let galleryImage: UIImage?
+    let description: String?
+}
+
 
 class Friends {
     let image: UIImage?

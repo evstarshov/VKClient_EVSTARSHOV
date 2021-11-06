@@ -6,10 +6,12 @@
 //
 
 import UIKit
+import RealmSwift
 
 class FriendsTableViewController: UITableViewController {
     @IBOutlet var tableViewHeader: FriendsTableHeader!
     let friendsService = FriendsAPI()
+    let myfriendsDB = FriendDB()
     var myfriends: [FriendModel] = []
     
     override func viewDidLoad() {
@@ -28,13 +30,16 @@ class FriendsTableViewController: UITableViewController {
         tableViewHeader.imageView.image = UIImage(named: "tableHeader3")
         tableViewHeader.imageView.contentMode = .scaleAspectFill
         tableView.tableHeaderView = tableViewHeader
-        
+        //myfriendsDB.delete(friendModel)
         // Получение списка друзей из JSON
-      
-                friendsService.getFriends { [weak self] friends in
-                    self?.myfriends = friends
-                    self?.tableView.reloadData()
-                }
+        friendsService.getFriends { [weak self] friends in
+            self?.myfriends = friends
+            self?.tableView.reloadData()
+            self?.myfriendsDB.create(self!.myfriends)
+        }
+        myfriends = myfriendsDB.read()
+        
+        
     }
 
     // MARK: - Table view data source
