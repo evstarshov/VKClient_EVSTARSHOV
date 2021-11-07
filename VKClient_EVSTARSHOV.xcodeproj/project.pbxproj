@@ -24,7 +24,7 @@
 		3A4E8BA426D79D84003B01B5 /* FriendsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4E8BA326D79D84003B01B5 /* FriendsModel.swift */; };
 		3A4E8BA726D7A5D6003B01B5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A4E8BA626D7A5D6003B01B5 /* Main.storyboard */; };
 		3A4E8BAA26D7A862003B01B5 /* FriendsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4E8BA826D7A862003B01B5 /* FriendsTableViewCell.swift */; };
-		3A4E8BAD26D7DB4F003B01B5 /* groups.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4E8BAC26D7DB4F003B01B5 /* groups.swift */; };
+		3A4E8BAD26D7DB4F003B01B5 /* GroupModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4E8BAC26D7DB4F003B01B5 /* GroupModel.swift */; };
 		3A72C8F926E7417B006A8480 /* AddFriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A72C8F826E7417B006A8480 /* AddFriendViewController.swift */; };
 		3A72C8FC26E76DB4006A8480 /* FriendsTableHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A72C8FB26E76DB4006A8480 /* FriendsTableHeader.swift */; };
 		3A72C8FF26E782A3006A8480 /* AllFriendsSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A72C8FE26E782A3006A8480 /* AllFriendsSectionHeader.swift */; };
@@ -69,7 +69,7 @@
 		3A4E8BA326D79D84003B01B5 /* FriendsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsModel.swift; sourceTree = "<group>"; };
 		3A4E8BA626D7A5D6003B01B5 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		3A4E8BA826D7A862003B01B5 /* FriendsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsTableViewCell.swift; sourceTree = "<group>"; };
-		3A4E8BAC26D7DB4F003B01B5 /* groups.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = groups.swift; sourceTree = "<group>"; };
+		3A4E8BAC26D7DB4F003B01B5 /* GroupModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupModel.swift; sourceTree = "<group>"; };
 		3A72C8F826E7417B006A8480 /* AddFriendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFriendViewController.swift; sourceTree = "<group>"; };
 		3A72C8FB26E76DB4006A8480 /* FriendsTableHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsTableHeader.swift; sourceTree = "<group>"; };
 		3A72C8FE26E782A3006A8480 /* AllFriendsSectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllFriendsSectionHeader.swift; sourceTree = "<group>"; };
@@ -206,7 +206,7 @@
 			isa = PBXGroup;
 			children = (
 				3A4E8BA326D79D84003B01B5 /* FriendsModel.swift */,
-				3A4E8BAC26D7DB4F003B01B5 /* groups.swift */,
+				3A4E8BAC26D7DB4F003B01B5 /* GroupModel.swift */,
 				3A000A0127282A6B00581CFA /* photos.swift */,
 				3A72C90A26E8B9D2006A8480 /* NewsModel.swift */,
 				3A10AD4226F25EEE00FE755F /* ShadowsAndBorders.swift */,
@@ -454,7 +454,7 @@
 				3A4E8BA426D79D84003B01B5 /* FriendsModel.swift in Sources */,
 				3AEB128726FCAC800067A954 /* CustomNavContriller.swift in Sources */,
 				3A72C8F926E7417B006A8480 /* AddFriendViewController.swift in Sources */,
-				3A4E8BAD26D7DB4F003B01B5 /* groups.swift in Sources */,
+				3A4E8BAD26D7DB4F003B01B5 /* GroupModel.swift in Sources */,
 				3A0E22A026D7EA8800970B82 /* GroupTableViewController.swift in Sources */,
 				3AEB128926FCD4E50067A954 /* AvatarFullScreenViewController.swift in Sources */,
 				3AEB128526FC98FA0067A954 /* NavigationControllerAnimation.swift in Sources */,
