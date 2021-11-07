@@ -10,60 +10,72 @@ import RealmSwift
 
 class FriendsTableViewController: UITableViewController {
     @IBOutlet var tableViewHeader: FriendsTableHeader!
-    let friendsService = FriendsAPI()
-    let myfriendsDB = FriendDB()
-    var myfriends: [FriendModel] = []
+    
+    private let friendsAPI = FriendsAPI()
+    private let myfriendsDB = FriendDB()
+    private var myfriends: Results<FriendModel>?
+    private var token: NotificationToken?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "friendsCell")
         
         // ----- Загрузка титульного изображения
         
         tableView.register(
             UINib(
-                           nibName: "FriendsTableViewCell",
-                            bundle: nil),
-                           forCellReuseIdentifier: "friendsCell")
+                nibName: "FriendsTableViewCell",
+                bundle: nil),
+            forCellReuseIdentifier: "friendsCell")
         
         tableViewHeader.imageView.image = UIImage(named: "tableHeader3")
         tableViewHeader.imageView.contentMode = .scaleAspectFill
         tableView.tableHeaderView = tableViewHeader
         // Получение списка друзей из JSON
         
-        var numberOfFriends = 0
-        myfriends = myfriendsDB.read()
-        numberOfFriends = myfriendsDB.read().count
-        tableView.reloadData()
-        
-        if numberOfFriends == 0 {
-        friendsService.getFriends { [weak self] friends in
-            self?.myfriends = friends
-            self?.tableView.reloadData()
-            self?.myfriendsDB.create(self!.myfriends)
-            numberOfFriends = self!.myfriendsDB.read().count
-            print("Количество друзей получено = \(numberOfFriends)")
+        friendsAPI.getFriends { [ weak self ] friends in
+            
+            guard let self = self else { return }
+            
+            self.myfriendsDB.save(friends)
+            
+            self.myfriends = self.myfriendsDB.load()
+            self.token = self.myfriends?.observe { [weak self] changes in
+                guard let self = self else { return }
+                
+                switch changes {
+                case .initial:
+                    self.tableView.reloadData()
+                case .update(_, let deletions, let insertions, let modifications):
+                    self.tableView.beginUpdates()
+                    self.tableView.insertRows(at: insertions.map({ IndexPath(row: $0, section: 0) }), with: .automatic)
+                    self.tableView.deleteRows(at: deletions.map({ IndexPath(row: $0, section: 0)}), with: .automatic)
+                    self.tableView.reloadRows(at: modifications.map({ IndexPath(row: $0, section: 0) }), with: .automatic)
+                    self.tableView.endUpdates()
+                case .error(let error):
+                    fatalError("\(error)")
+                }
             }
+            
         }
-        
-        else if numberOfFriends == myfriendsDB.read().count {
-            print("Количество друзей осталось прежним = \(numberOfFriends)")
-        }
-        
     }
-
+    
     // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return myfriends.count
+        
+        guard let friends = myfriends else { return 0 }
+        
+        return friends.count
     }
-
+    
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-       let cell = tableView.dequeueReusableCell(withIdentifier: "friendsCell", for: indexPath) as! FriendsTableViewCell
-        let friend = myfriends[indexPath.row]
-        cell.configureFriend(with: friend)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "friendsCell", for: indexPath) as! FriendsTableViewCell
+        
+        let friend = myfriends?[indexPath.row]
+        cell.configureFriend(with: friend!)
         
         return cell
     }

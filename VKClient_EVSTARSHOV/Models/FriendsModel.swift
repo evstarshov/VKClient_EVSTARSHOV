@@ -2,14 +2,6 @@ import UIKit
 import RealmSwift
 import Alamofire
 
-protocol DBProtocol {
-    //CRUD - create, read, update, delete
-    
-    func create(_ friends: [FriendModel])
-    func read() -> [FriendModel]
-    func delete(_ friends: [FriendModel])
-    func update(_ friends: [FriendModel])
-}
 
 struct FriendsJSON: Codable {
     let response: FriendsResponse
@@ -47,51 +39,36 @@ class FriendModel: Object, Codable {
     let version = "5.81"
 }
 
-class FriendDB: DBProtocol {
+final class FriendDB {
     
-    let migration = Realm.Configuration(schemaVersion: 6) //миграция работает как на расширение так и на уделение
-    lazy var mainRealm = try! Realm(configuration: migration)
-    
-    func create(_ friends: [FriendModel]) {
-        mainRealm.beginWrite()
-        do {
-            mainRealm.add(friends) //добавляем объект в хранилище
-            try mainRealm.commitWrite()
-            print(mainRealm.configuration.fileURL ?? "")
-            
-        } catch {
-            print(error.localizedDescription)
-        }
+    init() {
+        Realm.Configuration.defaultConfiguration = Realm.Configuration(schemaVersion: 7)
     }
     
-    func read() -> [FriendModel] {
+    func save(_ items: [FriendModel]) {
+        let realm = try! Realm()
         
-        let friends = mainRealm.objects(FriendModel.self)
-        friends.forEach { print($0.lastName) }
-        print(mainRealm.configuration.fileURL ?? "")
-        return Array(friends) //враппим Result<> в Array<>
-    }
-    
-    func delete(_ friends: [FriendModel]) {
         do {
-            mainRealm.beginWrite()
-            mainRealm.delete(friends)
-            try mainRealm.commitWrite()
-            
-        } catch {
-            print(error.localizedDescription)
+            try! realm.write {
+                realm.add(items)
+            }
         }
     }
     
-    func update(_ friends: [FriendModel]) {
-        do {
-            let oldFriends =  mainRealm.objects(FriendModel.self).filter("id == %@", friends)
-            mainRealm.beginWrite()
-            mainRealm.delete(oldFriends)
-            mainRealm.add(friends)
-            try mainRealm.commitWrite()
-        } catch {
-            print(error.localizedDescription)
+    func load() -> Results<FriendModel> {
+        
+        let realm = try! Realm()
+        
+        let friends: Results<FriendModel> = realm.objects(FriendModel.self)
+        
+        return friends
+        
+    }
+    
+    func delete(_ items: FriendModel) {
+        let realm = try! Realm()
+        try! realm.write {
+            realm.delete(items)
         }
     }
 }
