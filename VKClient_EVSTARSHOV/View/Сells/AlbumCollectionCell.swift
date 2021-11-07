@@ -27,8 +27,8 @@ class AlbumCollectionCell: UICollectionViewCell {
     }
     
     func configureGallery(with mygallery: PhotoModel){
-        friendsLabel.text = mygallery.text
-        friendsImageView.loadImage(url: mygallery.sizes[2].url)
+        friendsLabel?.text = mygallery.text
+        friendsImageView.loadImage(url: mygallery.sizes[1].url)
         contentMode = .scaleAspectFill
     }
     
