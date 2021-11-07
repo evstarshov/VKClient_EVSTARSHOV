@@ -34,12 +34,34 @@ class FriendsTableViewController: UITableViewController {
         tableView.tableHeaderView = tableViewHeader
         // Получение списка друзей из JSON
         
-        friendsAPI.getFriends { [ weak self ] friends in
+        if myfriendsDB.load().isEmpty {
             
-            guard let self = self else { return }
-            
-            self.myfriendsDB.save(friends)
-            
+            friendsAPI.getFriends { [ weak self ] friends in
+                
+                guard let self = self else { return }
+                
+                self.myfriendsDB.save(friends)
+                self.myfriends = self.myfriendsDB.load()
+                
+                self.token = self.myfriends?.observe { [weak self] changes in
+                    guard let self = self else { return }
+                    
+                    switch changes {
+                    case .initial:
+                        self.tableView.reloadData()
+                    case .update(_, let deletions, let insertions, let modifications):
+                        self.tableView.beginUpdates()
+                        self.tableView.insertRows(at: insertions.map({ IndexPath(row: $0, section: 0) }), with: .automatic)
+                        self.tableView.deleteRows(at: deletions.map({ IndexPath(row: $0, section: 0)}), with: .automatic)
+                        self.tableView.reloadRows(at: modifications.map({ IndexPath(row: $0, section: 0) }), with: .automatic)
+                        self.tableView.endUpdates()
+                    case .error(let error):
+                        fatalError("\(error)")
+                    }
+                }
+                
+            }
+        } else {
             self.myfriends = self.myfriendsDB.load()
             self.token = self.myfriends?.observe { [weak self] changes in
                 guard let self = self else { return }
@@ -57,7 +79,6 @@ class FriendsTableViewController: UITableViewController {
                     fatalError("\(error)")
                 }
             }
-            
         }
     }
     

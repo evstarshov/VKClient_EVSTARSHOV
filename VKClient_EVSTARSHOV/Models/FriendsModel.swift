@@ -65,7 +65,7 @@ final class FriendDB {
         
     }
     
-    func delete(_ items: FriendModel) {
+    func delete(_ items: [FriendModel]) {
         let realm = try! Realm()
         try! realm.write {
             realm.delete(items)
