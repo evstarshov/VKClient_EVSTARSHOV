@@ -6,29 +6,32 @@
 //
 
 import UIKit
+import RealmSwift
 
 class AlbumsCollectionViewController: UICollectionViewController {
     
-    let photoService = PhotoAPI()
-    let photosDB = PhotoDB()
-    var myalbums: [PhotoModel] = []
+    private let photoService = PhotoAPI()
+    private let photosDB = PhotoDB()
+    private var myalbums: Results<PhotoModel>?
+    private var token: NotificationToken?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        photosDB.delete(myalbums)
-        collectionView.reloadData()
-        
-
-        photoService.getPhotos { [weak self] photos in
-            self?.myalbums = photos
-            self?.collectionView.reloadData()
-            self?.photosDB.create(self!.myalbums)
-            }
+        if photosDB.load().isEmpty {
+            photoService.getPhotos { [weak self] photos in
             
-        myalbums = photosDB.read()
-            print("no new photo")
+            guard let self = self else { return }
+                
+                self.photosDB.save(photos)
+                self.myalbums = self.photosDB.load()
+                
+                
+            }
+        } else {
+            self.myalbums = self.photosDB.load()
         }
+    }
     
 
 
@@ -37,7 +40,8 @@ class AlbumsCollectionViewController: UICollectionViewController {
 
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        myalbums.count
+        guard let photos = myalbums else { return 0 }
+        return photos.count
     }
 
     // ------- Конфигурация ячейки коллекции
@@ -48,7 +52,7 @@ class AlbumsCollectionViewController: UICollectionViewController {
          guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoCell", for: indexPath) as?  AlbumCollectionCell
          else {return UICollectionViewCell()}
         
-        cell.configureGallery(with: myalbums[indexPath.item])
+        cell.configureGallery(with: myalbums![indexPath.item])
 
         return cell
     }

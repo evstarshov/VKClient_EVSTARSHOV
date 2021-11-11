@@ -51,52 +51,36 @@ class GroupModel: Object, Codable {
 
 final class GroupDB {
     
-    let migration = Realm.Configuration(schemaVersion: 6) //миграция работает как на расширение так и на уделение
-    lazy var mainRealm = try! Realm(configuration: migration)
+    init() {
+        Realm.Configuration.defaultConfiguration = Realm.Configuration(schemaVersion: 7)
+    }
     
-    
-    func create(_ groups: [GroupModel]) {
-        mainRealm.beginWrite()
+    func save(_ items: [GroupModel]) {
+        let realm = try! Realm()
+        
         do {
-            mainRealm.add(groups) //добавляем объект в хранилище
-            try mainRealm.commitWrite()
-            print(mainRealm.configuration.fileURL ?? "")
-            
-        } catch {
-            print(error.localizedDescription)
+            try! realm.write {
+                realm.add(items)
+            }
         }
     }
     
-    func read() -> [GroupModel] {
-        let groups = mainRealm.objects(GroupModel.self)
-        groups.forEach { print($0.name) }
-        print(mainRealm.configuration.fileURL ?? "")
-        return Array(groups) //враппим Result<> в Array<>
+    func load() -> Results<GroupModel> {
+        
+        let realm = try! Realm()
+        
+        let groups: Results<GroupModel> = realm.objects(GroupModel.self)
+        
+        return groups
+        
     }
     
-    func delete(_ groups: [GroupModel]) {
-        do {
-            mainRealm.beginWrite()
-            mainRealm.delete(groups)
-            try mainRealm.commitWrite()
-            
-        } catch {
-            print(error.localizedDescription)
+    func delete(_ items: [GroupModel]) {
+        let realm = try! Realm()
+        try! realm.write {
+            realm.delete(items)
         }
     }
-    
-    func update(_ groups: [GroupModel]) {
-        do {
-            let oldGroups =  mainRealm.objects(GroupModel.self).filter("id == %@", groups)
-            mainRealm.beginWrite()
-            mainRealm.delete(oldGroups)
-            mainRealm.add(groups)
-            try mainRealm.commitWrite()
-        } catch {
-            print(error.localizedDescription)
-        }
-    }
-    
     
 }
 

@@ -44,49 +44,34 @@ class PhotoModel: Object, Codable {
 
 final class PhotoDB {
     
-    let migration = Realm.Configuration(schemaVersion: 6) //миграция работает как на расширение так и на уделение
-    lazy var mainRealm = try! Realm(configuration: migration)
-    
-    func create(_ photos: [PhotoModel]) {
-        mainRealm.beginWrite()
-        do {
-            mainRealm.add(photos) //добавляем объект в хранилище
-            try mainRealm.commitWrite()
-            print(mainRealm.configuration.fileURL ?? "")
-            
-        } catch {
-            print(error.localizedDescription)
-        }
+    init() {
+        Realm.Configuration.defaultConfiguration = Realm.Configuration(schemaVersion: 7)
     }
     
-    func read() -> [PhotoModel] {
+    func save(_ items: [PhotoModel]) {
+        let realm = try! Realm()
         
-        let photos = mainRealm.objects(PhotoModel.self)
-        photos.forEach { print($0.id) }
-        print(mainRealm.configuration.fileURL ?? "")
-        return Array(photos) //враппим Result<> в Array<>
-    }
-    
-    func delete(_ photos: [PhotoModel]) {
         do {
-            mainRealm.beginWrite()
-            mainRealm.delete(photos)
-            try mainRealm.commitWrite()
-            
-        } catch {
-            print(error.localizedDescription)
+            try! realm.write {
+                realm.add(items)
+            }
         }
     }
     
-    func update(_ photos: [PhotoModel]) {
-        do {
-            let oldPhotos =  mainRealm.objects(PhotoModel.self).filter("id == %@", photos)
-            mainRealm.beginWrite()
-            mainRealm.delete(oldPhotos)
-            mainRealm.add(photos)
-            try mainRealm.commitWrite()
-        } catch {
-            print(error.localizedDescription)
+    func load() -> Results<PhotoModel> {
+        
+        let realm = try! Realm()
+        
+        let photos: Results<PhotoModel> = realm.objects(PhotoModel.self)
+        
+        return photos
+        
+    }
+    
+    func delete(_ items: [PhotoModel]) {
+        let realm = try! Realm()
+        try! realm.write {
+            realm.delete(items)
         }
     }
 }
