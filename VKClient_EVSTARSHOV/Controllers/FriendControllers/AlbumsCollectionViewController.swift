@@ -10,18 +10,27 @@ import UIKit
 class AlbumsCollectionViewController: UICollectionViewController {
     
     let photoService = PhotoAPI()
-    var myalbums: [PhotoDB] = []
+    let photosDB = PhotoDB()
+    var myalbums: [PhotoModel] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        photosDB.delete(myalbums)
+        collectionView.reloadData()
+        
+
         photoService.getPhotos { [weak self] photos in
             self?.myalbums = photos
             self?.collectionView.reloadData()
+            self?.photosDB.create(self!.myalbums)
+            }
+            
+        myalbums = photosDB.read()
+            print("no new photo")
         }
-        print("Got photos in VC")
-        print(myalbums)
-    }
+    
+
 
     // ------ Получение количества ячеек из массива
     

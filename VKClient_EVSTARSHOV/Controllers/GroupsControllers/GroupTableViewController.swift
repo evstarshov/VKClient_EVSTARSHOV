@@ -11,7 +11,8 @@ class GroupTableViewController: UITableViewController {
 
     @IBOutlet var searchGroupBar: UISearchBar!
     let groupsService = GroupsAPI()
-    var mygroups: [GroupDB] = []
+    let groupsDB = GroupDB()
+    var mygroups: [GroupModel] = []
 
 
         
@@ -22,12 +23,25 @@ class GroupTableViewController: UITableViewController {
         //searchGroupBar.delegate = self
         
         //Получение JSON
+        var numberOfgroups = 0
         
+        mygroups = groupsDB.read()
+        numberOfgroups = groupsDB.read().count
+        tableView.reloadData()
+        
+        if numberOfgroups == 0 {
         groupsService.getGroups { [weak self] groups in
             self?.mygroups = groups
             self?.tableView.reloadData()
+            self?.groupsDB.create(self!.mygroups)
+            numberOfgroups = self!.groupsDB.read().count
         }
+        }
+            else if numberOfgroups == groupsDB.read().count{
+                print("no groups to load")
+            }
     }
+    
     
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -39,6 +53,9 @@ class GroupTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "groupsCell", for: indexPath)
         let group = mygroups[indexPath.row]
         cell.textLabel?.text = group.name
+        if let groupImage = URL(string: group.photo100) {
+            cell.imageView?.loadImage(url: groupImage)
+        }
         
         return cell
     }

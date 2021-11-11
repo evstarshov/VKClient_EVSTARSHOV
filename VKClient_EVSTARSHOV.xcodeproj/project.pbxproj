@@ -233,12 +233,12 @@
 			path = TableSectionHeaderFooter;
 			sourceTree = "<group>";
 		};
-		3A990F692726DA660048D06F /* Helpers */ = {
+		3A990F692726DA660048D06F /* Extentions */ = {
 			isa = PBXGroup;
 			children = (
 				3A990F6A2726DA660048D06F /* Data+PrettyJSON.swift */,
 			);
-			path = Helpers;
+			path = Extentions;
 			sourceTree = "<group>";
 		};
 		3AB4D837271D8D8800BD4589 /* Services */ = {
@@ -256,7 +256,7 @@
 			isa = PBXGroup;
 			children = (
 				3A4543D7272A8DD200C2DF95 /* Modules */,
-				3A990F692726DA660048D06F /* Helpers */,
+				3A990F692726DA660048D06F /* Extentions */,
 				3AB4D837271D8D8800BD4589 /* Services */,
 			);
 			path = "vk-api";

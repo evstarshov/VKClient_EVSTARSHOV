@@ -14,7 +14,7 @@ final class GroupsAPI {
     let userId = Account.shared.userId
     let version = "5.81"
     
-    func getGroups(completion: @escaping([GroupDB]) -> ()) {
+    func getGroups(completion: @escaping([GroupModel]) -> ()) {
         let method = "/groups.get"
         let parameters: Parameters = [
             "user_id": userId,
@@ -35,7 +35,7 @@ final class GroupsAPI {
             do {
                 
                 let GroupsJSON = try JSONDecoder().decode(GroupsJSON.self, from: data)
-                let mygroups: [GroupDB] = GroupsJSON.response.items
+                let mygroups: [GroupModel] = GroupsJSON.response.items
                 completion(mygroups)
                 
             } catch {

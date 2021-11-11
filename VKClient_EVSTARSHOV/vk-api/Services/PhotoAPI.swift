@@ -18,7 +18,7 @@ final class PhotoAPI {
     let version = "5.81"
     let photoId = ""
     
-    func getPhotos(completion: @escaping([PhotoDB]) -> ()) {
+    func getPhotos(completion: @escaping([PhotoModel]) -> ()) {
         let method = "/photos.get"
         let parameters: Parameters = [
             "owner_id": userId,
@@ -40,7 +40,7 @@ final class PhotoAPI {
             do {
                 
                 let photoJSON = try JSONDecoder().decode(PhotoJSON.self, from: data)
-                let myalbums: [PhotoDB] = photoJSON.response.items
+                let myalbums: [PhotoModel] = photoJSON.response.items
                 completion(myalbums)
                 
             } catch {
