@@ -6,13 +6,16 @@
 //
 
 import UIKit
+import RealmSwift
 
 class GroupTableViewController: UITableViewController {
 
     @IBOutlet var searchGroupBar: UISearchBar!
-    let groupsService = GroupsAPI()
-    let groupsDB = GroupDB()
-    var mygroups: [GroupModel] = []
+    
+    private let groupsService = GroupsAPI()
+    private let groupsDB = GroupDB()
+    private var mygroups: Results<GroupModel>?
+    private var token: NotificationToken?
 
 
         
@@ -23,37 +26,68 @@ class GroupTableViewController: UITableViewController {
         //searchGroupBar.delegate = self
         
         //Получение JSON
-        var numberOfgroups = 0
-        
-        mygroups = groupsDB.read()
-        numberOfgroups = groupsDB.read().count
-        tableView.reloadData()
-        
-        if numberOfgroups == 0 {
-        groupsService.getGroups { [weak self] groups in
-            self?.mygroups = groups
-            self?.tableView.reloadData()
-            self?.groupsDB.create(self!.mygroups)
-            numberOfgroups = self!.groupsDB.read().count
-        }
-        }
-            else if numberOfgroups == groupsDB.read().count{
-                print("no groups to load")
+        if groupsDB.load().isEmpty {
+            groupsService.getGroups { [weak self] groups in
+                
+                guard let self = self else { return }
+                
+                self.groupsDB.save(groups)
+                self.mygroups = self.groupsDB.load()
+                
+                self.token = self.mygroups?.observe { [weak self] changes in
+                    guard let self = self else { return }
+                    
+                    switch changes {
+                    case .initial:
+                        self.tableView.reloadData()
+                    case .update(_, let deletions, let insertions, let modifications):
+                        self.tableView.beginUpdates()
+                        self.tableView.insertRows(at: insertions.map({ IndexPath(row: $0, section: 0) }), with: .automatic)
+                        self.tableView.deleteRows(at: deletions.map({ IndexPath(row: $0, section: 0)}), with: .automatic)
+                        self.tableView.reloadRows(at: modifications.map({ IndexPath(row: $0, section: 0) }), with: .automatic)
+                        self.tableView.endUpdates()
+                    case .error(let error):
+                        fatalError("\(error)")
+                    }
+                }
+                
             }
+        } else {
+            self.mygroups = self.groupsDB.load()
+            self.token = self.mygroups?.observe { [weak self] changes in
+                guard let self = self else { return }
+                
+                switch changes {
+                case .initial:
+                    self.tableView.reloadData()
+                case .update(_, let deletions, let insertions, let modifications):
+                    self.tableView.beginUpdates()
+                    self.tableView.insertRows(at: insertions.map({ IndexPath(row: $0, section: 0) }), with: .automatic)
+                    self.tableView.deleteRows(at: deletions.map({ IndexPath(row: $0, section: 0)}), with: .automatic)
+                    self.tableView.reloadRows(at: modifications.map({ IndexPath(row: $0, section: 0) }), with: .automatic)
+                    self.tableView.endUpdates()
+                case .error(let error):
+                    fatalError("\(error)")
+                }
+            }
+        }
+
     }
     
     
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        mygroups.count
+        
+        guard let groups = mygroups else { return 0 }
+        return groups.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "groupsCell", for: indexPath)
-        let group = mygroups[indexPath.row]
-        cell.textLabel?.text = group.name
-        if let groupImage = URL(string: group.photo100) {
+        let group = mygroups?[indexPath.row]
+        cell.textLabel?.text = group?.name
+        if let groupImage = URL(string: group?.photo100 ?? "") {
             cell.imageView?.loadImage(url: groupImage)
         }
         
