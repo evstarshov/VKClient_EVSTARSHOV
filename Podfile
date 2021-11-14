@@ -10,6 +10,12 @@ pod 'SwiftyJSON', '~> 4.0'
 pod 'Realm'
 pod 'RealmSwift'
 pod 'SwiftKeychainWrapper'
+pod 'Firebase/Auth'
+pod 'Firebase/Core'
+pod 'Firebase/Storage'
+pod 'Firebase/Database'
+pod 'Firebase'
+pod 'Firebase/Firestore'
 
   # Pods for VKClient_EVSTARSHOV
 
