@@ -9,7 +9,8 @@ import UIKit
 
 class NewsTableViewController: UITableViewController {
     
-
+    private let newsService = NewsAPI()
+    var news: [NewsJSON] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,7 +22,17 @@ class NewsTableViewController: UITableViewController {
                            forCellReuseIdentifier: "newsCell")
         tableView.estimatedRowHeight = 600
         tableView.rowHeight = UITableView.automaticDimension
-    loadNewsData()
+
+        newsService.getNews { [weak self] news in
+            
+            guard let self = self else { return }
+            
+            self.news = news
+            self.tableView.reloadData()
+            
+        }
+        
+        
     }
 
 

@@ -38,6 +38,7 @@
 		3A996F6B2742A37C00312EC8 /* PhotosDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A996F6A2742A37C00312EC8 /* PhotosDB.swift */; };
 		3A996F6D2742A44D00312EC8 /* FriendsDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A996F6C2742A44D00312EC8 /* FriendsDB.swift */; };
 		3A996F6F2742A46200312EC8 /* GroupsDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A996F6E2742A46200312EC8 /* GroupsDB.swift */; };
+		3A996F712742A69000312EC8 /* NewsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A996F702742A69000312EC8 /* NewsAPI.swift */; };
 		3AB4D839271D8DBB00BD4589 /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB4D838271D8DBB00BD4589 /* Account.swift */; };
 		3AC0C52626D76B0D00AB3DB5 /* FriendsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC0C52526D76B0D00AB3DB5 /* FriendsTableViewController.swift */; };
 		3ADA87712722AFB900AAAAEB /* FriendsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADA87702722AFB900AAAAEB /* FriendsAPI.swift */; };
@@ -86,6 +87,7 @@
 		3A996F6A2742A37C00312EC8 /* PhotosDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosDB.swift; sourceTree = "<group>"; };
 		3A996F6C2742A44D00312EC8 /* FriendsDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsDB.swift; sourceTree = "<group>"; };
 		3A996F6E2742A46200312EC8 /* GroupsDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsDB.swift; sourceTree = "<group>"; };
+		3A996F702742A69000312EC8 /* NewsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsAPI.swift; sourceTree = "<group>"; };
 		3AB4D838271D8DBB00BD4589 /* Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
 		3AC0C52526D76B0D00AB3DB5 /* FriendsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsTableViewController.swift; sourceTree = "<group>"; };
 		3ADA87702722AFB900AAAAEB /* FriendsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsAPI.swift; sourceTree = "<group>"; };
@@ -264,6 +266,7 @@
 				3ADA87702722AFB900AAAAEB /* FriendsAPI.swift */,
 				3ADA87722722BBC200AAAAEB /* PhotoAPI.swift */,
 				3ADA87742722DE8400AAAAEB /* GroupsAPI.swift */,
+				3A996F702742A69000312EC8 /* NewsAPI.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -468,6 +471,7 @@
 				3A12704926C7E38C0015E7B2 /* SceneDelegate.swift in Sources */,
 				3A0E22AE26DE37F900970B82 /* UIColor + Ext.swift in Sources */,
 				3A0E22A226D9F96E00970B82 /* AlbumsCollectionViewController.swift in Sources */,
+				3A996F712742A69000312EC8 /* NewsAPI.swift in Sources */,
 				3A990F6B2726DA660048D06F /* Data+PrettyJSON.swift in Sources */,
 				3A10AD4026F2538800FE755F /* CollectionViewLayout.swift in Sources */,
 				3AEB128326FC826D0067A954 /* Animator.swift in Sources */,
