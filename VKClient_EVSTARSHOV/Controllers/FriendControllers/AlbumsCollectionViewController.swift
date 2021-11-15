@@ -11,25 +11,23 @@ import RealmSwift
 class AlbumsCollectionViewController: UICollectionViewController {
     
     private let photoService = PhotoAPI()
-    private let photosDB = PhotoDB()
+    private let photosDB = PhotosDB()
     private var myalbums: Results<PhotoModel>?
-    private var token: NotificationToken?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if photosDB.load().isEmpty {
-            photoService.getPhotos { [weak self] photos in
-            
+        //контроллер держит сервис
+        photoService.getPhotos { [weak self] photos in
+            //гарантирует что блок полностью выполниться даже если контроллер будет удален из памяти
             guard let self = self else { return }
-                
-                self.photosDB.save(photos)
-                self.myalbums = self.photosDB.load()
-                
-                
-            }
-        } else {
+            
+            self.photosDB.deleteAll()
+            self.photosDB.add(photos)
             self.myalbums = self.photosDB.load()
+
+            self.collectionView.reloadData()
+
         }
     }
     
