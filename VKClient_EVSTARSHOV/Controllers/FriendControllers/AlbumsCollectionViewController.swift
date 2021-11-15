@@ -17,15 +17,15 @@ class AlbumsCollectionViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //контроллер держит сервис
+        
         photoService.getPhotos { [weak self] photos in
-            //гарантирует что блок полностью выполниться даже если контроллер будет удален из памяти
+            
             guard let self = self else { return }
             
             self.photosDB.deleteAll()
             self.photosDB.add(photos)
             self.myalbums = self.photosDB.load()
-
+            print("Got photo in VC")
             self.collectionView.reloadData()
 
         }
@@ -47,10 +47,10 @@ class AlbumsCollectionViewController: UICollectionViewController {
 
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoCell", for: indexPath) as?  AlbumCollectionCell
-         else {return UICollectionViewCell()}
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoCell", for: indexPath) as!  AlbumCollectionCell
         
-        cell.configureGallery(with: myalbums![indexPath.item])
+        let photo = myalbums?[indexPath.row]
+        cell.configureGallery(with: photo!)
 
         return cell
     }
