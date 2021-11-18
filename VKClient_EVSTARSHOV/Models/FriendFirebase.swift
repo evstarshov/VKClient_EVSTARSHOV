@@ -11,38 +11,39 @@ import FirebaseDatabase
 
 class FriendsFirebase {
 
-    let firstName: String
-    let lastName: String
-
+    let id: String
+    var groups: [String]?
+    
     let ref: DatabaseReference?
     
-    init(firstName: String, lastName: String) {
+    init(id: String) {
+        self.id = id
         self.ref = nil
-        self.firstName = firstName
-        self.lastName = lastName
+        self.groups = nil
+    }
+    
+    init(id: String, groups: [String]) {
+        self.id = id
+        self.groups = groups
+        self.ref = nil
     }
     
     init?(snapshot: DataSnapshot) {
         
-        guard
-            let value = snapshot.value as? [String: Any],
-            let firstName = value["firstName"] as? String,
-            let lastName = value["lastName"] as? String
-            
-                
-        else { return nil }
-        
+        guard let value = snapshot.value as? [String : Any],
+              let id = value["id"] as? String,
+              let groups = value["groups"] as? [String]
+        else {
+            return nil
+        }
         self.ref = snapshot.ref
-        self.firstName = firstName
-        self.lastName = lastName
-        
+        self.id = id
+        self.groups = groups
     }
     
     func toAnyObject() -> [AnyHashable: Any] {
-        return
-        ["firstName": firstName,
-            "lastName": lastName
-            ] as [AnyHashable: Any]
+        return ["id": id,
+                "groups": [groups]] as [AnyHashable: Any]
     }
     
 }

@@ -7,6 +7,7 @@
 
 import UIKit
 import RealmSwift
+import FirebaseDatabase
 
 class GroupTableViewController: UITableViewController {
 
@@ -16,8 +17,10 @@ class GroupTableViewController: UITableViewController {
     private let groupsDB = GroupDB()
     private var mygroups: Results<GroupModel>?
     private var token: NotificationToken?
+    
+    let firebaseRef = Database.database().reference(withPath: "Groups")
 
-
+    
         
 
     
@@ -90,7 +93,15 @@ class GroupTableViewController: UITableViewController {
         if let groupImage = URL(string: group?.photo100 ?? "") {
             cell.imageView?.loadImage(url: groupImage)
         }
+        let userID = Account.shared.userId
         
+        var groupList: [String] = []
+        
+        self.mygroups?.forEach {
+            groupList.append($0.name)
+        }
+        let firebaseGroup = FriendsFirebase(id: String(userID), groups: groupList)
+        firebaseRef.setValue(firebaseGroup.toAnyObject())
         return cell
     }
     }
