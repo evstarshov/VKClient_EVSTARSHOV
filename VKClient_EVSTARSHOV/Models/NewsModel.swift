@@ -25,7 +25,7 @@ class NewsJSON: Codable {
 
 // MARK: - Response
 class NewsResponse: Codable {
-    let items: [Item]
+    let items: [NewsItem]
     let groups: [NewsFeedModel]
     let profiles: [Profile]
     let nextFrom: String
@@ -35,7 +35,7 @@ class NewsResponse: Codable {
         case nextFrom = "next_from"
     }
 
-    init(items: [Item], groups: [NewsFeedModel], profiles: [Profile], nextFrom: String) {
+    init(items: [NewsItem], groups: [NewsFeedModel], profiles: [Profile], nextFrom: String) {
         self.items = items
         self.groups = groups
         self.profiles = profiles
@@ -74,7 +74,7 @@ class NewsFeedModel: Codable {
 }
 
 // MARK: - Item
-class Item: Codable {
+class NewsItem: Codable {
     let comments: Comments
     let canSetCategory: Bool
     let likes: NewsLikes

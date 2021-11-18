@@ -10,25 +10,24 @@ import UIKit
 class NewsTableViewController: UITableViewController {
     
     private let newsService = NewsAPI()
-    var news: [NewsFeedModel] = []
+    var newsFeed: [NewsFeedModel] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        tableView.register(
-            UINib(
-                           nibName: "NewsTableViewCell",
-                            bundle: nil),
-                           forCellReuseIdentifier: "newsCell")
-        tableView.estimatedRowHeight = 600
-        tableView.rowHeight = UITableView.automaticDimension
+//        tableView.register(
+//            UINib(
+//                           nibName: "NewsTableViewCell",
+//                            bundle: nil),
+//                           forCellReuseIdentifier: "newsCell")
+//        tableView.estimatedRowHeight = 600
+//        tableView.rowHeight = UITableView.automaticDimension
 
         newsService.getNews { [weak self] news in
             
-            guard let self = self else { return }
-            
-            self.news = news
-            self.tableView.reloadData()
+            self?.newsFeed = news
+            print("GOT NEWS IN VC")
+            self?.tableView.reloadData()
             
         }
         
@@ -39,31 +38,33 @@ class NewsTableViewController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
 
-        return news.count
+        return newsFeed.count
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
-        return news.count
+        return newsFeed.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "newsCell", for: indexPath) as! NewsTableViewCell
-        let new = news[indexPath.row]
-        cell.configureNews(model: new)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "newsCell", for: indexPath)
+        let new = newsFeed[indexPath.row]
+        cell.textLabel?.text = new.name
+        if let newsImage = URL(string: new.photo100) {
+            cell.imageView?.loadImage(url: newsImage) }
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        UITableView.automaticDimension
-    }
+//    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        UITableView.automaticDimension
+//    }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        defer { tableView.deselectRow(at: indexPath, animated: true)
-        }
-        performSegue(
-            withIdentifier: "showComments",
-            sender: nil)
-    }
+//    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        defer { tableView.deselectRow(at: indexPath, animated: true)
+//        }
+//        performSegue(
+//            withIdentifier: "showComments",
+//            sender: nil)
+//    }
 
 }

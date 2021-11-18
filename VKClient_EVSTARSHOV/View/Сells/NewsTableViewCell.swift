@@ -57,13 +57,24 @@ class NewsTableViewCell: UITableViewCell {
 
     }
     
-    func configureNews(model: NewsFeedModel) {
-        newsTitleCell.text = model.name
-        newsTextCell.text = model.type
-        newsImageCell.image = nil
-        if let avatarNewsimage = URL(string: model.photo200) {
-            avatarImageCell.loadImage(url: avatarNewsimage) }
-        friendLabelCell.text = nil
+    func configureNews(model: NewsItem) {
+        
+        newsTextCell.text = model.text
+        
+        
+        //        if let newsImage = URL(string: model.newsSizes[1].url) {
+        //            newsImageCell.loadImage(url: newsImage) }
+        
+//        newsTitleCell.text = model.newsGroupTitle[1].name
+//        newsTextCell.text = model.newsText[1].text
+//
+//        if let newsImage = URL(string: model.newsSizes[1].url) {
+//            newsImageCell.loadImage(url: newsImage) }
+//
+//        if let newsAvatar = URL(string: model.newsGroupTitle[1].photo200) {
+//            avatarImageCell.loadImage(url: newsAvatar) }
+//
+//        friendLabelCell.text = model.newsGroupTitle[1].screenName
     }
     
 }

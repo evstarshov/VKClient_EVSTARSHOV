@@ -22,7 +22,7 @@ final class NewsAPI {
             "user_id": userId,
             "access_token": token,
             "start_time": 86400,
-            "count": 1,
+            "count": 5,
             "filters": "post,photo,photo_tag,wall_photo",
             "v": version
         ]
@@ -35,11 +35,9 @@ final class NewsAPI {
                          debugPrint(response.data?.prettyJSON as Any)
             
             do {
-                let itemsData = try JSON(data)["response"]["items"].rawData()
-                                 let news = try JSONDecoder().decode([NewsFeedModel].self, from: itemsData)
-
-                                 completion(news)
-
+                let items = try JSON(data)["response"]["groups"].rawData()
+                let news = try? JSONDecoder().decode([NewsFeedModel].self, from: items)
+                                 completion(news ?? [])
                              } catch {
                                  print(error)
                              }
