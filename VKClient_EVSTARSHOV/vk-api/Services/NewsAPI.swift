@@ -16,7 +16,7 @@ final class NewsAPI {
     let userId = Account.shared.userId
     let version = "5.81"
     
-    func getNews(completion: @escaping([NewsJSON]) -> ()) {
+    func getNews(completion: @escaping([NewsFeedModel]) -> ()) {
         let method = "/newsfeed.get"
         let parametrs: Parameters = [
             "user_id": userId,
@@ -36,7 +36,7 @@ final class NewsAPI {
             
             do {
                 let itemsData = try JSON(data)["response"]["items"].rawData()
-                                 let news = try JSONDecoder().decode([NewsJSON].self, from: itemsData)
+                                 let news = try JSONDecoder().decode([NewsFeedModel].self, from: itemsData)
 
                                  completion(news)
 

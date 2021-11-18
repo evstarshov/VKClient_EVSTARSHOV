@@ -10,7 +10,7 @@ import UIKit
 class NewsTableViewController: UITableViewController {
     
     private let newsService = NewsAPI()
-    var news: [NewsJSON] = []
+    var news: [NewsFeedModel] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,17 +39,17 @@ class NewsTableViewController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
 
-        return newsArray.count
+        return news.count
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
 
-        return newsArray.count
+        return news.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "newsCell", for: indexPath) as! NewsTableViewCell
-        let new = newsArray[indexPath.row]
+        let new = news[indexPath.row]
         cell.configureNews(model: new)
         return cell
     }

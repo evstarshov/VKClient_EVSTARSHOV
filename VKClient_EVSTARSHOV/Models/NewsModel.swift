@@ -15,18 +15,18 @@ import UIKit
 import Foundation
 
 // MARK: - Welcome
-class Welcome: Codable {
-    let response: Response
+class NewsJSON: Codable {
+    let response: NewsResponse
 
-    init(response: Response) {
+    init(response: NewsResponse) {
         self.response = response
     }
 }
 
 // MARK: - Response
-class Response: Codable {
+class NewsResponse: Codable {
     let items: [Item]
-    let groups: [Group]
+    let groups: [NewsFeedModel]
     let profiles: [Profile]
     let nextFrom: String
 
@@ -35,7 +35,7 @@ class Response: Codable {
         case nextFrom = "next_from"
     }
 
-    init(items: [Item], groups: [Group], profiles: [Profile], nextFrom: String) {
+    init(items: [Item], groups: [NewsFeedModel], profiles: [Profile], nextFrom: String) {
         self.items = items
         self.groups = groups
         self.profiles = profiles
@@ -44,7 +44,7 @@ class Response: Codable {
 }
 
 // MARK: - Group
-class Group: Codable {
+class NewsFeedModel: Codable {
     let id: Int
     let photo100, photo50, photo200: String
     let type, screenName, name: String
@@ -316,9 +316,4 @@ class OnlineInfo: Codable {
         self.isMobile = isMobile
         self.isOnline = isOnline
     }
-}
-
-
-class NewsJSON: Decodable {
-    
 }

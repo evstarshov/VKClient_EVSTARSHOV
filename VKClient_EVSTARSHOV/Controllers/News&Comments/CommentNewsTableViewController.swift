@@ -17,20 +17,20 @@ class CommentNewsTableViewController: UITableViewController {
 //    override func numberOfSections(in tableView: UITableView) -> Int {
 //        return commentsArray.count
 //    }
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return commentsArray.count
-    }
-
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-     let cell = tableView.dequeueReusableCell(
-                withIdentifier: "commentСell",
-                for: indexPath)
-        cell.textLabel?.text = commentsArray[indexPath.row].commentarium
-        cell.accessoryType = .disclosureIndicator
-        cell.detailTextLabel?.text = ""
-        return cell
-    }
+//
+//    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        return commentsArray.count
+//    }
+//
+//    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//     let cell = tableView.dequeueReusableCell(
+//                withIdentifier: "commentСell",
+//                for: indexPath)
+//        cell.textLabel?.text = commentsArray[indexPath.row].commentarium
+//        cell.accessoryType = .disclosureIndicator
+//        cell.detailTextLabel?.text = ""
+//        return cell
+//    }
 }
 
 
