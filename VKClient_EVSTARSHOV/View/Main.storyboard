@@ -616,7 +616,7 @@
                                 </collectionViewCellContentView>
                                 <size key="customSize" width="168" height="170"/>
                                 <connections>
-                                    <outlet property="friendsImageView" destination="StQ-ql-tVd" id="oX9-de-92F"/>
+                                    <outlet property="friendsImageView" destination="StQ-ql-tVd" id="iyr-tU-RQX"/>
                                     <outlet property="friendsLabel" destination="DSm-oh-UqV" id="f57-vv-cFI"/>
                                 </connections>
                             </collectionViewCell>

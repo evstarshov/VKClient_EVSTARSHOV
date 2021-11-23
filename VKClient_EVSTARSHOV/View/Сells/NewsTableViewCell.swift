@@ -54,18 +54,27 @@ class NewsTableViewCell: UITableViewCell {
     }
     
     @IBAction func submitBtnPressed(_ sender: Any) {
-        if let comment = commentTextField.text, comment != "" {
-            commentsArray.append(Comments(ncomment: commentTextField.text!))
-            commentTextField.text = ""
-        }
+
     }
     
-    func configureNews(model: NewsModel) {
-        newsTitleCell.text = model.newsTitle
-        newsTextCell.text = model.newsText
-        newsImageCell.image = model.newsImage
-        avatarImageCell.image = model.friendPosted.image
-        friendLabelCell.text = model.friendPosted.name
+    func configureNews(model: NewsItem) {
+        
+        newsTextCell.text = model.text
+        
+        
+        //        if let newsImage = URL(string: model.newsSizes[1].url) {
+        //            newsImageCell.loadImage(url: newsImage) }
+        
+//        newsTitleCell.text = model.newsGroupTitle[1].name
+//        newsTextCell.text = model.newsText[1].text
+//
+//        if let newsImage = URL(string: model.newsSizes[1].url) {
+//            newsImageCell.loadImage(url: newsImage) }
+//
+//        if let newsAvatar = URL(string: model.newsGroupTitle[1].photo200) {
+//            avatarImageCell.loadImage(url: newsAvatar) }
+//
+//        friendLabelCell.text = model.newsGroupTitle[1].screenName
     }
     
 }

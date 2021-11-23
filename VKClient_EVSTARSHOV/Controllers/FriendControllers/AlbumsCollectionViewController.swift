@@ -11,25 +11,23 @@ import RealmSwift
 class AlbumsCollectionViewController: UICollectionViewController {
     
     private let photoService = PhotoAPI()
-    private let photosDB = PhotoDB()
+    private let photosDB = PhotosDB()
     private var myalbums: Results<PhotoModel>?
-    private var token: NotificationToken?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if photosDB.load().isEmpty {
-            photoService.getPhotos { [weak self] photos in
+        
+        photoService.getPhotos { [weak self] photos in
             
             guard let self = self else { return }
-                
-                self.photosDB.save(photos)
-                self.myalbums = self.photosDB.load()
-                
-                
-            }
-        } else {
+            
+            self.photosDB.deleteAll()
+            self.photosDB.add(photos)
             self.myalbums = self.photosDB.load()
+            print("Got photo in VC")
+            self.collectionView.reloadData()
+
         }
     }
     
@@ -49,10 +47,10 @@ class AlbumsCollectionViewController: UICollectionViewController {
 
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoCell", for: indexPath) as?  AlbumCollectionCell
-         else {return UICollectionViewCell()}
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PhotoCell", for: indexPath) as!  AlbumCollectionCell
         
-        cell.configureGallery(with: myalbums![indexPath.item])
+        let photo = myalbums?[indexPath.row]
+        cell.configureGallery(with: photo!)
 
         return cell
     }
