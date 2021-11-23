@@ -57,9 +57,13 @@ class NewsTableViewCell: UITableViewCell {
 
     }
     
-    func configureNews(model: NewsItem) {
+    func configureNews(model: NewsModel) {
         
-        newsTextCell.text = model.text
+        newsTitleCell.text = model.newsTitle
+        newsTextCell.text = model.newsText
+        newsImageCell.image = model.newsImage
+        avatarImageCell.image = model.friendPosted.image
+        friendLabelCell.text = model.friendPosted.name
         
         
         //        if let newsImage = URL(string: model.newsSizes[1].url) {

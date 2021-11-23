@@ -6,13 +6,17 @@
 //
 
 import UIKit
-
-// This file was generated from JSON Schema using quicktype, do not modify it directly.
-// To parse the JSON, add this file to your project and do:
-//
-//   let welcome = try? newJSONDecoder().decode(Welcome.self, from: jsonData)
-
 import Foundation
+
+enum NewsFeedEnum {
+    case authorName
+    case authorAvatar
+    case publicationDate
+    case publicationText
+    case publicationPicture
+    case newsLikes
+}
+
 
 // MARK: - Welcome
 class NewsJSON: Codable {
@@ -315,5 +319,42 @@ class OnlineInfo: Codable {
         self.visible = visible
         self.isMobile = isMobile
         self.isOnline = isOnline
+    }
+}
+
+
+// ------------- ТЕСТОВЫЕ ДАННЫЕ
+
+var newsArray = [NewsModel(ntitle: "Реалистик!", ntext: "Топ залайканных постов за неделю. 💟 Какой арт лучше?", nimage: UIImage(named: "newsImage"), commenttext: "Liked!", nfriend: friendsArray[1])]
+
+var commentsArray = [OldComments(ncomment: "Вот это задница"), OldComments(ncomment: "Лайк")]
+
+class NewsModel {
+
+    
+    let newsTitle: String?
+    let newsText: String?
+    let newsImage: UIImage?
+    let commentText: String?
+    var friendPosted: Friends
+    
+    init(ntitle: String, ntext: String, nimage: UIImage?, commenttext: String, nfriend: Friends) {
+        self.newsTitle = ntitle
+        self.newsText = ntext
+        self.newsImage = nimage
+        self.commentText = commenttext
+        self.friendPosted = nfriend
+    }
+}
+
+
+func loadNewsData() {
+    _ = newsArray
+}
+
+class OldComments {
+    let commentarium: String?
+    init(ncomment: String){
+        self.commentarium = ncomment
     }
 }
