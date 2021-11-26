@@ -10,7 +10,7 @@ import UIKit
 class NewsTableViewController: UITableViewController {
     
     private let newsService = NewsAPI()
-    var newsFeed: [NewsFeedModel] = []
+    var newsFeed: [NewsGroup] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()

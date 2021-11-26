@@ -30,8 +30,8 @@ class NewsJSON: Codable {
 // MARK: - Response
 class NewsResponse: Codable {
     let items: [NewsItem]
-    let groups: [NewsFeedModel]
-    let profiles: [Profile]
+    let groups: [NewsGroup]
+    let profiles: [NewsProfile]
     let nextFrom: String
 
     enum CodingKeys: String, CodingKey {
@@ -39,7 +39,7 @@ class NewsResponse: Codable {
         case nextFrom = "next_from"
     }
 
-    init(items: [NewsItem], groups: [NewsFeedModel], profiles: [Profile], nextFrom: String) {
+    init(items: [NewsItem], groups: [NewsGroup], profiles: [NewsProfile], nextFrom: String) {
         self.items = items
         self.groups = groups
         self.profiles = profiles
@@ -48,7 +48,7 @@ class NewsResponse: Codable {
 }
 
 // MARK: - Group
-class NewsFeedModel: Codable {
+class NewsGroup: Codable {
     let id: Int
     let photo100, photo50, photo200: String
     let type, screenName, name: String
@@ -272,7 +272,7 @@ class Views: Codable {
 }
 
 // MARK: - Profile
-class Profile: Codable {
+class NewsProfile: Codable {
     let online, id: Int
     let photo100: String
     let lastName: String
