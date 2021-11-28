@@ -17,6 +17,21 @@ enum NewsFeedEnum {
     case newsLikes
 }
 
+final class NewsFeed: Codable {
+    
+    var vkItems: [NewsItem]
+    var vkProfile: [NewsProfile]
+    var vkGroup: [NewsGroup]
+    let response: [NewsResponse]
+    
+    init(vkItems: [NewsItem], vkProfile: [NewsProfile], vkGroup: [NewsGroup], response: [NewsResponse]) {
+        self.vkItems = vkItems
+        self.vkProfile = vkProfile
+        self.vkGroup = vkGroup
+        self.response = response
+    }
+}
+
 
 // MARK: - Welcome
 class NewsJSON: Codable {
@@ -32,18 +47,20 @@ class NewsResponse: Codable {
     let items: [NewsItem]
     let groups: [NewsGroup]
     let profiles: [NewsProfile]
-    let nextFrom: String
+//    let nextFrom: String
 
     enum CodingKeys: String, CodingKey {
         case items, groups, profiles
-        case nextFrom = "next_from"
+//        case nextFrom = "next_from"
     }
 
-    init(items: [NewsItem], groups: [NewsGroup], profiles: [NewsProfile], nextFrom: String) {
+    init(items: [NewsItem], groups: [NewsGroup], profiles: [NewsProfile]
+         //nextFrom: String
+    ) {
         self.items = items
         self.groups = groups
         self.profiles = profiles
-        self.nextFrom = nextFrom
+        //self.nextFrom = nextFrom
     }
 }
 

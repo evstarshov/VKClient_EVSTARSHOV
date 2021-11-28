@@ -1,18 +1,14 @@
 //
-//  NewsHeaderTableViewCell.swift
+//  SourceNewsTableViewCell.swift
 //  VKClient_EVSTARSHOV
 //
-//  Created by Евгений Старшов on 23.11.2021.
+//  Created by Евгений Старшов on 26.11.2021.
 //
 
 import UIKit
 
-class NewsHeaderTableViewCell: UITableViewCell {
+class SourceNewsTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var authorName: UILabel!
-    @IBOutlet weak var publicationDate: UILabel!
-    
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

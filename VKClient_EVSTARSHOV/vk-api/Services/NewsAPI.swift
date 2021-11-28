@@ -16,13 +16,13 @@ final class NewsAPI {
     let userId = Account.shared.userId
     let version = "5.81"
     
-    func getNews(_ completion: @escaping (NewsGroup?) -> ()) {
+    func getNews(_ completion: @escaping (NewsJSON?) -> ()) {
         let method = "/newsfeed.get"
         let parametrs: Parameters = [
             "user_id": userId,
             "access_token": token,
             "start_time": 86400,
-            "count": 5,
+            "count": 1,
             "filters": "post,photo,photo_tag,wall_photo",
             "v": version
         ]
@@ -76,6 +76,12 @@ final class NewsAPI {
                         print("Group decoding error at index \(index), err: \(errorDecode)")
                     }
                 }
+            }
+            
+            dispatchGroup.notify(queue: DispatchQueue.main) {
+                let response = NewsResponse(items: vkItemsArr, groups: vkGroupsArr, profiles: vkProfilesArr)
+                let feed = NewsJSON(response: response)
+                completion(feed)
             }
         }
         

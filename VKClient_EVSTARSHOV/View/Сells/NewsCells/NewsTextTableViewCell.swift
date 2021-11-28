@@ -13,9 +13,15 @@ class NewsTextTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
+        
+        
     }
 
+    func configureText(modelText: NewsResponse?) {
+        newsText.text = modelText?.groups[0].name
+    }
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
