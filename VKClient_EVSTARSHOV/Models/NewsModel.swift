@@ -8,28 +8,43 @@
 import UIKit
 import Foundation
 
-enum NewsFeedEnum {
-    case authorName
-    case authorAvatar
-    case publicationDate
-    case publicationText
-    case publicationPicture
-    case newsLikes
-}
+
 
 final class NewsFeed: Codable {
     
-    var vkItems: [NewsItem]
-    var vkProfile: [NewsProfile]
-    var vkGroup: [NewsGroup]
-    let response: [NewsResponse]
+    let postID: Int
+    let authorName: String
+    let authorAvatar: String
+    let publicationDate: Int
+    let publicationText: String
+    let publicationPicture: String
+    let newsLikes: Int
     
-    init(vkItems: [NewsItem], vkProfile: [NewsProfile], vkGroup: [NewsGroup], response: [NewsResponse]) {
-        self.vkItems = vkItems
-        self.vkProfile = vkProfile
-        self.vkGroup = vkGroup
-        self.response = response
+    
+    var newsFeed: Any? = []
+    
+    
+    enum CodingKeys: String, CodingKey {
+        
+        case postID
+        case authorName
+        case authorAvatar
+        case publicationDate
+        case publicationText
+        case publicationPicture
+        case newsLikes
     }
+    
+    func makeFeed() {
+        let newsService = NewsAPI()
+        //var getFeed: NewsJSON?
+        newsService.getNews { [weak self] news in
+        self?.newsFeed = news
+        print("GOT NEWS IN VC")
+        }
+    }
+    
+    
 }
 
 
@@ -68,7 +83,7 @@ class NewsResponse: Codable {
 class NewsGroup: Codable {
     let id: Int
     let photo100, photo50, photo200: String
-    let type, screenName, name: String
+    let type, name: String
     let isClosed: Int
 
     enum CodingKeys: String, CodingKey {
@@ -77,18 +92,17 @@ class NewsGroup: Codable {
         case photo50 = "photo_50"
         case photo200 = "photo_200"
         case type
-        case screenName = "screen_name"
+        //case screenName = "screen_name"
         case name
         case isClosed = "is_closed"
     }
 
-    init(id: Int, photo100: String, photo50: String, photo200: String, type: String, screenName: String, name: String, isClosed: Int) {
+    init(id: Int, photo100: String, photo50: String, photo200: String, type: String, name: String, isClosed: Int) {
         self.id = id
         self.photo100 = photo100
         self.photo50 = photo50
         self.photo200 = photo200
         self.type = type
-        self.screenName = screenName
         self.name = name
         self.isClosed = isClosed
     }
@@ -147,11 +161,13 @@ class NewsItem: Codable {
 // MARK: - Attachment
 class Attachment: Codable {
     let type: String
-    let link: Link
+    //let link: Link
 
-    init(type: String, link: Link) {
+    init(type: String
+         //link: Link
+    ) {
         self.type = type
-        self.link = link
+        //self.link = link
     }
 }
 
