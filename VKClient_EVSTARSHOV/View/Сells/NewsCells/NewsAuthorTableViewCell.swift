@@ -56,6 +56,8 @@ class NewsAuthorTableViewCell: UITableViewCell {
         let dateInt = Double(model.date)
                         let date = Date(timeIntervalSince1970: dateInt)
                         let dateformatter = DateFormatter()
+        dateformatter.dateStyle = .full
+        print("Publication date is \(date)")
         dateLabel?.text = dateformatter.string(from: date)
         
         
