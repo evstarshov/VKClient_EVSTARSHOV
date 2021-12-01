@@ -7,23 +7,22 @@
 
 import UIKit
 
+
+
 class NewsTableViewController: UITableViewController {
     
     private let newsService = NewsAPI()
     
-    var newsFeed: NewsJSON?
-    var feed: [NewsFeed] = []
+    private var newsFeed: NewsJSON?
+
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         makeSection()
-        
-        let dispatchGroup = DispatchGroup()
-        
-        
-        DispatchQueue.global().async(group: dispatchGroup) {
+
+       
 //        tableView.register(
 //            UINib(
 //                           nibName: "NewsTableViewCell",
@@ -34,39 +33,73 @@ class NewsTableViewController: UITableViewController {
             
             self.newsService.getNews { [weak self] news in
             self?.newsFeed = news
+
+                
             print("GOT NEWS IN VC")
             self?.tableView.reloadData()
             }
-        }
-        
-       
-        
+            
+        print("Number of sections: \(newsFeed?.response.items.count ?? 0)")
         
     }
+    
 
     func makeSection() {
         let authorNib = UINib(nibName: "NewsAuthorTableViewCell", bundle: nil)
         self.tableView.register(authorNib, forCellReuseIdentifier: "authorCell")
         tableView.estimatedRowHeight = 600
         tableView.rowHeight = UITableView.automaticDimension
-        //let textNib = UINib(nibName: "NewsTextTableViewCell", bundle: nil)
-        //self.tableView.register(textNib, forCellReuseIdentifier: "NewsTextTableViewCell")
+        let textNib = UINib(nibName: "NewsTextTableViewCell", bundle: nil)
+        self.tableView.register(textNib, forCellReuseIdentifier: "newsTextCell")
+        tableView.estimatedRowHeight = 600
+        tableView.rowHeight = UITableView.automaticDimension
     }
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        guard let sections = newsFeed else { return 0 }
+        return sections.response.items.count
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-
-        return 1
+        guard let sections = newsFeed else { return 0 }
+        return sections.response.items.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "authorCell", for: indexPath) as! NewsAuthorTableViewCell
-        cell.configureAuthor(authorModel: newsFeed)
-        return cell
+        
+        switch indexPath.section {
+            
+        case 0:
+            
+            print("Making author cell")
+            let cell = tableView.dequeueReusableCell(withIdentifier: "authorCell", for: indexPath) as! NewsAuthorTableViewCell
+            let feed = newsFeed?.response.groups[indexPath.row]
+            let date = newsFeed?.response.items[indexPath.row]
+            let avatar = AuthorCellModel(avatar: feed!.photo100, label: feed!.name, date: date!.date)
+            cell.configureAuthor(model: avatar)
+        
+            return cell
+            
+        case 1:
+            
+            print("Getting news text")
+            let cell = tableView.dequeueReusableCell(withIdentifier: "newsTextCell", for: indexPath) as! NewsTextTableViewCell
+            let text = newsFeed?.response.items[indexPath.row]
+            let newstext = NewsTextCellModel(newsText: text?.text ?? "error")
+            cell.configureText(textModel: newstext)
+            return cell
+        
+        default:
+            print("Do nothing")
+            let cell = tableView.dequeueReusableCell(withIdentifier: "authorCell", for: indexPath) as! NewsAuthorTableViewCell
+            return cell
+        }
+        
+        
     }
+    
+
+    
     
 //    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 //        let cell = tableView.dequeueReusableCell(withIdentifier: "NewsTextTableViewCell", for: indexPath)

@@ -25,13 +25,13 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Имя автора" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VR7-Cb-KV6">
-                        <rect key="frame" x="137" y="22" width="92" height="21"/>
+                        <rect key="frame" x="137" y="22" width="540" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="дата публикации" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dj5-GG-Zuz">
-                        <rect key="frame" x="137" y="53" width="136" height="21"/>
+                        <rect key="frame" x="137" y="53" width="525" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -41,7 +41,9 @@
                     <constraint firstAttribute="bottom" secondItem="gmu-Nk-htw" secondAttribute="bottom" constant="22" id="2TF-J5-Vhn"/>
                     <constraint firstItem="Dj5-GG-Zuz" firstAttribute="top" secondItem="VR7-Cb-KV6" secondAttribute="bottom" constant="10" id="43x-gS-gma"/>
                     <constraint firstItem="VR7-Cb-KV6" firstAttribute="leading" secondItem="gmu-Nk-htw" secondAttribute="trailing" constant="5" id="4DD-hA-tAg"/>
+                    <constraint firstAttribute="trailing" secondItem="VR7-Cb-KV6" secondAttribute="trailing" constant="5" id="Hz1-dP-Wkx"/>
                     <constraint firstItem="gmu-Nk-htw" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="LOn-F4-OLT"/>
+                    <constraint firstAttribute="trailing" secondItem="Dj5-GG-Zuz" secondAttribute="trailing" constant="20" id="RMT-g1-F1U"/>
                     <constraint firstItem="gmu-Nk-htw" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="2" id="V24-9t-bWO"/>
                     <constraint firstAttribute="trailing" secondItem="gmu-Nk-htw" secondAttribute="trailing" constant="550" id="j3U-ml-inJ"/>
                     <constraint firstItem="VR7-Cb-KV6" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="22" id="j7X-3P-34z"/>

@@ -10,7 +10,18 @@ import Foundation
 
 
 
+public enum Feed {
+    
+case authorCell
+case textCell
+    
+}
+
 final class NewsFeed: Codable {
+    
+    let items: [NewsItem]
+    let groups: [NewsGroup]
+    let profiles: [NewsProfile]
     
     let postID: Int
     let authorName: String
@@ -33,16 +44,28 @@ final class NewsFeed: Codable {
         case publicationText
         case publicationPicture
         case newsLikes
+        
+        case items
+        case groups
+        case profiles
     }
     
-    func makeFeed() {
-        let newsService = NewsAPI()
-        //var getFeed: NewsJSON?
-        newsService.getNews { [weak self] news in
-        self?.newsFeed = news
-        print("GOT NEWS IN VC")
-        }
+    init (postID: Int, authorName: String, authorAvatar: String, publicationDate: Int, publicationText: String, publicationPicture: String, newsLikes: Int, newsFeed: Any, items: [NewsItem], groups: [NewsGroup], profiles: [NewsProfile]) {
+        
+        self.postID = postID
+        self.authorName = authorName
+        self.authorAvatar = authorAvatar
+        self.publicationDate = publicationDate
+        self.publicationText = publicationText
+        self.publicationPicture = publicationPicture
+        self.newsLikes = newsLikes
+        self.newsFeed = newsFeed
+        self.items = items
+        self.groups = groups
+        self.profiles = profiles
     }
+    
+    
     
     
 }

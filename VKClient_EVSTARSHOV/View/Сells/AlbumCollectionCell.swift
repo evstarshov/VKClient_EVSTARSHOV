@@ -28,7 +28,7 @@ class AlbumCollectionCell: UICollectionViewCell {
     
     func configureGallery(with mygallery: PhotoModel){
         friendsLabel?.text = mygallery.text
-        if let photoUrl = URL(string: mygallery.assetUrl ?? "") {
+        if let photoUrl = URL(string: mygallery.assetUrl) {
             friendsImageView.loadImage(url: photoUrl)
             
         }

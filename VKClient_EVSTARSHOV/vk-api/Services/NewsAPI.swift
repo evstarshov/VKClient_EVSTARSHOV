@@ -22,7 +22,9 @@ final class NewsAPI {
             "user_id": userId,
             "access_token": token,
             "start_time": 86400,
-            "count": 1,
+//            "start_from": 0,
+//            "start_time": 5,
+            "count": 3,
             "filters": "post,photo,photo_tag,wall_photo",
             "v": version
         ]
@@ -57,9 +59,9 @@ final class NewsAPI {
             }
             
             DispatchQueue.global().async(group: dispatchGroup) {
-                for (index, items) in vkProfilesJSON.enumerated() {
+                for (index, profiles) in vkProfilesJSON.enumerated() {
                     do {
-                        let decodedProfile = try decoder.decode(NewsProfile.self, from: items.rawData())
+                        let decodedProfile = try decoder.decode(NewsProfile.self, from: profiles.rawData())
                         vkProfilesArr.append(decodedProfile)
                     } catch (let errorDecode) {
                         print("Profile decoding error at index \(index), err: \(errorDecode)")
@@ -68,9 +70,9 @@ final class NewsAPI {
             }
             
             DispatchQueue.global().async(group: dispatchGroup) {
-                for (index, items) in vkGroupsJSON.enumerated() {
+                for (index, groups) in vkGroupsJSON.enumerated() {
                     do {
-                        let decodedGroups = try decoder.decode(NewsGroup.self, from: items.rawData())
+                        let decodedGroups = try decoder.decode(NewsGroup.self, from: groups.rawData())
                         vkGroupsArr.append(decodedGroups)
                     } catch (let errorDecode) {
                         print("Group decoding error at index \(index), err: \(errorDecode)")
