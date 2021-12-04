@@ -34,7 +34,7 @@ final class AuthorCellModel: ViewModel {
 
 class NewsAuthorTableViewCell: UITableViewCell {
     
-    @IBOutlet weak var authorAvatar: UIImageView!
+    @IBOutlet weak var authorAvatar: AvatarImage!
     @IBOutlet weak var authorNameLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     
@@ -56,7 +56,7 @@ class NewsAuthorTableViewCell: UITableViewCell {
         let dateInt = Double(model.date)
                         let date = Date(timeIntervalSince1970: dateInt)
                         let dateformatter = DateFormatter()
-        dateformatter.dateStyle = .full
+        dateformatter.dateStyle = .medium
         print("Publication date is \(date)")
         dateLabel?.text = dateformatter.string(from: date)
         

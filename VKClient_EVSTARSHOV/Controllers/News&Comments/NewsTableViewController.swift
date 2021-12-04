@@ -61,42 +61,86 @@ class NewsTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let sections = newsFeed else { return 0 }
-        return sections.response.items.count
+        return 5
     }
+    
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        switch indexPath.section {
-            
-        case 0:
-            
-            print("Making author cell")
-            let cell = tableView.dequeueReusableCell(withIdentifier: "authorCell", for: indexPath) as! NewsAuthorTableViewCell
-            let feed = newsFeed?.response.groups[indexPath.row]
-            let date = newsFeed?.response.items[indexPath.row]
-            let avatar = AuthorCellModel(avatar: feed!.photo100, label: feed!.name, date: date!.date)
-            cell.configureAuthor(model: avatar)
+        guard let items = newsFeed?.response.items,
+              let groups = newsFeed?.response.groups,
+              let profiles = newsFeed?.response.profiles
+                
+        else { return UITableViewCell() }
         
-            return cell
+        if indexPath.row == 0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "authorCell", for: indexPath) as! NewsAuthorTableViewCell
+            var name, string: String?
+            guard let source = newsFeed?.response.items[indexPath.section].sourceID else { return UITableViewCell() }
             
-        case 1:
-            
-            print("Getting news text")
+            if source < 0 {
+                groups.forEach {
+                    if $0.id == abs(source) {
+                        name = $0.name
+                        string = $0.photo100
+                    }
+                }
+            } else {
+                profiles.forEach {
+                    if $0.id == source {
+                        name = $0.firstName + " " + $0.lastName
+                        string = $0.photo100
+                    }
+                }
+            }
+                        print("Making author cell")
+                        let avatar = newsFeed?.response.groups[indexPath.section]
+                        let date = newsFeed?.response.items[indexPath.section]
+                        let avatarCell = AuthorCellModel(avatar: avatar!.photo100, label: avatar!.name, date: date!.date)
+                        cell.configureAuthor(model: avatarCell)
+                        return cell
+        } else if indexPath.row == 1 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "newsTextCell", for: indexPath) as! NewsTextTableViewCell
-            let text = newsFeed?.response.items[indexPath.row]
-            let newstext = NewsTextCellModel(newsText: text?.text ?? "error")
-            cell.configureText(textModel: newstext)
-            return cell
-        
-        default:
-            print("Do nothing")
-            let cell = tableView.dequeueReusableCell(withIdentifier: "authorCell", for: indexPath) as! NewsAuthorTableViewCell
+                        let text = newsFeed?.response.items[indexPath.section]
+                        let newstext = NewsTextCellModel(newsText: text?.text ?? "error")
+                        cell.configureText(textModel: newstext)
             return cell
         }
-        
-        
+        else { return UITableViewCell() }
     }
+    
+//    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//
+//        switch indexPath.section {
+//
+//        case 0:
+//
+//            print("Making author cell")
+//            let cell = tableView.dequeueReusableCell(withIdentifier: "authorCell", for: indexPath) as! NewsAuthorTableViewCell
+//            let avatar = newsFeed?.response.groups[indexPath.row]
+//            let date = newsFeed?.response.items[indexPath.row]
+//            let avatarCell = AuthorCellModel(avatar: avatar!.photo100, label: avatar!.name, date: date!.date)
+//            cell.configureAuthor(model: avatarCell)
+//
+//            return cell
+//
+//        case 1:
+//
+//            print("Getting news text")
+//            let cell = tableView.dequeueReusableCell(withIdentifier: "newsTextCell", for: indexPath) as! NewsTextTableViewCell
+//            let text = newsFeed?.response.items[indexPath.row]
+//            let newstext = NewsTextCellModel(newsText: text?.text ?? "error")
+//            cell.configureText(textModel: newstext)
+//            return cell
+//
+//        default:
+//            print("Do nothing")
+//            let cell = tableView.dequeueReusableCell(withIdentifier: "authorCell", for: indexPath) as! NewsAuthorTableViewCell
+//            return cell
+//        }
+//
+//
+//    }
     
 
     
