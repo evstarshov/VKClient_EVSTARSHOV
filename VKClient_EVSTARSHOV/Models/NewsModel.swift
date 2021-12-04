@@ -184,12 +184,15 @@ class NewsItem: Codable {
 // MARK: - Attachment
 class Attachment: Codable {
     let type: String
+    let photo: NewsPhoto?
     //let link: Link
 
-    init(type: String
+    init(type: String,
+         photo: NewsPhoto?
          //link: Link
     ) {
         self.type = type
+        self.photo = photo
         //self.link = link
     }
 }
@@ -221,33 +224,35 @@ class NewsPhoto: Codable {
     let albumID, id, date: Int
     let text: String
     let userID: Int
-    let newsSizes: [NewsSize]
-    let hasTags: Bool
+    let sizes: [Size]
+    //let hasTags: Bool
     let ownerID: Int
 
     enum CodingKeys: String, CodingKey {
         case albumID = "album_id"
         case id, date, text
         case userID = "user_id"
-        case newsSizes
-        case hasTags = "has_tags"
+        case sizes
+        //case hasTags = "has_tags"
         case ownerID = "owner_id"
     }
 
-    init(albumID: Int, id: Int, date: Int, text: String, userID: Int, newsSizes: [NewsSize], hasTags: Bool, ownerID: Int) {
+    init(albumID: Int, id: Int, date: Int, text: String, userID: Int, sizes: [Size],
+         //hasTags: Bool,
+         ownerID: Int) {
         self.albumID = albumID
         self.id = id
         self.date = date
         self.text = text
         self.userID = userID
-        self.newsSizes = newsSizes
-        self.hasTags = hasTags
+        self.sizes = sizes
+        //self.hasTags = hasTags
         self.ownerID = ownerID
     }
 }
 
 // MARK: - Size
-class NewsSize: Codable {
+class Size: Codable {
     let width, height: Int
     let url: String
     let type: String

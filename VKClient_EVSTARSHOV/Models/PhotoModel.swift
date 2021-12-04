@@ -20,8 +20,8 @@ class PhotoModel: Object, Codable {
     @objc dynamic var assetUrl: String = ""
     
     //Не сохраняется в Realm
-    let sizes: [Size]
-    let hasTags: Bool
+    let sizes: [PhotoSize]
+    //let hasTags: Bool
     let ownerID: Int
     let likes: Likes
     let albumID: Int
@@ -38,7 +38,7 @@ class PhotoModel: Object, Codable {
         case reposts
         case postID = "post_id"
         case id, date, text, sizes
-        case hasTags = "has_tags"
+        //case hasTags = "has_tags"
         case ownerID = "owner_id"
         case likes
     }
@@ -60,7 +60,7 @@ struct Reposts: Codable {
 }
 
 // MARK: - Size
-struct Size: Codable {
+struct PhotoSize: Codable {
     let width, height: Int
     let url: String
     let type: String
