@@ -46,3 +46,20 @@ final class FriendsParcingOperation: Operation {
         }
     }
 }
+
+final class FriendsDisplayOperations: Operation {
+    var friendsViewController: FriendsTableViewControllerOperation
+    
+    override func main() {
+        guard let parsedFriendsListData = dependencies.first as? FriendsParcingOperation,
+              let friendsList = parsedFriendsListData.friendslist else { return }
+        friendsViewController.friends = friendsList
+        friendsViewController.tableView.reloadData()
+        }
+    
+    init(controller: FriendsTableViewControllerOperation) {
+        
+        self.friendsViewController = controller
+    
+    }
+}
