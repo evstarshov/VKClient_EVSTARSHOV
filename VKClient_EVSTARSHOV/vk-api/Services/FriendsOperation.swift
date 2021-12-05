@@ -29,3 +29,20 @@ final class FriendsMakeAPIOperation: Operation {
         self.data = data
     }
 }
+
+final class FriendsParcingOperation: Operation {
+    
+    var friendslist: [FriendModel]? = []
+    
+    override func main() {
+        guard let friendslistData = dependencies.first as? FriendsMakeAPIOperation,
+              let data = friendslistData.data else { return }
+        
+        do {
+            let responseData = try JSONDecoder().decode(FriendsJSON.self, from: data)
+            self.friendslist = responseData.response.items
+        } catch {
+            print(error)
+        }
+    }
+}
