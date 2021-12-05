@@ -405,7 +405,7 @@
                                 <buttonConfiguration key="configuration" style="plain" image="arrow.clockwise" catalog="system" title="Обновить"/>
                             </button>
                             <connections>
-                                <action selector="refreshNews:" destination="HFV-K5-mAn" id="AhA-xv-d9T"/>
+                                <action selector="refreshNewsBtnpressed:" destination="HFV-K5-mAn" id="g0o-3U-txY"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

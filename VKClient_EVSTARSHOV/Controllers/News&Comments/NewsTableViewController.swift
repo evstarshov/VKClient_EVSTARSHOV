@@ -16,12 +16,12 @@ class NewsTableViewController: UITableViewController {
     private let newsService = NewsAPI()
     private var newsFeed: NewsJSON?
 
-//    let newsRefreshControl: UIRefreshControl = {
-//        let refreshControl = UIRefreshControl()
-//        refreshControl.attributedTitle = NSAttributedString(string: "Updating news feed...")
-//        refreshControl.addTarget(self, action: #selector(refreshNews), for: .valueChanged)
-//        return refreshControl
-//    } ()
+    let newsRefreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.attributedTitle = NSAttributedString(string: "Updating news feed...")
+        refreshControl.addTarget(self, action: #selector(refreshNews), for: .valueChanged)
+        return refreshControl
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,8 +43,18 @@ class NewsTableViewController: UITableViewController {
     
     
     @IBAction func refreshNewsBtnpressed(_ sender: Any) {
-        refreshBTN.action
+        if refreshBTN.isEnabled == true {
         print("Refresh News button pressed")
+        self.newsService.getNews { [weak self] news in
+        self?.newsFeed = news
+        print("GOT NEWS IN VC")
+        self?.tableView.reloadData()
+            }
+        }
+    }
+    
+    @objc func refreshNews() {
+        print("Refreshing news")
         self.newsService.getNews { [weak self] news in
         self?.newsFeed = news
         print("GOT NEWS IN VC")
@@ -147,7 +157,8 @@ class NewsTableViewController: UITableViewController {
                 case 4:
                 print("Putting separator")
                                 let cell = tableView.dequeueReusableCell(withIdentifier: "SeparatorTableViewCell", for: indexPath) as! SeparatorTableViewCell
-                                return cell
+                cell.backgroundColor = .systemGray6
+                return cell
 
         default:
             print("Do nothing in row")
