@@ -8,13 +8,66 @@
 import UIKit
 import Foundation
 
-enum NewsFeedEnum {
-    case authorName
-    case authorAvatar
-    case publicationDate
-    case publicationText
-    case publicationPicture
-    case newsLikes
+
+
+public enum Feed {
+    
+case authorCell
+case textCell
+    
+}
+
+final class NewsFeed: Codable {
+    
+    let items: [NewsItem]
+    let groups: [NewsGroup]
+    let profiles: [NewsProfile]
+    
+    let postID: Int
+    let authorName: String
+    let authorAvatar: String
+    let publicationDate: Int
+    let publicationText: String
+    let publicationPicture: String
+    let newsLikes: Int
+    
+    
+    var newsFeed: Any? = []
+    
+    
+    enum CodingKeys: String, CodingKey {
+        
+        case postID
+        case authorName
+        case authorAvatar
+        case publicationDate
+        case publicationText
+        case publicationPicture
+        case newsLikes
+        
+        case items
+        case groups
+        case profiles
+    }
+    
+    init (postID: Int, authorName: String, authorAvatar: String, publicationDate: Int, publicationText: String, publicationPicture: String, newsLikes: Int, newsFeed: Any, items: [NewsItem], groups: [NewsGroup], profiles: [NewsProfile]) {
+        
+        self.postID = postID
+        self.authorName = authorName
+        self.authorAvatar = authorAvatar
+        self.publicationDate = publicationDate
+        self.publicationText = publicationText
+        self.publicationPicture = publicationPicture
+        self.newsLikes = newsLikes
+        self.newsFeed = newsFeed
+        self.items = items
+        self.groups = groups
+        self.profiles = profiles
+    }
+    
+    
+    
+    
 }
 
 
@@ -30,28 +83,30 @@ class NewsJSON: Codable {
 // MARK: - Response
 class NewsResponse: Codable {
     let items: [NewsItem]
-    let groups: [NewsFeedModel]
-    let profiles: [Profile]
-    let nextFrom: String
+    let groups: [NewsGroup]
+    let profiles: [NewsProfile]
+//    let nextFrom: String
 
     enum CodingKeys: String, CodingKey {
         case items, groups, profiles
-        case nextFrom = "next_from"
+//        case nextFrom = "next_from"
     }
 
-    init(items: [NewsItem], groups: [NewsFeedModel], profiles: [Profile], nextFrom: String) {
+    init(items: [NewsItem], groups: [NewsGroup], profiles: [NewsProfile]
+         //nextFrom: String
+    ) {
         self.items = items
         self.groups = groups
         self.profiles = profiles
-        self.nextFrom = nextFrom
+        //self.nextFrom = nextFrom
     }
 }
 
 // MARK: - Group
-class NewsFeedModel: Codable {
+class NewsGroup: Codable {
     let id: Int
     let photo100, photo50, photo200: String
-    let type, screenName, name: String
+    let type, name: String
     let isClosed: Int
 
     enum CodingKeys: String, CodingKey {
@@ -60,18 +115,17 @@ class NewsFeedModel: Codable {
         case photo50 = "photo_50"
         case photo200 = "photo_200"
         case type
-        case screenName = "screen_name"
+        //case screenName = "screen_name"
         case name
         case isClosed = "is_closed"
     }
 
-    init(id: Int, photo100: String, photo50: String, photo200: String, type: String, screenName: String, name: String, isClosed: Int) {
+    init(id: Int, photo100: String, photo50: String, photo200: String, type: String, name: String, isClosed: Int) {
         self.id = id
         self.photo100 = photo100
         self.photo50 = photo50
         self.photo200 = photo200
         self.type = type
-        self.screenName = screenName
         self.name = name
         self.isClosed = isClosed
     }
@@ -80,7 +134,7 @@ class NewsFeedModel: Codable {
 // MARK: - Item
 class NewsItem: Codable {
     let comments: Comments
-    let canSetCategory: Bool
+    //let canSetCategory: Bool
     let likes: NewsLikes
     let reposts: NewsReposts
     let type, postType: String
@@ -94,7 +148,7 @@ class NewsItem: Codable {
 
     enum CodingKeys: String, CodingKey {
         case comments
-        case canSetCategory = "can_set_category"
+        //case canSetCategory = "can_set_category"
         case likes, reposts, type
         case postType = "post_type"
         case date
@@ -110,7 +164,7 @@ class NewsItem: Codable {
 
     init(comments: Comments, canSetCategory: Bool, likes: NewsLikes, reposts: NewsReposts, type: String, postType: String, date: Int, sourceID: Int, text: String, canDoubtCategory: Bool, attachments: [Attachment], markedAsAds: Int, postID: Int, postSource: PostSource, views: Views) {
         self.comments = comments
-        self.canSetCategory = canSetCategory
+        //self.canSetCategory = canSetCategory
         self.likes = likes
         self.reposts = reposts
         self.type = type
@@ -130,11 +184,16 @@ class NewsItem: Codable {
 // MARK: - Attachment
 class Attachment: Codable {
     let type: String
-    let link: Link
+    let photo: NewsPhoto?
+    //let link: Link
 
-    init(type: String, link: Link) {
+    init(type: String,
+         photo: NewsPhoto?
+         //link: Link
+    ) {
         self.type = type
-        self.link = link
+        self.photo = photo
+        //self.link = link
     }
 }
 
@@ -165,33 +224,35 @@ class NewsPhoto: Codable {
     let albumID, id, date: Int
     let text: String
     let userID: Int
-    let newsSizes: [NewsSize]
-    let hasTags: Bool
+    let sizes: [Size]
+    //let hasTags: Bool
     let ownerID: Int
 
     enum CodingKeys: String, CodingKey {
         case albumID = "album_id"
         case id, date, text
         case userID = "user_id"
-        case newsSizes
-        case hasTags = "has_tags"
+        case sizes
+        //case hasTags = "has_tags"
         case ownerID = "owner_id"
     }
 
-    init(albumID: Int, id: Int, date: Int, text: String, userID: Int, newsSizes: [NewsSize], hasTags: Bool, ownerID: Int) {
+    init(albumID: Int, id: Int, date: Int, text: String, userID: Int, sizes: [Size],
+         //hasTags: Bool,
+         ownerID: Int) {
         self.albumID = albumID
         self.id = id
         self.date = date
         self.text = text
         self.userID = userID
-        self.newsSizes = newsSizes
-        self.hasTags = hasTags
+        self.sizes = sizes
+        //self.hasTags = hasTags
         self.ownerID = ownerID
     }
 }
 
 // MARK: - Size
-class NewsSize: Codable {
+class Size: Codable {
     let width, height: Int
     let url: String
     let type: String
@@ -272,14 +333,15 @@ class Views: Codable {
 }
 
 // MARK: - Profile
-class Profile: Codable {
+class NewsProfile: Codable {
     let online, id: Int
     let photo100: String
     let lastName: String
     let photo50: String
     let onlineInfo: OnlineInfo
     let sex: Int
-    let screenName, firstName: String
+//    let screenName,
+    let firstName: String
 
     enum CodingKeys: String, CodingKey {
         case online, id
@@ -288,11 +350,11 @@ class Profile: Codable {
         case photo50 = "photo_50"
         case onlineInfo = "online_info"
         case sex
-        case screenName = "screen_name"
+        //case screenName = "screen_name"
         case firstName = "first_name"
     }
 
-    init(online: Int, id: Int, photo100: String, lastName: String, photo50: String, onlineInfo: OnlineInfo, sex: Int, screenName: String, firstName: String) {
+    init(online: Int, id: Int, photo100: String, lastName: String, photo50: String, onlineInfo: OnlineInfo, sex: Int, firstName: String) {
         self.online = online
         self.id = id
         self.photo100 = photo100
@@ -300,7 +362,7 @@ class Profile: Codable {
         self.photo50 = photo50
         self.onlineInfo = onlineInfo
         self.sex = sex
-        self.screenName = screenName
+        //self.screenName = screenName
         self.firstName = firstName
     }
 }

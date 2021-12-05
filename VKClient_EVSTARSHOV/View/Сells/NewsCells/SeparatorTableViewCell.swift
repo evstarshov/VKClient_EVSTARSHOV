@@ -1,18 +1,14 @@
 //
-//  NewsHeaderTableViewCell.swift
-//  VKClient_EVSTARSHOV
+//  SeparatorTableViewCell.swift
+//  VK Client
 //
-//  Created by Евгений Старшов on 23.11.2021.
+//  Created by Сергей Беляков on 20.11.2021.
 //
 
 import UIKit
 
-class NewsHeaderTableViewCell: UITableViewCell {
+class SeparatorTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var authorName: UILabel!
-    @IBOutlet weak var publicationDate: UILabel!
-    
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

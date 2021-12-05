@@ -2,18 +2,34 @@
 //  NewsTextTableViewCell.swift
 //  VKClient_EVSTARSHOV
 //
-//  Created by Евгений Старшов on 23.11.2021.
+//  Created by Евгений Старшов on 30.11.2021.
 //
 
 import UIKit
 
-class NewsTextTableViewCell: UITableViewCell {
+protocol NewsText {
+    var newsText: String { get }
+}
+
+final class NewsTextCellModel: NewsText {
+    var newsText: String
     
-    @IBOutlet weak var newsText: UILabel!
+    init(newsText: String) {
+        self.newsText = newsText
+    }
+}
+
+class NewsTextTableViewCell: UITableViewCell {
+
+    @IBOutlet weak var nextText: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+       
+    }
+    
+    func configureText(textModel: NewsTextCellModel) {
+        nextText.text? = textModel.newsText
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
