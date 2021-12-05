@@ -26,5 +26,6 @@ final class FriendsMakeAPIOperation: Operation {
         
         guard let url = requesConstructor.url else { return }
         guard let data = try? Data(contentsOf: url) else { return }
+        self.data = data
     }
 }
