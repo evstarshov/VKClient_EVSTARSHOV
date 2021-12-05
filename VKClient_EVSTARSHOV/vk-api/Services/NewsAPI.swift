@@ -24,7 +24,7 @@ final class NewsAPI {
             "start_time": 86400,
 //            "start_from": 0,
 //            "start_time": 5,
-            "count": 10,
+            "count": 100,
             "filters": "post,photo,photo_tag,wall_photo",
             "v": version
         ]

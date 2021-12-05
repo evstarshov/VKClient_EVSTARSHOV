@@ -17,15 +17,22 @@
                 <rect key="frame" x="0.0" y="0.0" width="208" height="208"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" adjustsImageSizeForAccessibilityContentSizeCategory="YES" id="evU-E9-uwj">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="25t-kp-87w">
                         <rect key="frame" x="0.0" y="0.0" width="208" height="208"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     </imageView>
                 </subviews>
+                <constraints>
+                    <constraint firstItem="25t-kp-87w" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="12Y-4r-FeE"/>
+                    <constraint firstItem="25t-kp-87w" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="a8r-3M-1jA"/>
+                    <constraint firstItem="25t-kp-87w" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="cnJ-VC-sDR"/>
+                    <constraint firstAttribute="bottom" secondItem="25t-kp-87w" secondAttribute="bottom" id="gn8-UU-Igc"/>
+                    <constraint firstItem="25t-kp-87w" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="sc3-f4-hCX"/>
+                    <constraint firstAttribute="trailing" secondItem="25t-kp-87w" secondAttribute="trailing" id="x7S-kG-mXg"/>
+                </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
-                <outlet property="newsPicture" destination="evU-E9-uwj" id="aoZ-bg-3KZ"/>
+                <outlet property="newsPicture" destination="25t-kp-87w" id="VOD-1v-Ad8"/>
             </connections>
             <point key="canvasLocation" x="79.710144927536234" y="81.696428571428569"/>
         </tableViewCell>

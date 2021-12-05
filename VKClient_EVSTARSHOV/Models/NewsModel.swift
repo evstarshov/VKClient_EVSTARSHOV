@@ -134,7 +134,7 @@ class NewsGroup: Codable {
 // MARK: - Item
 class NewsItem: Codable {
     let comments: Comments
-    let canSetCategory: Bool
+    //let canSetCategory: Bool
     let likes: NewsLikes
     let reposts: NewsReposts
     let type, postType: String
@@ -148,7 +148,7 @@ class NewsItem: Codable {
 
     enum CodingKeys: String, CodingKey {
         case comments
-        case canSetCategory = "can_set_category"
+        //case canSetCategory = "can_set_category"
         case likes, reposts, type
         case postType = "post_type"
         case date
@@ -164,7 +164,7 @@ class NewsItem: Codable {
 
     init(comments: Comments, canSetCategory: Bool, likes: NewsLikes, reposts: NewsReposts, type: String, postType: String, date: Int, sourceID: Int, text: String, canDoubtCategory: Bool, attachments: [Attachment], markedAsAds: Int, postID: Int, postSource: PostSource, views: Views) {
         self.comments = comments
-        self.canSetCategory = canSetCategory
+        //self.canSetCategory = canSetCategory
         self.likes = likes
         self.reposts = reposts
         self.type = type
@@ -340,7 +340,8 @@ class NewsProfile: Codable {
     let photo50: String
     let onlineInfo: OnlineInfo
     let sex: Int
-    let screenName, firstName: String
+//    let screenName,
+    let firstName: String
 
     enum CodingKeys: String, CodingKey {
         case online, id
@@ -349,11 +350,11 @@ class NewsProfile: Codable {
         case photo50 = "photo_50"
         case onlineInfo = "online_info"
         case sex
-        case screenName = "screen_name"
+        //case screenName = "screen_name"
         case firstName = "first_name"
     }
 
-    init(online: Int, id: Int, photo100: String, lastName: String, photo50: String, onlineInfo: OnlineInfo, sex: Int, screenName: String, firstName: String) {
+    init(online: Int, id: Int, photo100: String, lastName: String, photo50: String, onlineInfo: OnlineInfo, sex: Int, firstName: String) {
         self.online = online
         self.id = id
         self.photo100 = photo100
@@ -361,7 +362,7 @@ class NewsProfile: Codable {
         self.photo50 = photo50
         self.onlineInfo = onlineInfo
         self.sex = sex
-        self.screenName = screenName
+        //self.screenName = screenName
         self.firstName = firstName
     }
 }
