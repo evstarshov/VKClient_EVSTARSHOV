@@ -156,8 +156,8 @@ class NewsTableViewController: UITableViewController {
                                 return cell
                 case 4:
                 print("Putting separator")
-                                let cell = tableView.dequeueReusableCell(withIdentifier: "SeparatorTableViewCell", for: indexPath) as! SeparatorTableViewCell
-                cell.backgroundColor = .systemGray6
+                let cell = tableView.dequeueReusableCell(withIdentifier: "SeparatorTableViewCell", for: indexPath) as! SeparatorTableViewCell
+                cell.backgroundColor = .systemGray
                 return cell
 
         default:
