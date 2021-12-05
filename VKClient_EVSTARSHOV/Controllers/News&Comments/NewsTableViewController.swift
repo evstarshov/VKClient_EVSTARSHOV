@@ -11,31 +11,23 @@ import UIKit
 
 class NewsTableViewController: UITableViewController {
     
-    private let newsService = NewsAPI()
+    @IBOutlet weak var refreshBTN: UIBarButtonItem!
     
+    private let newsService = NewsAPI()
     private var newsFeed: NewsJSON?
 
-    let newsRefreshControl: UIRefreshControl = {
-        let refreshControl = UIRefreshControl()
-        refreshControl.attributedTitle = NSAttributedString(string: "Updating news feed...")
-        refreshControl.addTarget(self, action: #selector(refreshNews), for: .valueChanged)
-        return refreshControl
-    } ()
+//    let newsRefreshControl: UIRefreshControl = {
+//        let refreshControl = UIRefreshControl()
+//        refreshControl.attributedTitle = NSAttributedString(string: "Updating news feed...")
+//        refreshControl.addTarget(self, action: #selector(refreshNews), for: .valueChanged)
+//        return refreshControl
+//    } ()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         makeSection()
 
-       
-//        tableView.register(
-//            UINib(
-//                           nibName: "NewsTableViewCell",
-//                            bundle: nil),
-//                           forCellReuseIdentifier: "newsCell")
-//        tableView.estimatedRowHeight = 600
-//        tableView.rowHeight = UITableView.automaticDimension
-            
             self.newsService.getNews { [weak self] news in
             self?.newsFeed = news
 
@@ -49,9 +41,10 @@ class NewsTableViewController: UITableViewController {
         tableView.rowHeight = UITableView.automaticDimension
     }
     
-    @objc func refreshNews() {
-        
-        newsRefreshControl.endRefreshing()
+    
+    @IBAction func refreshNewsBtnpressed(_ sender: Any) {
+        refreshBTN.action
+        print("Refresh News button pressed")
         self.newsService.getNews { [weak self] news in
         self?.newsFeed = news
         print("GOT NEWS IN VC")
@@ -190,3 +183,4 @@ extension NewsTableViewController {
     }
     
 }
+

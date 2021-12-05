@@ -396,8 +396,21 @@
                             <outlet property="delegate" destination="HFV-K5-mAn" id="05h-Ej-q37"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Новости" id="LxB-NZ-4sP"/>
+                    <navigationItem key="navigationItem" title="Новости" id="LxB-NZ-4sP">
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="3n3-hw-ZZI">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="HOA-mU-enZ">
+                                <rect key="frame" x="250.66666666666666" y="5" width="123.33333333333334" height="34.333333333333336"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="arrow.clockwise" catalog="system" title="Обновить"/>
+                            </button>
+                            <connections>
+                                <action selector="refreshNews:" destination="HFV-K5-mAn" id="AhA-xv-d9T"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
+                        <outlet property="refreshBTN" destination="3n3-hw-ZZI" id="9Ua-sB-bDK"/>
                         <segue destination="uRT-dT-TpO" kind="show" identifier="showComments" id="BuG-wZ-y7O"/>
                     </connections>
                 </tableViewController>
@@ -704,6 +717,7 @@
         <segue reference="a1H-5k-ZLM"/>
     </inferredMetricsTieBreakers>
     <resources>
+        <image name="arrow.clockwise" catalog="system" width="115" height="128"/>
         <image name="arrowshape.turn.up.backward" catalog="system" width="128" height="106"/>
         <image name="heart" width="860" height="792"/>
         <namedColor name="AccentColor">
