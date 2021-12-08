@@ -7,6 +7,7 @@
 
 import UIKit
 import RealmSwift
+import Alamofire
 
 class FriendsTableViewController: UITableViewController {
     @IBOutlet var tableViewHeader: FriendsTableHeader!
@@ -35,52 +36,7 @@ class FriendsTableViewController: UITableViewController {
         tableView.tableHeaderView = tableViewHeader
         // Получение списка друзей из JSON
         
-        if myfriendsDB.load().isEmpty {
-            
-            friendsAPI.getFriends { [ weak self ] friends in
-                
-                guard let self = self else { return }
-                
-                self.myfriendsDB.save(friends)
-                self.myfriends = self.myfriendsDB.load()
-                
-                self.token = self.myfriends?.observe { [weak self] changes in
-                    guard let self = self else { return }
-                    
-                    switch changes {
-                    case .initial:
-                        self.tableView.reloadData()
-                    case .update(_, let deletions, let insertions, let modifications):
-                        self.tableView.beginUpdates()
-                        self.tableView.insertRows(at: insertions.map({ IndexPath(row: $0, section: 0) }), with: .automatic)
-                        self.tableView.deleteRows(at: deletions.map({ IndexPath(row: $0, section: 0)}), with: .automatic)
-                        self.tableView.reloadRows(at: modifications.map({ IndexPath(row: $0, section: 0) }), with: .automatic)
-                        self.tableView.endUpdates()
-                    case .error(let error):
-                        fatalError("\(error)")
-                    }
-                }
-                
-            }
-        } else {
-            self.myfriends = self.myfriendsDB.load()
-            self.token = self.myfriends?.observe { [weak self] changes in
-                guard let self = self else { return }
-                
-                switch changes {
-                case .initial:
-                    self.tableView.reloadData()
-                case .update(_, let deletions, let insertions, let modifications):
-                    self.tableView.beginUpdates()
-                    self.tableView.insertRows(at: insertions.map({ IndexPath(row: $0, section: 0) }), with: .automatic)
-                    self.tableView.deleteRows(at: deletions.map({ IndexPath(row: $0, section: 0)}), with: .automatic)
-                    self.tableView.reloadRows(at: modifications.map({ IndexPath(row: $0, section: 0) }), with: .automatic)
-                    self.tableView.endUpdates()
-                case .error(let error):
-                    fatalError("\(error)")
-                }
-            }
-        }
+      
     }
     
     // MARK: - Table view data source
@@ -102,4 +58,42 @@ class FriendsTableViewController: UITableViewController {
         return cell
     }
     
+    let friendsQueue = OperationQueue()
+    private var friendsRequest: DataRequest {
+        
+        let baseURL = "https://api.vk.com/method"
+        let token = Account.shared.token
+        let userId = Account.shared.userId
+        let version = "5.81"
+        
+        let method = "/friends.get"
+        
+        let parameters: Parameters = [
+            "user_id": userId,
+            "order": "name",
+            "fields": "photo_50, photo_100",
+            "count": 10,
+            "access_token": token,
+            "v": version
+        ]
+        
+        let url = baseURL + method
+        
+        return AF.request(url, method: .get, parameters: parameters)
+    }
+    
+    
+    func getFriends() {
+        friendsQueue.qualityOfService = .userInteractive
+        
+        let getData = FriendsMakeAPIOperation()
+        let parceData = FriendsParcingOperation()
+        let displayData = FriendsDisplayOperations(controller: self)
+        
+        friendsQueue.addOperation(getData)
+        parceData.addDependency(getData)
+        friendsQueue.addOperation(parceData)
+        displayData.addDependency(parceData)
+        OperationQueue.main.addOperation(displayData)
+    }
 }
