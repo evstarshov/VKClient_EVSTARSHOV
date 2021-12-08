@@ -11,6 +11,7 @@ import RealmSwift
 class FriendsTableViewController: UITableViewController {
     @IBOutlet var tableViewHeader: FriendsTableHeader!
     
+    var friends: [FriendModel] = []
     private let friendsAPI = FriendsAPI()
     private let myfriendsDB = FriendDB()
     private var myfriends: Results<FriendModel>?
