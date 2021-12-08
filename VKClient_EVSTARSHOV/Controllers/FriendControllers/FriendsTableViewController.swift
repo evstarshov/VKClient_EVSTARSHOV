@@ -57,6 +57,9 @@ class FriendsTableViewController: UITableViewController {
         return cell
     }
     
+    
+        // Получение друзей асинхронно через Operations
+    
     let friendsQueue = OperationQueue()
     private var friendsRequest: DataRequest {
         
