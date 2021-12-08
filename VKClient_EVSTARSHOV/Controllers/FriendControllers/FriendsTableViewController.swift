@@ -20,7 +20,7 @@ class FriendsTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        getFriends()
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "friendsCell")
         
         // ----- Загрузка титульного изображения
@@ -42,7 +42,6 @@ class FriendsTableViewController: UITableViewController {
     // MARK: - Table view data source
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        guard let friends = myfriends else { return 0 }
         
         return friends.count
     }
@@ -52,8 +51,8 @@ class FriendsTableViewController: UITableViewController {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "friendsCell", for: indexPath) as! FriendsTableViewCell
         
-        let friend = myfriends?[indexPath.row]
-        cell.configureFriend(with: friend!)
+        let friend = friends[indexPath.row]
+        cell.configureFriend(with: friend)
         
         return cell
     }
