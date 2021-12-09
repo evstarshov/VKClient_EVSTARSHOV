@@ -7,8 +7,10 @@
 
 import Foundation
 import Alamofire
+import PromiseKit
 
 final class GroupsAPI {
+    
     let baseURL = "https://api.vk.com/method"
     let token = Account.shared.token
     let userId = Account.shared.userId
@@ -43,4 +45,60 @@ final class GroupsAPI {
             }
         }
     }
+}
+
+
+enum ApplicationError: Error {
+    case noGroups
+    case noPosts
+    case groupsCouldNotBeParsed
+}
+
+final class GroupsAPIPromisekit {
+    
+    func getAllGroups() -> Promise<[GroupModel]> {
+        
+        return Promise<[GroupModel]> { resolver in
+        
+        let baseURL = "https://api.vk.com/method"
+        let token = Account.shared.token
+        let userId = Account.shared.userId
+        let version = "5.81"
+        let method = "/groups.get"
+        let parameters: Parameters = [
+            "user_id": userId,
+            "extended": 1,
+            "access_token": token,
+            "fields": "name, photo_100",
+            "count": 10,
+            "v": version
+        ]
+        
+        let url = baseURL + method
+        
+        AF.request(url, method: .get, parameters: parameters).responseJSON { response in
+            
+            if let error = response.error {
+                resolver.reject(error)
+            }
+            
+                
+            if let data = response.data {
+                do {
+                    let groups = try JSONDecoder().decode(GroupsJSON.self, from: data).response.items
+                    resolver.fulfill(groups)
+                } catch {
+                    resolver.reject(ApplicationError.noGroups)
+                }
+            }
+            
+                
+        
+            }
+            
+        }
+    
+    }
+    
+    
 }
