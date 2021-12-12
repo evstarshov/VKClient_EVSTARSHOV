@@ -111,8 +111,10 @@ extension GroupTableViewController: UISearchBarDelegate {
             print(mygroups)
             tableView.reloadData()
         } else {
-            mygroups = groupsDB.load()
+                mygroups = groupsDB.load()
+            tableView.reloadData()
+            }
         }
         
     }
-}
+
