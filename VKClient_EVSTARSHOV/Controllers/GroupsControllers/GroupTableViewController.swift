@@ -28,7 +28,13 @@ class GroupTableViewController: UITableViewController {
         
         firstly {
             groupsPromiseAPI.getAllGroups()
+        }.done { groups in
+            self.groupsDB.save(groups)
+        }.catch { error in
+            print(error)
         }
+        
+        mygroups = groupsDB.load()
 
         }
         
