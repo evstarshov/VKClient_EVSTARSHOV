@@ -366,7 +366,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="searchGroupBar" destination="hFM-n0-Fwg" id="db1-FO-kXE"/>
+                        <outlet property="searchGroupBar" destination="hFM-n0-Fwg" id="sbH-rf-C1b"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aLB-br-mzD" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
