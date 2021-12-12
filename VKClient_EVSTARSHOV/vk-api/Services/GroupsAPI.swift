@@ -8,6 +8,7 @@
 import Foundation
 import Alamofire
 import PromiseKit
+import RealmSwift
 
 final class GroupsAPI {
     
@@ -91,8 +92,6 @@ final class GroupsAPIPromisekit {
                     resolver.reject(ApplicationError.noGroups)
                 }
             }
-            
-                
         
             }
             
@@ -102,3 +101,22 @@ final class GroupsAPIPromisekit {
     
     
 }
+
+
+//final class GroupsRealmPromisekit {
+//    
+//    private let groupsDB = GroupDB()
+//    private var mygroups: Results<GroupModel>?
+//    private var token: NotificationToken?
+//    
+//    func writeGroups(groups: GroupsAPIPromisekit) -> Promise<Results<GroupModel>?> {
+//        return Promise<Results<GroupModel>?> { resolve in
+//            
+//            self.
+//            
+//            
+//        }
+//    }
+//    
+//}
+//}
