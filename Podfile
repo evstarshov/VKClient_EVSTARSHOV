@@ -10,6 +10,7 @@ pod 'SwiftyJSON', '~> 4.0'
 pod 'Realm'
 pod 'RealmSwift'
 pod 'SwiftKeychainWrapper'
+pod "PromiseKit", "~> 6.8"
 
   # Pods for VKClient_EVSTARSHOV
 

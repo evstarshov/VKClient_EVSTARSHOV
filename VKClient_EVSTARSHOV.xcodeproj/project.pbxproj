@@ -29,7 +29,6 @@
 		3A6D4F8E275D431400BBC36A /* FriendsOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6D4F8D275D431400BBC36A /* FriendsOperation.swift */; };
 		3A6D4F91275D4BA200BBC36A /* SeparatorTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A6D4F8F275D4BA200BBC36A /* SeparatorTableViewCell.xib */; };
 		3A6D4F92275D4BA200BBC36A /* SeparatorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6D4F90275D4BA200BBC36A /* SeparatorTableViewCell.swift */; };
-		3A6D4F94275D4F1300BBC36A /* FriendsTableViewControllerOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6D4F93275D4F1200BBC36A /* FriendsTableViewControllerOperation.swift */; };
 		3A72C8F926E7417B006A8480 /* AddFriendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A72C8F826E7417B006A8480 /* AddFriendViewController.swift */; };
 		3A72C8FC26E76DB4006A8480 /* FriendsTableHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A72C8FB26E76DB4006A8480 /* FriendsTableHeader.swift */; };
 		3A72C8FF26E782A3006A8480 /* AllFriendsSectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A72C8FE26E782A3006A8480 /* AllFriendsSectionHeader.swift */; };
@@ -88,7 +87,6 @@
 		3A6D4F8D275D431400BBC36A /* FriendsOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsOperation.swift; sourceTree = "<group>"; };
 		3A6D4F8F275D4BA200BBC36A /* SeparatorTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SeparatorTableViewCell.xib; sourceTree = "<group>"; };
 		3A6D4F90275D4BA200BBC36A /* SeparatorTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeparatorTableViewCell.swift; sourceTree = "<group>"; };
-		3A6D4F93275D4F1200BBC36A /* FriendsTableViewControllerOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsTableViewControllerOperation.swift; sourceTree = "<group>"; };
 		3A72C8F826E7417B006A8480 /* AddFriendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFriendViewController.swift; sourceTree = "<group>"; };
 		3A72C8FB26E76DB4006A8480 /* FriendsTableHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsTableHeader.swift; sourceTree = "<group>"; };
 		3A72C8FE26E782A3006A8480 /* AllFriendsSectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllFriendsSectionHeader.swift; sourceTree = "<group>"; };
@@ -327,7 +325,6 @@
 				3A0E22A926DE26B800970B82 /* AvatarVievController.swift */,
 				3A72C8F826E7417B006A8480 /* AddFriendViewController.swift */,
 				3AEB128826FCD4E50067A954 /* AvatarFullScreenViewController.swift */,
-				3A6D4F93275D4F1200BBC36A /* FriendsTableViewControllerOperation.swift */,
 			);
 			path = FriendControllers;
 			sourceTree = "<group>";
@@ -495,7 +492,6 @@
 				3A996F6D2742A44D00312EC8 /* FriendsDB.swift in Sources */,
 				3A10AD4326F25EEE00FE755F /* ShadowsAndBorders.swift in Sources */,
 				3A3F00BD26D3E23A00CA9303 /* TabbarNavigationViewController.swift in Sources */,
-				3A6D4F94275D4F1300BBC36A /* FriendsTableViewControllerOperation.swift in Sources */,
 				3ADA87752722DE8400AAAAEB /* GroupsAPI.swift in Sources */,
 				3A7F8DD1274D55D8009C7F07 /* NewsLikesTableViewCell.swift in Sources */,
 				3A598FAA275651D000EC507C /* NewsTextTableViewCell.swift in Sources */,

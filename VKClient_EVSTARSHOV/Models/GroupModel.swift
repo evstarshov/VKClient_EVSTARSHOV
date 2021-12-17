@@ -9,6 +9,7 @@ import UIKit
 import RealmSwift
 
 
+
 // MARK: - Welcome
 struct GroupsJSON: Codable {
     let response: GroupsResponse
