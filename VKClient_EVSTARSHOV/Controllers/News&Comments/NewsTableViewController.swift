@@ -16,20 +16,10 @@ class NewsTableViewController: UITableViewController {
     private let newsService = NewsAPI()
     private var newsFeed: NewsJSON?
     
-    let newsRefreshControl: UIRefreshControl = {
-        let refreshControl = UIRefreshControl()
-        refreshControl.attributedTitle = NSAttributedString(string: "Updating news feed...")
-        refreshControl.addTarget(self, action: #selector(refreshNews), for: .valueChanged)
-        return refreshControl
-    }()
+    var itemsArray: [NewsItem] = []
+    var profilesArray: [NewsProfile] = []
+    var groupsArray: [NewsGroup] = []
     
-    fileprivate func setupRefreshcontrol() {
-        refreshControl = UIRefreshControl()
-        refreshControl?.attributedTitle = NSAttributedString(string: "Refreshing news...")
-        refreshControl?.tintColor = .systemBlue
-        refreshControl?.addTarget(self, action: #selector(refreshNews), for: .valueChanged)
-        
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,8 +29,9 @@ class NewsTableViewController: UITableViewController {
         
         self.newsService.getNews { [weak self] news in
             self?.newsFeed = news
-            
-            
+            self?.itemsArray = news!.response.items
+            self?.groupsArray = news!.response.groups
+            self?.profilesArray = news!.response.profiles
             print("GOT NEWS IN VC")
             self?.tableView.reloadData()
         }
@@ -48,27 +39,6 @@ class NewsTableViewController: UITableViewController {
         print("Number of sections: \(newsFeed?.response.items.count ?? 0)")
         tableView.estimatedRowHeight = 100
         tableView.rowHeight = UITableView.automaticDimension
-    }
-    
-    
-    @IBAction func refreshNewsBtnpressed(_ sender: Any) {
-        if refreshBTN.isEnabled == true {
-            print("Refresh News button pressed")
-            self.newsService.getNews { [weak self] news in
-                self?.newsFeed = news
-                print("GOT NEWS IN VC")
-                self?.tableView.reloadData()
-            }
-        }
-    }
-    
-    @objc func refreshNews() {
-        print("Refreshing news")
-        self.newsService.getNews { [weak self] news in
-            self?.newsFeed = news
-            print("GOT NEWS IN VC")
-            self?.tableView.reloadData()
-        }
     }
     
     
@@ -182,6 +152,50 @@ class NewsTableViewController: UITableViewController {
         performSegue(
             withIdentifier: "showComments",
             sender: nil)
+    }
+    
+    
+    // ----- Refresh Control block
+    
+    let newsRefreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.attributedTitle = NSAttributedString(string: "Updating news feed...")
+        refreshControl.addTarget(self, action: #selector(refreshNews), for: .valueChanged)
+        return refreshControl
+    }()
+    
+    fileprivate func setupRefreshcontrol() {
+        refreshControl = UIRefreshControl()
+        refreshControl?.attributedTitle = NSAttributedString(string: "Refreshing news...")
+        refreshControl?.tintColor = .systemBlue
+        refreshControl?.addTarget(self, action: #selector(refreshNews), for: .valueChanged)
+        
+    }
+    
+    @objc func refreshNews() {
+        self.refreshControl?.beginRefreshing()
+        
+        let mostFreshNewsDate = Double(self.itemsArray.first?.date ?? Int(Date().timeIntervalSince1970))
+        
+        
+        self.newsService.getNews(startTime: mostFreshNewsDate + 1) { [weak self] news in
+            guard let self = self else {return}
+            self.refreshControl?.endRefreshing()
+            
+            
+            guard let items = news?.response.items else { return }
+            guard let profiles = news?.response.profiles else { return }
+            guard let groups = news?.response.groups else { return }
+            
+            guard items.count > 0 else { return }
+            
+            self.itemsArray = items + self.itemsArray
+            self.profilesArray = profiles + self.profilesArray
+            self.groupsArray = groups + self.groupsArray
+            
+            let indexSet = IndexSet(integersIn: 0..<items.count)
+            self.tableView.insertSections(indexSet, with: .automatic)
+        }
     }
     
     
