@@ -20,6 +20,8 @@ class NewsTableViewController: UITableViewController {
     var profilesArray: [NewsProfile] = []
     var groupsArray: [NewsGroup] = []
     
+    var nextFrom = ""
+    var isLoading = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +34,7 @@ class NewsTableViewController: UITableViewController {
             self?.itemsArray = news!.response.items
             self?.groupsArray = news!.response.groups
             self?.profilesArray = news!.response.profiles
+            self?.nextFrom = news?.response.nextFrom ?? ""
             print("GOT NEWS IN VC")
             self?.tableView.reloadData()
         }
@@ -58,7 +61,7 @@ class NewsTableViewController: UITableViewController {
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return newsFeed?.response.items.count ?? 1
+        return itemsArray.count
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -199,6 +202,8 @@ class NewsTableViewController: UITableViewController {
     }
     
     
+    
+    
 }
 
 
@@ -219,3 +224,22 @@ extension NewsTableViewController {
     
 }
 
+//extension NewsTableViewController: UITableViewDataSourcePrefetching {
+//    
+//    func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
+//        guard let maxSection = indexPaths.map({$0.section}).max() else { return }
+//        
+//        
+//        if maxSection > itemsArray.count - 3,
+//           !isLoading {
+//            isLoading = true
+//            newsService.getNews(startTime: nextFrom) { [weak self] news in
+//                guard let self = self else { return }
+//                
+//                guard let newItems = news.
+//            }
+//        }
+//        
+//        
+//    }
+//}

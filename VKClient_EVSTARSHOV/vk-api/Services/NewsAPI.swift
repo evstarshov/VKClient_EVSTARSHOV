@@ -54,6 +54,7 @@ final class NewsAPI {
             let vkItemsJSON = json["response"]["items"].arrayValue
             let vkProfilesJSON = json["response"]["profiles"].arrayValue
             let vkGroupsJSON = json["response"]["groups"].arrayValue
+            let nextFrom = json["response"]["next_from"].stringValue
             
             var vkItemsArr: [NewsItem] = []
             var vkProfilesArr: [NewsProfile] = []
@@ -93,7 +94,7 @@ final class NewsAPI {
             }
             
             dispatchGroup.notify(queue: DispatchQueue.main) {
-                let response = NewsResponse(items: vkItemsArr, groups: vkGroupsArr, profiles: vkProfilesArr)
+                let response = NewsResponse(items: vkItemsArr, groups: vkGroupsArr, profiles: vkProfilesArr, nextFrom: nextFrom)
                 let feed = NewsJSON(response: response)
                 completion(feed)
             }
