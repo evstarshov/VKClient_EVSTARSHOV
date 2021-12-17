@@ -224,22 +224,32 @@ extension NewsTableViewController {
     
 }
 
-//extension NewsTableViewController: UITableViewDataSourcePrefetching {
-//    
-//    func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
-//        guard let maxSection = indexPaths.map({$0.section}).max() else { return }
-//        
-//        
-//        if maxSection > itemsArray.count - 3,
-//           !isLoading {
-//            isLoading = true
-//            newsService.getNews(startTime: nextFrom) { [weak self] news in
-//                guard let self = self else { return }
-//                
-//                guard let newItems = news.
-//            }
-//        }
-//        
-//        
-//    }
-//}
+extension NewsTableViewController: UITableViewDataSourcePrefetching {
+    
+    func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
+        guard let maxSection = indexPaths.map({$0.section}).max() else { return }
+        
+        
+        if maxSection > itemsArray.count - 3,
+           !isLoading {
+            isLoading = true
+            newsService.getNews(startFrom: nextFrom) { [weak self] news in
+                guard let self = self else { return }
+                
+                guard let newItems = news?.response.items else { return }
+                guard let newProfiles = news?.response.profiles else { return }
+                guard let newGroups = news?.response.groups else { return }
+                
+                let indexSet = IndexSet(integersIn: self.itemsArray.count..<self.itemsArray.count + newItems.count)
+                
+                self.itemsArray.append(contentsOf: newItems)
+                self.profilesArray.append(contentsOf: newProfiles)
+                self.groupsArray.append(contentsOf: newGroups)
+                
+                self.nextFrom = news?.response.nextFrom ?? ""
+                self.tableView.insertSections(indexSet, with: .automatic)
+                self.isLoading = false
+            }
+        }
+    }
+}
