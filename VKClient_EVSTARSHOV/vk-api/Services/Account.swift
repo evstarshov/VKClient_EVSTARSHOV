@@ -32,4 +32,7 @@ final class Account {
             return UserDefaults.standard.integer(forKey:"userId")
         }
     }
+    
+    let clientID = "8018451"
+    let version = "5.81"
 }

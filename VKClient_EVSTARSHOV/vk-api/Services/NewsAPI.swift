@@ -12,24 +12,36 @@ import Alamofire
 final class NewsAPI {
     
     let baseUrl = "https://api.vk.com/method"
-    let token = Account.shared.token
-    let userId = Account.shared.userId
-    let version = "5.81"
+    let method = "/newsfeed.get"
     
-    func getNews(_ completion: @escaping (NewsJSON?) -> ()) {
-        let method = "/newsfeed.get"
-        let parametrs: Parameters = [
-            "user_id": userId,
-            "access_token": token,
-            "start_time": 86400,
-//            "start_from": 0,
-//            "start_time": 5,
-            "count": 100,
-            "filters": "post,photo,photo_tag,wall_photo",
-            "v": version
+    var parametrs: Parameters
+    
+    init() {
+        let session = Account.shared
+        self.parametrs = [
+            "client_id": session.clientID,
+            "user_id": session.userId,
+            "access_token": session.token,
+            "v": session.version,
+            "filters": "post",
+            "count": "50",
         ]
+    }
+
+    
+    func getNews(startTime: TimeInterval? = nil, startFrom: String? = nil, _ completion: @escaping (NewsJSON?) -> ()) {
+        
+
         
         let url = baseUrl + method
+        
+        if startTime != nil {
+            self.parametrs["start_time"] = startTime
+        }
+        
+        if startFrom != nil {
+            self.parametrs["start_from"] = startFrom
+        }
         
         AF.request(url, method: .get, parameters: parametrs).responseData { response in
             
