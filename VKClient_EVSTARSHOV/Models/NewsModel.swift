@@ -79,7 +79,7 @@ class NewsItem: Codable {
     let date, sourceID: Int
     let text: String
     let canDoubtCategory: Bool?
-    let attachments: [Attachment]
+    let attachments: [Attachment]?
     let markedAsAds: Int?
     let postID: Int
     let postSource: PostSource

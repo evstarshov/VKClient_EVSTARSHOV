@@ -29,6 +29,7 @@ class NewsTableViewController: UITableViewController {
         
         makeSection()
         setupRefreshcontrol()
+        tableView.prefetchDataSource = self
         
         self.newsService.getNews { [weak self] news in
             self?.newsFeed = news
@@ -230,13 +231,12 @@ extension NewsTableViewController {
 extension NewsTableViewController: UITableViewDataSourcePrefetching {
     
     func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
-        guard let maxSection = indexPaths.map({$0.section}).max() else { return }
+        guard let maxSection = indexPaths.map({ $0.section }).max() else { return }
         
         print("Prefetching news")
         
         
-        if maxSection > itemsArray.count - 5,
-           !isLoading {
+        if maxSection > itemsArray.count - 3, !isLoading {
             isLoading = true
             newsService.getNews(startFrom: nextFrom) { [weak self] news in
                 guard let self = self else { return }
