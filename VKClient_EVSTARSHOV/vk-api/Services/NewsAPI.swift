@@ -24,12 +24,12 @@ final class NewsAPI {
             "access_token": session.token,
             "v": session.version,
             "filters": "post",
-            "count": "50",
+            "count": "10",
         ]
     }
 
     
-    func getNews(startTime: TimeInterval? = nil, startFrom: String? = nil, _ completion: @escaping (NewsJSON?) -> ()) {
+    func getNews(startTime: Int? = nil, startFrom: String? = nil, _ completion: @escaping (NewsJSON?) -> ()) {
         
 
         

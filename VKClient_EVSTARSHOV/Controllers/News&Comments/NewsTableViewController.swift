@@ -22,6 +22,7 @@ class NewsTableViewController: UITableViewController {
     
     var nextFrom = ""
     var isLoading = false
+    var expandedIndexSet: IndexSet = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,7 +40,7 @@ class NewsTableViewController: UITableViewController {
             self?.tableView.reloadData()
         }
         
-        print("Number of sections: \(newsFeed?.response.items.count ?? 0)")
+        print("Number of sections: \(itemsArray.count)")
         tableView.estimatedRowHeight = 100
         tableView.rowHeight = UITableView.automaticDimension
     }
@@ -65,45 +66,45 @@ class NewsTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        let currentFeedItem = itemsArray[section]
+//        var count = 1
+//
+//        if currentFeedItem.hasText { count += 1 }
+//        if currentFeedItem.hasPhoto { count += 1 }
+//        if currentFeedItem.hasLink { count += 1 }
+//
+//        return count
         return 5
     }
     
     
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        guard let profiles = newsFeed?.response.profiles,
-              let groups = newsFeed?.response.groups,
-              let items = newsFeed?.response.items else { return UITableViewCell() }
-        
-        
-        let source = items[indexPath.section].sourceID
-        var name, string: String?
-        if source < 0 {
-            groups.forEach {
-                if $0.id == abs(source) {
-                    name = $0.name
-                    string = $0.photo100
+
+            switch (indexPath.row) {
+            case 0:
+                
+                let source = itemsArray[indexPath.section].sourceID
+                var name, string: String?
+                if source < 0 {
+                    groupsArray.forEach {
+                        if $0.id == abs(source) {
+                            name = $0.name
+                            string = $0.photo100
+                        }
+                    }
                 } else {
-                    profiles.forEach {
+                    profilesArray.forEach {
                         if $0.id == source {
                             name = $0.firstName + " " + $0.lastName
                             string = $0.photo100
                         }
                     }
                 }
-            }
-        }
-        
-        switch (indexPath.section) {
-            
-        default:
-            
-            switch (indexPath.row) {
-            case 0:
                 
                 print("Making author cell")
                 let cell = tableView.dequeueReusableCell(withIdentifier: "authorCell", for: indexPath) as! NewsAuthorTableViewCell
-                let date = items[indexPath.section]
+                let date = itemsArray[indexPath.section]
                 let avatarCell = AuthorCellModel(avatar: string ?? "no foto", label: name ?? "name error", date: date.date )
                 cell.configureAuthor(model: avatarCell)
                 
@@ -113,7 +114,7 @@ class NewsTableViewController: UITableViewController {
                 
                 print("Getting news text")
                 let cell = tableView.dequeueReusableCell(withIdentifier: "newsTextCell", for: indexPath) as! NewsTextTableViewCell
-                let text = items[indexPath.section]
+                let text = itemsArray[indexPath.section]
                 let newstext = NewsTextCellModel(newsText: text.text)
                 cell.configureText(textModel: newstext)
                 return cell
@@ -121,7 +122,7 @@ class NewsTableViewController: UITableViewController {
             case 2:
                 print("Getting image")
                 let cell = tableView.dequeueReusableCell(withIdentifier: "newsimageCell", for: indexPath) as! NewsPictureTableViewCell
-                guard let pictures = findURL(item: items[indexPath.section].attachments) else { let cell = UITableViewCell()
+                guard let pictures = findURL(item: itemsArray[indexPath.section].attachments) else { let cell = UITableViewCell()
                     cell.backgroundColor = .systemGray6
                     return cell }
                 cell.newsPicture.loadImage(url: pictures)
@@ -130,10 +131,10 @@ class NewsTableViewController: UITableViewController {
             case 3:
                 print("Getting likes")
                 let cell = tableView.dequeueReusableCell(withIdentifier: "NewsLikesTableViewCell", for: indexPath) as! NewsLikesTableViewCell
-                let likes = String(items[indexPath.section].likes.count)
-                let comments = String(items[indexPath.section].comments.count)
-                let reposts = String(items[indexPath.section].reposts.count)
-                let views = String(items[indexPath.section].views.count)
+                let likes = String(itemsArray[indexPath.section].likes.count)
+                let comments = String(itemsArray[indexPath.section].comments.count)
+                let reposts = String(itemsArray[indexPath.section].reposts.count)
+                let views = String(itemsArray[indexPath.section].views?.count ?? 0)
                 cell.configure(likes: likes, comments: comments, reposts: reposts, views: views)
                 return cell
             case 4:
@@ -147,7 +148,7 @@ class NewsTableViewController: UITableViewController {
                 return UITableViewCell()
             }
         }
-    }
+    
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         defer { tableView.deselectRow(at: indexPath, animated: true)
@@ -178,19 +179,20 @@ class NewsTableViewController: UITableViewController {
     @objc func refreshNews() {
         self.refreshControl?.beginRefreshing()
         
-        let mostFreshNewsDate = Double(self.itemsArray.first?.date ?? Int(Date().timeIntervalSince1970))
+        let mostFreshNewsDate = self.itemsArray.first?.date ?? Int(Date().timeIntervalSince1970)
+        print("refreshing from \(mostFreshNewsDate)")
         
-        
-        self.newsService.getNews(startTime: mostFreshNewsDate + 1) { [weak self] news in
+        newsService.getNews(startTime: mostFreshNewsDate + 1) { [weak self] feed in
             guard let self = self else {return}
+            print("begin upload")
             self.refreshControl?.endRefreshing()
             
             
-            guard let items = news?.response.items else { return }
-            guard let profiles = news?.response.profiles else { return }
-            guard let groups = news?.response.groups else { return }
-            
+            guard let items = feed?.response.items else { return }
+            guard let profiles = feed?.response.profiles else { return }
+            guard let groups = feed?.response.groups else { return }
             guard items.count > 0 else { return }
+            print("new items: \(items.count)")
             
             self.itemsArray = items + self.itemsArray
             self.profilesArray = profiles + self.profilesArray
@@ -198,6 +200,7 @@ class NewsTableViewController: UITableViewController {
             
             let indexSet = IndexSet(integersIn: 0..<items.count)
             self.tableView.insertSections(indexSet, with: .automatic)
+            print("setted refresh func")
         }
     }
     
@@ -213,7 +216,7 @@ extension NewsTableViewController {
         var url = String()
         guard let item = item else {return URL(string: url)}
         for item in item {
-            item.photo?.sizes.forEach {
+            item.photo?.sizes?.forEach {
                 if $0.type == "r" {
                     url = $0.url
                 }
@@ -229,8 +232,10 @@ extension NewsTableViewController: UITableViewDataSourcePrefetching {
     func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
         guard let maxSection = indexPaths.map({$0.section}).max() else { return }
         
+        print("Prefetching news")
         
-        if maxSection > itemsArray.count - 3,
+        
+        if maxSection > itemsArray.count - 5,
            !isLoading {
             isLoading = true
             newsService.getNews(startFrom: nextFrom) { [weak self] news in
@@ -245,7 +250,7 @@ extension NewsTableViewController: UITableViewDataSourcePrefetching {
                 self.itemsArray.append(contentsOf: newItems)
                 self.profilesArray.append(contentsOf: newProfiles)
                 self.groupsArray.append(contentsOf: newGroups)
-                
+                print("Inside prefetch closure")
                 self.nextFrom = news?.response.nextFrom ?? ""
                 self.tableView.insertSections(indexSet, with: .automatic)
                 self.isLoading = false

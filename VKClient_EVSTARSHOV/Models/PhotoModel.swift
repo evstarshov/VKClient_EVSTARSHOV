@@ -21,7 +21,7 @@ class PhotoModel: Object, Codable {
     
     //Не сохраняется в Realm
     let sizes: [PhotoSize]
-    //let hasTags: Bool
+    let hasTags: Bool?
     let ownerID: Int
     let likes: Likes
     let albumID: Int
@@ -38,7 +38,7 @@ class PhotoModel: Object, Codable {
         case reposts
         case postID = "post_id"
         case id, date, text, sizes
-        //case hasTags = "has_tags"
+        case hasTags = "has_tags"
         case ownerID = "owner_id"
         case likes
     }
