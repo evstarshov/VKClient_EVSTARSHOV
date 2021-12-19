@@ -164,6 +164,18 @@ class NewsPhoto: Codable {
     let sizes: [Size]?
     let hasTags: Bool?
     let ownerID: Int
+    
+    var photoAvailable: Size? {
+        
+        guard let sizes = self.sizes else { return nil }
+        if let photo = sizes.first(where: {$0.type == "x"}) { return photo }
+        if let photo = sizes.first(where: {$0.type == "z"}) { return photo }
+        if let photo = sizes.first(where: {$0.type == "y"}) { return photo }
+        if let photo = sizes.first(where: {$0.type == "m"}) { return photo }
+        if let photo = sizes.first(where: {$0.type == "s"}) { return photo }
+        
+        return sizes.first
+    }
 
     enum CodingKeys: String, CodingKey {
         case albumID = "album_id"

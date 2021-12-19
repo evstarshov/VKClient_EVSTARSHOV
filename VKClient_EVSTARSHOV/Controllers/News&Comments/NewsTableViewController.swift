@@ -159,7 +159,36 @@ class NewsTableViewController: UITableViewController {
             sender: nil)
     }
     
+    // ----- Расчет размера фото
     
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        func currentPhotoHeight(_ item: NewsItem) -> CGFloat {
+            guard let height = item.attachments?[0].photo?.photoAvailable?.height else { return UITableView.automaticDimension }
+            guard let width = item.attachments?[0].photo?.photoAvailable?.width else { return UITableView.automaticDimension }
+            
+            let tableWidth = tableView.bounds.width
+            
+            let aspectRatio = CGFloat(height) / CGFloat(width)
+            let cellHeight = tableWidth * aspectRatio
+            return cellHeight
+        }
+        
+        let currentItem = itemsArray[indexPath.section]
+        
+        switch indexPath.row {
+        case 2:
+            print("Returning image aspect ratio")
+            return currentPhotoHeight(currentItem)
+        default:
+            return UITableView.automaticDimension
+        }
+        
+
+    }
+    
+
     // ----- Refresh Control block
     
     let newsRefreshControl: UIRefreshControl = {
