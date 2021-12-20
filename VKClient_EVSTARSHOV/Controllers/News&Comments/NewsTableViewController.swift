@@ -15,27 +15,36 @@ class NewsTableViewController: UITableViewController {
     
     private let newsService = NewsAPI()
     private var newsFeed: NewsJSON?
-
+    
+    let dateFormatter: DateFormatter = {
+        let df = DateFormatter()
+        df.dateFormat = "dd.MM.yyyy HH.mm"
+        return df
+    }()
+    
+    var dateTextCache: [IndexPath: String] = [:]
+    
+    
     let newsRefreshControl: UIRefreshControl = {
         let refreshControl = UIRefreshControl()
         refreshControl.attributedTitle = NSAttributedString(string: "Updating news feed...")
         refreshControl.addTarget(self, action: #selector(refreshNews), for: .valueChanged)
         return refreshControl
     }()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         makeSection()
-
-            self.newsService.getNews { [weak self] news in
+        
+        self.newsService.getNews { [weak self] news in
             self?.newsFeed = news
-
-                
+            
+            
             print("GOT NEWS IN VC")
             self?.tableView.reloadData()
-            }
-            
+        }
+        
         print("Number of sections: \(newsFeed?.response.items.count ?? 0)")
         tableView.estimatedRowHeight = 100
         tableView.rowHeight = UITableView.automaticDimension
@@ -44,11 +53,11 @@ class NewsTableViewController: UITableViewController {
     
     @IBAction func refreshNewsBtnpressed(_ sender: Any) {
         if refreshBTN.isEnabled == true {
-        print("Refresh News button pressed")
-        self.newsService.getNews { [weak self] news in
-        self?.newsFeed = news
-        print("GOT NEWS IN VC")
-        self?.tableView.reloadData()
+            print("Refresh News button pressed")
+            self.newsService.getNews { [weak self] news in
+                self?.newsFeed = news
+                print("GOT NEWS IN VC")
+                self?.tableView.reloadData()
             }
         }
     }
@@ -56,13 +65,13 @@ class NewsTableViewController: UITableViewController {
     @objc func refreshNews() {
         print("Refreshing news")
         self.newsService.getNews { [weak self] news in
-        self?.newsFeed = news
-        print("GOT NEWS IN VC")
-        self?.tableView.reloadData()
+            self?.newsFeed = news
+            print("GOT NEWS IN VC")
+            self?.tableView.reloadData()
         }
     }
     
-
+    
     func makeSection() {
         let authorNib = UINib(nibName: "NewsAuthorTableViewCell", bundle: nil)
         self.tableView.register(authorNib, forCellReuseIdentifier: "authorCell")
@@ -77,16 +86,16 @@ class NewsTableViewController: UITableViewController {
         let separatorNib = UINib(nibName: "SeparatorTableViewCell", bundle: nil)
         self.tableView.register(separatorNib, forCellReuseIdentifier: "SeparatorTableViewCell")
     }
-
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         return newsFeed?.response.items.count ?? 1
     }
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 5
     }
-
-
+    
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         guard let profiles = newsFeed?.response.profiles,
@@ -107,62 +116,63 @@ class NewsTableViewController: UITableViewController {
                             name = $0.firstName + " " + $0.lastName
                             string = $0.photo100
                         }
+                    }
                 }
-        }
             }
         }
         
         switch (indexPath.section) {
             
-            default:
+        default:
             
             switch (indexPath.row) {
             case 0:
-
-            print("Making author cell")
-            let cell = tableView.dequeueReusableCell(withIdentifier: "authorCell", for: indexPath) as! NewsAuthorTableViewCell
-            let date = items[indexPath.section]
-                let avatarCell = AuthorCellModel(avatar: string ?? "no foto", label: name ?? "name error", date: date.date )
-            cell.configureAuthor(model: avatarCell)
-
-            return cell
-
-        case 1:
-
-            print("Getting news text")
-            let cell = tableView.dequeueReusableCell(withIdentifier: "newsTextCell", for: indexPath) as! NewsTextTableViewCell
-            let text = items[indexPath.section]
-            let newstext = NewsTextCellModel(newsText: text.text)
-            cell.configureText(textModel: newstext)
-            return cell
-                    
-                case 2:
-                    print("Getting image")
-                                let cell = tableView.dequeueReusableCell(withIdentifier: "newsimageCell", for: indexPath) as! NewsPictureTableViewCell
-                                guard let pictures = findURL(item: items[indexPath.section].attachments) else { let cell = UITableViewCell()
-                                    cell.backgroundColor = .systemGray6
-                                    return cell }
-                                cell.newsPicture.loadImage(url: pictures)
-                    
-                                return cell
-                case 3:
+                
+                
+                print("Making author cell")
+                let cell = tableView.dequeueReusableCell(withIdentifier: "authorCell", for: indexPath) as! NewsAuthorTableViewCell
+                cell.dateLabel.text = getCellDateText(forIndexPath: indexPath, andTimeStamp: Double(items[indexPath.section].date))
+                let avatarCell = AuthorCellModel(avatar: string ?? "no foto", label: name ?? "name error")
+                cell.configureAuthor(model: avatarCell)
+                
+                return cell
+                
+            case 1:
+                
+                print("Getting news text")
+                let cell = tableView.dequeueReusableCell(withIdentifier: "newsTextCell", for: indexPath) as! NewsTextTableViewCell
+                let text = items[indexPath.section]
+                let newstext = NewsTextCellModel(newsText: text.text)
+                cell.configureText(textModel: newstext)
+                return cell
+                
+            case 2:
+                print("Getting image")
+                let cell = tableView.dequeueReusableCell(withIdentifier: "newsimageCell", for: indexPath) as! NewsPictureTableViewCell
+                guard let pictures = findURL(item: items[indexPath.section].attachments) else { let cell = UITableViewCell()
+                    cell.backgroundColor = .systemGray6
+                    return cell }
+                cell.newsPicture.loadImage(url: pictures)
+                
+                return cell
+            case 3:
                 print("Getting likes")
-                                let cell = tableView.dequeueReusableCell(withIdentifier: "NewsLikesTableViewCell", for: indexPath) as! NewsLikesTableViewCell
-                                let likes = String(items[indexPath.section].likes.count)
-                                let comments = String(items[indexPath.section].comments.count)
-                                let reposts = String(items[indexPath.section].reposts.count)
-                                let views = String(items[indexPath.section].views.count)
-                                cell.configure(likes: likes, comments: comments, reposts: reposts, views: views)
-                                return cell
-                case 4:
+                let cell = tableView.dequeueReusableCell(withIdentifier: "NewsLikesTableViewCell", for: indexPath) as! NewsLikesTableViewCell
+                let likes = String(items[indexPath.section].likes.count)
+                let comments = String(items[indexPath.section].comments.count)
+                let reposts = String(items[indexPath.section].reposts.count)
+                let views = String(items[indexPath.section].views.count)
+                cell.configure(likes: likes, comments: comments, reposts: reposts, views: views)
+                return cell
+            case 4:
                 print("Putting separator")
                 let cell = tableView.dequeueReusableCell(withIdentifier: "SeparatorTableViewCell", for: indexPath) as! SeparatorTableViewCell
                 cell.backgroundColor = .systemGray
                 return cell
-
-        default:
-            print("Do nothing in row")
-                    return UITableViewCell()
+                
+            default:
+                print("Do nothing in row")
+                return UITableViewCell()
             }
         }
     }
@@ -174,24 +184,36 @@ class NewsTableViewController: UITableViewController {
             withIdentifier: "showComments",
             sender: nil)
     }
-
+    
+    func getCellDateText(forIndexPath indexPath : IndexPath, andTimeStamp timestamp: Double) -> String {
+        if let stringDate = dateTextCache[indexPath] {
+            return stringDate
+        } else {
+            let date = Date(timeIntervalSince1970: timestamp)
+            let stringDate = dateFormatter.string(from: date)
+            dateTextCache[indexPath] = stringDate
+            return stringDate
+        }
+    }
+    
 }
 
 
 extension NewsTableViewController {
     
     func findURL(item: [Attachment]?) -> URL? {
-      var url = String()
-      guard let item = item else {return URL(string: url)}
-      for item in item {
-          item.photo?.sizes.forEach {
-          if $0.type == "r" {
-            url = $0.url
-          }
+        var url = String()
+        guard let item = item else {return URL(string: url)}
+        for item in item {
+            item.photo?.sizes.forEach {
+                if $0.type == "r" {
+                    url = $0.url
+                }
+            }
         }
-      }
-      return URL(string: url)
+        return URL(string: url)
     }
     
 }
+
 
