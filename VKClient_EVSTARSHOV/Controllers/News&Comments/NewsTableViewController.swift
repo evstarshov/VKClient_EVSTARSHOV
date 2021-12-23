@@ -151,13 +151,13 @@ class NewsTableViewController: UITableViewController {
         }
     
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        defer { tableView.deselectRow(at: indexPath, animated: true)
-        }
-        performSegue(
-            withIdentifier: "showComments",
-            sender: nil)
-    }
+//    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        defer { tableView.deselectRow(at: indexPath, animated: true)
+//        }
+//        performSegue(
+//            withIdentifier: "showComments",
+//            sender: nil)
+//    }
     
     // ----- Расчет размера фото
     
@@ -287,3 +287,5 @@ extension NewsTableViewController: UITableViewDataSourcePrefetching {
         }
     }
 }
+
+

@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -18,26 +19,40 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="текст новости" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9ud-1I-6qZ">
-                        <rect key="frame" x="5" y="12" width="310" height="269"/>
+                        <rect key="frame" x="5" y="12" width="310" height="231"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WXp-Kf-Z97">
+                        <rect key="frame" x="79" y="251" width="162" height="31"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="WXp-Kf-Z97" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="0am-if-b7b"/>
                     <constraint firstItem="9ud-1I-6qZ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="1Jk-Wt-QYY"/>
-                    <constraint firstAttribute="bottom" secondItem="9ud-1I-6qZ" secondAttribute="bottom" constant="12" id="ELn-Cb-dZc"/>
+                    <constraint firstItem="WXp-Kf-Z97" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="63" id="BLk-vv-vEs"/>
+                    <constraint firstItem="WXp-Kf-Z97" firstAttribute="top" secondItem="9ud-1I-6qZ" secondAttribute="bottom" constant="8" symbolic="YES" id="FcU-gL-euM"/>
                     <constraint firstAttribute="trailing" secondItem="9ud-1I-6qZ" secondAttribute="trailing" constant="5" id="aSL-HV-ZEz"/>
                     <constraint firstItem="9ud-1I-6qZ" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="bWH-25-uMN"/>
                     <constraint firstItem="9ud-1I-6qZ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="12" id="kw4-2e-hiZ"/>
-                    <constraint firstItem="9ud-1I-6qZ" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="mGg-cs-CIS"/>
+                    <constraint firstItem="9ud-1I-6qZ" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" constant="-19" id="mGg-cs-CIS"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="WXp-Kf-Z97" secondAttribute="trailing" constant="63" id="uF6-Hh-a3l"/>
+                    <constraint firstItem="WXp-Kf-Z97" firstAttribute="bottom" secondItem="H2p-sc-9uM" secondAttribute="bottomMargin" id="zz3-Dg-2sI"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
-                <outlet property="nextText" destination="9ud-1I-6qZ" id="2fg-Ki-UUH"/>
+                <outlet property="buttonView" destination="WXp-Kf-Z97" id="dwu-yo-1iH"/>
+                <outlet property="newsLabel" destination="9ud-1I-6qZ" id="bv1-ke-yag"/>
             </connections>
             <point key="canvasLocation" x="131.8840579710145" y="159.04017857142856"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
 </document>
