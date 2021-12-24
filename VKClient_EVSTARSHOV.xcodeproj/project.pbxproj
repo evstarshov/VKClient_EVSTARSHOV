@@ -59,7 +59,7 @@
 		3AEB128726FCAC800067A954 /* CustomNavContriller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AEB128626FCAC800067A954 /* CustomNavContriller.swift */; };
 		3AEB128926FCD4E50067A954 /* AvatarFullScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AEB128826FCD4E50067A954 /* AvatarFullScreenViewController.swift */; };
 		3AFA188A26ED10360078E60D /* LaunchScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AFA188926ED10360078E60D /* LaunchScreenViewController.swift */; };
-		9D36D2AA7F3B319B547EF14F /* Pods_VKClient_EVSTARSHOV.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CDB2DC8E5DCED748DECC0814 /* Pods_VKClient_EVSTARSHOV.framework */; };
+		A671FDF398E495E3C0B97B33 /* Pods_VKClient_EVSTARSHOV.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D0152349DE29BDDA0F36309F /* Pods_VKClient_EVSTARSHOV.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -117,9 +117,9 @@
 		3AEB128626FCAC800067A954 /* CustomNavContriller.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomNavContriller.swift; sourceTree = "<group>"; };
 		3AEB128826FCD4E50067A954 /* AvatarFullScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarFullScreenViewController.swift; sourceTree = "<group>"; };
 		3AFA188926ED10360078E60D /* LaunchScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenViewController.swift; sourceTree = "<group>"; };
-		96A427C97CAA6FCC966B7A32 /* Pods-VKClient_EVSTARSHOV.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VKClient_EVSTARSHOV.release.xcconfig"; path = "Target Support Files/Pods-VKClient_EVSTARSHOV/Pods-VKClient_EVSTARSHOV.release.xcconfig"; sourceTree = "<group>"; };
-		CDB2DC8E5DCED748DECC0814 /* Pods_VKClient_EVSTARSHOV.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VKClient_EVSTARSHOV.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		E76E30CB2FC2DF443DAC599E /* Pods-VKClient_EVSTARSHOV.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VKClient_EVSTARSHOV.debug.xcconfig"; path = "Target Support Files/Pods-VKClient_EVSTARSHOV/Pods-VKClient_EVSTARSHOV.debug.xcconfig"; sourceTree = "<group>"; };
+		5669CE41133726A8ABC35C83 /* Pods-VKClient_EVSTARSHOV.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VKClient_EVSTARSHOV.debug.xcconfig"; path = "Target Support Files/Pods-VKClient_EVSTARSHOV/Pods-VKClient_EVSTARSHOV.debug.xcconfig"; sourceTree = "<group>"; };
+		8160A931E9582BDE01DA3380 /* Pods-VKClient_EVSTARSHOV.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VKClient_EVSTARSHOV.release.xcconfig"; path = "Target Support Files/Pods-VKClient_EVSTARSHOV/Pods-VKClient_EVSTARSHOV.release.xcconfig"; sourceTree = "<group>"; };
+		D0152349DE29BDDA0F36309F /* Pods_VKClient_EVSTARSHOV.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VKClient_EVSTARSHOV.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,18 +127,26 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9D36D2AA7F3B319B547EF14F /* Pods_VKClient_EVSTARSHOV.framework in Frameworks */,
+				A671FDF398E495E3C0B97B33 /* Pods_VKClient_EVSTARSHOV.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		09B068747A84F0D14E591BB5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D0152349DE29BDDA0F36309F /* Pods_VKClient_EVSTARSHOV.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		1C61B43464C283936F18FB0F /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				E76E30CB2FC2DF443DAC599E /* Pods-VKClient_EVSTARSHOV.debug.xcconfig */,
-				96A427C97CAA6FCC966B7A32 /* Pods-VKClient_EVSTARSHOV.release.xcconfig */,
+				5669CE41133726A8ABC35C83 /* Pods-VKClient_EVSTARSHOV.debug.xcconfig */,
+				8160A931E9582BDE01DA3380 /* Pods-VKClient_EVSTARSHOV.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -157,7 +165,7 @@
 				3A12704526C7E38C0015E7B2 /* VKClient_EVSTARSHOV */,
 				3A12704426C7E38C0015E7B2 /* Products */,
 				1C61B43464C283936F18FB0F /* Pods */,
-				A8FA1B3CE3F698F90C4B0705 /* Frameworks */,
+				09B068747A84F0D14E591BB5 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -357,14 +365,6 @@
 			path = "News&Comments";
 			sourceTree = "<group>";
 		};
-		A8FA1B3CE3F698F90C4B0705 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				CDB2DC8E5DCED748DECC0814 /* Pods_VKClient_EVSTARSHOV.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -372,11 +372,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3A12705726C7E38C0015E7B2 /* Build configuration list for PBXNativeTarget "VKClient_EVSTARSHOV" */;
 			buildPhases = (
-				C45EB1C92F262D7A9F0A3B15 /* [CP] Check Pods Manifest.lock */,
+				928C6EAE1B97EAD6F92DEEF7 /* [CP] Check Pods Manifest.lock */,
 				3A12703F26C7E38C0015E7B2 /* Sources */,
 				3A12704026C7E38C0015E7B2 /* Frameworks */,
 				3A12704126C7E38C0015E7B2 /* Resources */,
-				884F6488EE52718CE7E8C0D8 /* [CP] Embed Pods Frameworks */,
+				4BCD74C1C7A74489A16D5F65 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -439,7 +439,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		884F6488EE52718CE7E8C0D8 /* [CP] Embed Pods Frameworks */ = {
+		4BCD74C1C7A74489A16D5F65 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -456,7 +456,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-VKClient_EVSTARSHOV/Pods-VKClient_EVSTARSHOV-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		C45EB1C92F262D7A9F0A3B15 /* [CP] Check Pods Manifest.lock */ = {
+		928C6EAE1B97EAD6F92DEEF7 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -663,7 +663,7 @@
 		};
 		3A12705826C7E38C0015E7B2 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E76E30CB2FC2DF443DAC599E /* Pods-VKClient_EVSTARSHOV.debug.xcconfig */;
+			baseConfigurationReference = 5669CE41133726A8ABC35C83 /* Pods-VKClient_EVSTARSHOV.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -683,7 +683,7 @@
 		};
 		3A12705926C7E38C0015E7B2 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 96A427C97CAA6FCC966B7A32 /* Pods-VKClient_EVSTARSHOV.release.xcconfig */;
+			baseConfigurationReference = 8160A931E9582BDE01DA3380 /* Pods-VKClient_EVSTARSHOV.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

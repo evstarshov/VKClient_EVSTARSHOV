@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -396,21 +396,8 @@
                             <outlet property="delegate" destination="HFV-K5-mAn" id="05h-Ej-q37"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Новости" id="LxB-NZ-4sP">
-                        <barButtonItem key="rightBarButtonItem" style="plain" id="3n3-hw-ZZI">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="HOA-mU-enZ">
-                                <rect key="frame" x="250.66666666666666" y="5" width="123.33333333333334" height="34.333333333333336"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="arrow.clockwise" catalog="system" title="Обновить"/>
-                            </button>
-                            <connections>
-                                <action selector="refreshNewsBtnpressed:" destination="HFV-K5-mAn" id="g0o-3U-txY"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Новости" id="LxB-NZ-4sP"/>
                     <connections>
-                        <outlet property="refreshBTN" destination="3n3-hw-ZZI" id="9Ua-sB-bDK"/>
                         <segue destination="uRT-dT-TpO" kind="show" identifier="showComments" id="BuG-wZ-y7O"/>
                     </connections>
                 </tableViewController>
@@ -717,7 +704,6 @@
         <segue reference="a1H-5k-ZLM"/>
     </inferredMetricsTieBreakers>
     <resources>
-        <image name="arrow.clockwise" catalog="system" width="115" height="128"/>
         <image name="arrowshape.turn.up.backward" catalog="system" width="128" height="106"/>
         <image name="heart" width="860" height="792"/>
         <namedColor name="AccentColor">
