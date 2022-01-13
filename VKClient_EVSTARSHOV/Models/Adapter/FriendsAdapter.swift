@@ -20,12 +20,9 @@ struct FriendsAdapterStruct {
 final class FriendsAdapter {
     
     private let friendsService = FriendsAPI()
-    private var myfriends: Results<FriendModel>?
-    private var token: NotificationToken?
     private var friendAdapterList: [FriendsAdapterStruct] = []
     private var friendList: [FriendModel] = []
-    private(set) var myfriendsDB = FriendDB()
-    private var realmNotificationTokens: [String: NotificationToken] = [:]
+    
     
     func getFriends(completion: @escaping ([FriendsAdapterStruct])-> ()) {
         
