@@ -43,7 +43,7 @@ class NewsTextTableViewCell: UITableViewCell {
             
             newsLabel.text? = textModel.newsText
         let readmoreFont = UIFont(name: "Helvetica-Oblique", size: 11.0)
-        let readmoreFontColor = UIColor.blue
+        let readmoreFontColor = UIColor.brandBlue
         DispatchQueue.main.async {
             self.newsLabel.addTrailing(with: "... ", moreText: "Readmore", moreTextFont: readmoreFont!, moreTextColor: readmoreFontColor)
             }

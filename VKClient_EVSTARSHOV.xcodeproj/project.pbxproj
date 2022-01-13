@@ -24,6 +24,8 @@
 		3A4E8BA426D79D84003B01B5 /* FriendsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4E8BA326D79D84003B01B5 /* FriendsModel.swift */; };
 		3A4E8BA726D7A5D6003B01B5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A4E8BA626D7A5D6003B01B5 /* Main.storyboard */; };
 		3A4E8BAD26D7DB4F003B01B5 /* GroupModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4E8BAC26D7DB4F003B01B5 /* GroupModel.swift */; };
+		3A4EA39D278EE18100F35570 /* Color&Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4EA39C278EE18100F35570 /* Color&Fonts.swift */; };
+		3A4EA3A0278EECA700F35570 /* FriendsAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4EA39F278EECA700F35570 /* FriendsAdapter.swift */; };
 		3A598FAA275651D000EC507C /* NewsTextTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A598FA8275651D000EC507C /* NewsTextTableViewCell.swift */; };
 		3A598FAB275651D000EC507C /* NewsTextTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A598FA9275651D000EC507C /* NewsTextTableViewCell.xib */; };
 		3A6D4F8E275D431400BBC36A /* FriendsOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6D4F8D275D431400BBC36A /* FriendsOperation.swift */; };
@@ -82,6 +84,8 @@
 		3A4E8BA326D79D84003B01B5 /* FriendsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsModel.swift; sourceTree = "<group>"; };
 		3A4E8BA626D7A5D6003B01B5 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		3A4E8BAC26D7DB4F003B01B5 /* GroupModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupModel.swift; sourceTree = "<group>"; };
+		3A4EA39C278EE18100F35570 /* Color&Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color&Fonts.swift"; sourceTree = "<group>"; };
+		3A4EA39F278EECA700F35570 /* FriendsAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsAdapter.swift; sourceTree = "<group>"; };
 		3A598FA8275651D000EC507C /* NewsTextTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsTextTableViewCell.swift; sourceTree = "<group>"; };
 		3A598FA9275651D000EC507C /* NewsTextTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewsTextTableViewCell.xib; sourceTree = "<group>"; };
 		3A6D4F8D275D431400BBC36A /* FriendsOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsOperation.swift; sourceTree = "<group>"; };
@@ -227,6 +231,7 @@
 		3A4E8BA226D79D58003B01B5 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				3A4EA39E278EEC6B00F35570 /* Adapter */,
 				3A4E8BA326D79D84003B01B5 /* FriendsModel.swift */,
 				3A4E8BAC26D7DB4F003B01B5 /* GroupModel.swift */,
 				3A000A0127282A6B00581CFA /* PhotoModel.swift */,
@@ -237,6 +242,14 @@
 				3AEB128626FCAC800067A954 /* CustomNavContriller.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		3A4EA39E278EEC6B00F35570 /* Adapter */ = {
+			isa = PBXGroup;
+			children = (
+				3A4EA39F278EECA700F35570 /* FriendsAdapter.swift */,
+			);
+			path = Adapter;
 			sourceTree = "<group>";
 		};
 		3A72C8FA26E76C33006A8480 /* TableHeaders */ = {
@@ -287,6 +300,7 @@
 			isa = PBXGroup;
 			children = (
 				3A990F6A2726DA660048D06F /* Data+PrettyJSON.swift */,
+				3A4EA39C278EE18100F35570 /* Color&Fonts.swift */,
 			);
 			path = Extentions;
 			sourceTree = "<group>";
@@ -508,6 +522,7 @@
 				3A996F6B2742A37C00312EC8 /* PhotosDB.swift in Sources */,
 				3AC0C52626D76B0D00AB3DB5 /* FriendsTableViewController.swift in Sources */,
 				3ADA87712722AFB900AAAAEB /* FriendsAPI.swift in Sources */,
+				3A4EA39D278EE18100F35570 /* Color&Fonts.swift in Sources */,
 				3A996F6F2742A46200312EC8 /* GroupsDB.swift in Sources */,
 				3A12704926C7E38C0015E7B2 /* SceneDelegate.swift in Sources */,
 				3A6D4F92275D4BA200BBC36A /* SeparatorTableViewCell.swift in Sources */,
@@ -522,6 +537,7 @@
 				3A6D4F8E275D431400BBC36A /* FriendsOperation.swift in Sources */,
 				3AEB128726FCAC800067A954 /* CustomNavContriller.swift in Sources */,
 				3A72C8F926E7417B006A8480 /* AddFriendViewController.swift in Sources */,
+				3A4EA3A0278EECA700F35570 /* FriendsAdapter.swift in Sources */,
 				3A4E8BAD26D7DB4F003B01B5 /* GroupModel.swift in Sources */,
 				3A0E22A026D7EA8800970B82 /* GroupTableViewController.swift in Sources */,
 				3AEB128926FCD4E50067A954 /* AvatarFullScreenViewController.swift in Sources */,
