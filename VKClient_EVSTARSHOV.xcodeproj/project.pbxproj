@@ -26,6 +26,7 @@
 		3A4E8BAD26D7DB4F003B01B5 /* GroupModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4E8BAC26D7DB4F003B01B5 /* GroupModel.swift */; };
 		3A4EA39D278EE18100F35570 /* Color&Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4EA39C278EE18100F35570 /* Color&Fonts.swift */; };
 		3A4EA3A0278EECA700F35570 /* FriendsAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4EA39F278EECA700F35570 /* FriendsAdapter.swift */; };
+		3A4EA3A327906FB200F35570 /* FriendsFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A4EA3A227906FB200F35570 /* FriendsFactory.swift */; };
 		3A598FAA275651D000EC507C /* NewsTextTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A598FA8275651D000EC507C /* NewsTextTableViewCell.swift */; };
 		3A598FAB275651D000EC507C /* NewsTextTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3A598FA9275651D000EC507C /* NewsTextTableViewCell.xib */; };
 		3A6D4F8E275D431400BBC36A /* FriendsOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A6D4F8D275D431400BBC36A /* FriendsOperation.swift */; };
@@ -86,6 +87,7 @@
 		3A4E8BAC26D7DB4F003B01B5 /* GroupModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupModel.swift; sourceTree = "<group>"; };
 		3A4EA39C278EE18100F35570 /* Color&Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color&Fonts.swift"; sourceTree = "<group>"; };
 		3A4EA39F278EECA700F35570 /* FriendsAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsAdapter.swift; sourceTree = "<group>"; };
+		3A4EA3A227906FB200F35570 /* FriendsFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsFactory.swift; sourceTree = "<group>"; };
 		3A598FA8275651D000EC507C /* NewsTextTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsTextTableViewCell.swift; sourceTree = "<group>"; };
 		3A598FA9275651D000EC507C /* NewsTextTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewsTextTableViewCell.xib; sourceTree = "<group>"; };
 		3A6D4F8D275D431400BBC36A /* FriendsOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsOperation.swift; sourceTree = "<group>"; };
@@ -231,6 +233,7 @@
 		3A4E8BA226D79D58003B01B5 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				3A4EA3A127906F7E00F35570 /* Factory */,
 				3A4EA39E278EEC6B00F35570 /* Adapter */,
 				3A4E8BA326D79D84003B01B5 /* FriendsModel.swift */,
 				3A4E8BAC26D7DB4F003B01B5 /* GroupModel.swift */,
@@ -250,6 +253,14 @@
 				3A4EA39F278EECA700F35570 /* FriendsAdapter.swift */,
 			);
 			path = Adapter;
+			sourceTree = "<group>";
+		};
+		3A4EA3A127906F7E00F35570 /* Factory */ = {
+			isa = PBXGroup;
+			children = (
+				3A4EA3A227906FB200F35570 /* FriendsFactory.swift */,
+			);
+			path = Factory;
 			sourceTree = "<group>";
 		};
 		3A72C8FA26E76C33006A8480 /* TableHeaders */ = {
@@ -521,6 +532,7 @@
 				3A7F8DD9274D55D8009C7F07 /* AlbumCollectionCell.swift in Sources */,
 				3A996F6B2742A37C00312EC8 /* PhotosDB.swift in Sources */,
 				3AC0C52626D76B0D00AB3DB5 /* FriendsTableViewController.swift in Sources */,
+				3A4EA3A327906FB200F35570 /* FriendsFactory.swift in Sources */,
 				3ADA87712722AFB900AAAAEB /* FriendsAPI.swift in Sources */,
 				3A4EA39D278EE18100F35570 /* Color&Fonts.swift in Sources */,
 				3A996F6F2742A46200312EC8 /* GroupsDB.swift in Sources */,
