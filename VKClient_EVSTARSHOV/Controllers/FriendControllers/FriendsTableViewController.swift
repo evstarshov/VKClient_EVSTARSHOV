@@ -12,16 +12,24 @@ import Alamofire
 class FriendsTableViewController: UITableViewController {
     @IBOutlet var tableViewHeader: FriendsTableHeader!
     
-    var friends: Results<FriendModel>?
-    private let friendsAPI = FriendsAPI()
+    var friends: [FriendsAdapterStruct] = []
+    private let friendsAPI = FriendsAdapter()
     private let myfriendsDB = FriendDB()
     private var token: NotificationToken?
     
     override func viewDidLoad() {
+        
+
+        
         super.viewDidLoad()
-        getFriends()
+        tableView.reloadData()
         print("Realm DB is here \(Realm.Configuration.defaultConfiguration.fileURL!)")
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "friendsCell")
+        friendsAPI.getFriends { [weak self] friend in
+            
+            self?.friends = friend
+            self?.tableView.reloadData()
+        }
         
         // ----- Загрузка титульного изображения
         
@@ -43,7 +51,7 @@ class FriendsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         
-        return friends?.count ?? 0
+        return friends.count ?? 0
     }
     
     
@@ -51,7 +59,7 @@ class FriendsTableViewController: UITableViewController {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "friendsCell", for: indexPath) as! FriendsTableViewCell
         
-        let friend = (friends?[indexPath.row])!
+        let friend = (friends[indexPath.row])
         cell.configureFriend(with: friend)
         
         return cell

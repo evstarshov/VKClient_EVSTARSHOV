@@ -86,6 +86,7 @@ final class FriendsRealmOperation: AsyncOperation {
 
 final class FriendsDisplayOperations: AsyncOperation {
     
+    private var adapter = FriendsAdapter()
     private(set) var myfriends: Results<FriendModel>?
     private(set) var token: NotificationToken?
     var friendsViewController: FriendsTableViewController
@@ -93,7 +94,11 @@ final class FriendsDisplayOperations: AsyncOperation {
     override func main() {
         guard let parsedFriendsListData = dependencies.first as? FriendsRealmOperation
         else { return }
-        self.friendsViewController.friends = parsedFriendsListData.myfriendsDB.load()
+        self.myfriends = parsedFriendsListData.myfriendsDB.load()
+        adapter.getFriends { [weak self] friends in
+            self?.friendsViewController.friends = friends
+            self?.friendsViewController.tableView.reloadData()
+        }
         self.token = self.myfriends?.observe { [weak self] changes in
             guard let self = self else { return }
             
