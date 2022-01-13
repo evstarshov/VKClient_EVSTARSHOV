@@ -11,7 +11,7 @@ import UIKit
 
 struct FriendViewModel {
     let friendName: String
-    let friendAvatar: AvatarImage!
+    let friendAvatar: String
 }
 
 
@@ -22,11 +22,8 @@ final class FriendViewModelFactory {
     
     private func viewModel(from friend: FriendsAdapterStruct) -> FriendViewModel {
         let friendName = String(friend.firstName + " " + friend.lastName)
-        let avatar = AvatarImage()
-        let friendAvatar = friend.photo100
-        if let imageURL = URL(string: friendAvatar) {
-            avatar.loadImage(url: imageURL)
-        }
-        return FriendViewModel(friendName: friendName, friendAvatar: avatar)
+        let avatarURL = String(friend.photo100)
+        
+        return FriendViewModel(friendName: friendName, friendAvatar: avatarURL)
     }
 }

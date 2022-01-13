@@ -41,11 +41,11 @@ class FriendsTableViewCell: UITableViewCell {
         
     }
     
-    func configureFriend(with friend: FriendsAdapterStruct) {
-        if let imageUrl = URL(string: friend.photo100 ){
+    func configureFriend(with viewModel: FriendViewModel) {
+        if let imageUrl = URL(string: viewModel.friendAvatar ){
             friendImageAvatar?.loadImage(url: imageUrl)
         }
-        friendNameLabel?.text = friend.firstName + " " + friend.lastName
+        friendNameLabel?.text = viewModel.friendName
         contentMode = .scaleAspectFill
         
     }

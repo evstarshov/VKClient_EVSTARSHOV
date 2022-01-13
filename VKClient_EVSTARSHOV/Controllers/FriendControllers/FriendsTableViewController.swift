@@ -16,6 +16,8 @@ class FriendsTableViewController: UITableViewController {
     private let friendsAPI = FriendsAdapter()
     private let myfriendsDB = FriendDB()
     private var token: NotificationToken?
+    private let viewModelFactory = FriendViewModelFactory()
+    private var viewModels: [FriendViewModel] = []
     
     override func viewDidLoad() {
         
@@ -28,6 +30,7 @@ class FriendsTableViewController: UITableViewController {
         friendsAPI.getFriends { [weak self] friend in
             
             self?.friends = friend
+            self?.viewModels = self?.viewModelFactory.constructViewModels(from: friend) ?? [FriendViewModel(friendName: "name error", friendAvatar: "avatar error")]
             self?.tableView.reloadData()
         }
         
@@ -51,7 +54,7 @@ class FriendsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         
-        return friends.count ?? 0
+        return viewModels.count
     }
     
     
@@ -59,8 +62,7 @@ class FriendsTableViewController: UITableViewController {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "friendsCell", for: indexPath) as! FriendsTableViewCell
         
-        let friend = (friends[indexPath.row])
-        cell.configureFriend(with: friend)
+        cell.configureFriend(with: viewModels[indexPath.row])
         
         return cell
     }
