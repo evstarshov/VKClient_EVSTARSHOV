@@ -53,6 +53,7 @@
 		3A996F6F2742A46200312EC8 /* GroupsDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A996F6E2742A46200312EC8 /* GroupsDB.swift */; };
 		3A996F712742A69000312EC8 /* NewsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A996F702742A69000312EC8 /* NewsAPI.swift */; };
 		3AB4D839271D8DBB00BD4589 /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AB4D838271D8DBB00BD4589 /* Account.swift */; };
+		3ABB657D27A00E87003D6974 /* ProtocolFriendsServiceInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ABB657C27A00E86003D6974 /* ProtocolFriendsServiceInterface.swift */; };
 		3AC0C52626D76B0D00AB3DB5 /* FriendsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AC0C52526D76B0D00AB3DB5 /* FriendsTableViewController.swift */; };
 		3ADA87712722AFB900AAAAEB /* FriendsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADA87702722AFB900AAAAEB /* FriendsAPI.swift */; };
 		3ADA87732722BBC200AAAAEB /* PhotoAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ADA87722722BBC200AAAAEB /* PhotoAPI.swift */; };
@@ -114,6 +115,7 @@
 		3A996F6E2742A46200312EC8 /* GroupsDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupsDB.swift; sourceTree = "<group>"; };
 		3A996F702742A69000312EC8 /* NewsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsAPI.swift; sourceTree = "<group>"; };
 		3AB4D838271D8DBB00BD4589 /* Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
+		3ABB657C27A00E86003D6974 /* ProtocolFriendsServiceInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProtocolFriendsServiceInterface.swift; sourceTree = "<group>"; };
 		3AC0C52526D76B0D00AB3DB5 /* FriendsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsTableViewController.swift; sourceTree = "<group>"; };
 		3ADA87702722AFB900AAAAEB /* FriendsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsAPI.swift; sourceTree = "<group>"; };
 		3ADA87722722BBC200AAAAEB /* PhotoAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoAPI.swift; sourceTree = "<group>"; };
@@ -339,9 +341,18 @@
 			path = Services;
 			sourceTree = "<group>";
 		};
+		3ABB657B27A00ADE003D6974 /* Proxy */ = {
+			isa = PBXGroup;
+			children = (
+				3ABB657C27A00E86003D6974 /* ProtocolFriendsServiceInterface.swift */,
+			);
+			path = Proxy;
+			sourceTree = "<group>";
+		};
 		3ADA876C272286E200AAAAEB /* vk-api */ = {
 			isa = PBXGroup;
 			children = (
+				3ABB657B27A00ADE003D6974 /* Proxy */,
 				3A996F692742A35E00312EC8 /* Database */,
 				3A4543D7272A8DD200C2DF95 /* Modules */,
 				3A990F692726DA660048D06F /* Extentions */,
@@ -522,6 +533,7 @@
 				3A598FAA275651D000EC507C /* NewsTextTableViewCell.swift in Sources */,
 				3A72C8FF26E782A3006A8480 /* AllFriendsSectionHeader.swift in Sources */,
 				3A72C91726E9B3AF006A8480 /* CommentNewsTableViewController.swift in Sources */,
+				3ABB657D27A00E87003D6974 /* ProtocolFriendsServiceInterface.swift in Sources */,
 				3A12704726C7E38C0015E7B2 /* AppDelegate.swift in Sources */,
 				3A7F8DD3274D55D8009C7F07 /* NewsAuthorTableViewCell.swift in Sources */,
 				3A72C90126E7BE2C006A8480 /* AllGroupsTableViewController.swift in Sources */,

@@ -18,6 +18,7 @@ class FriendsTableViewController: UITableViewController {
     private var token: NotificationToken?
     private let viewModelFactory = FriendViewModelFactory()
     private var viewModels: [FriendViewModel] = []
+    private let proxy = FriendsServiceProxy(friendsService: FriendsAdapter())
     
     override func viewDidLoad() {
         
@@ -27,12 +28,19 @@ class FriendsTableViewController: UITableViewController {
         tableView.reloadData()
         print("Realm DB is here \(Realm.Configuration.defaultConfiguration.fileURL!)")
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "friendsCell")
+        proxy.getFriends { [weak self] friend in
+
+            self?.friends = friend
+            self?.viewModels = self?.viewModelFactory.constructViewModels(from: friend) ?? [FriendViewModel(friendName: "name error", friendAvatar: "avatar error")]
+            self?.tableView.reloadData()
+        }
         friendsAPI.getFriends { [weak self] friend in
             
             self?.friends = friend
             self?.viewModels = self?.viewModelFactory.constructViewModels(from: friend) ?? [FriendViewModel(friendName: "name error", friendAvatar: "avatar error")]
             self?.tableView.reloadData()
         }
+
         
         // ----- Загрузка титульного изображения
         
