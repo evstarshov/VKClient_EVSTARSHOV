@@ -12,16 +12,35 @@ import Alamofire
 class FriendsTableViewController: UITableViewController {
     @IBOutlet var tableViewHeader: FriendsTableHeader!
     
-    var friends: [FriendModel] = []
-    private let friendsAPI = FriendsAPI()
+    var friends: [FriendsAdapterStruct] = []
+    private let friendsAPI = FriendsAdapter()
     private let myfriendsDB = FriendDB()
-    private var myfriends: Results<FriendModel>?
     private var token: NotificationToken?
+    private let viewModelFactory = FriendViewModelFactory()
+    private var viewModels: [FriendViewModel] = []
+    private let proxy = FriendsServiceProxy(friendsService: FriendsAdapter())
     
     override func viewDidLoad() {
+        
+
+        
         super.viewDidLoad()
-        getFriends()
+        tableView.reloadData()
+        print("Realm DB is here \(Realm.Configuration.defaultConfiguration.fileURL!)")
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "friendsCell")
+        proxy.getFriends { [weak self] friend in
+
+            self?.friends = friend
+            self?.viewModels = self?.viewModelFactory.constructViewModels(from: friend) ?? [FriendViewModel(friendName: "name error", friendAvatar: "avatar error")]
+            self?.tableView.reloadData()
+        }
+        friendsAPI.getFriends { [weak self] friend in
+            
+            self?.friends = friend
+            self?.viewModels = self?.viewModelFactory.constructViewModels(from: friend) ?? [FriendViewModel(friendName: "name error", friendAvatar: "avatar error")]
+            self?.tableView.reloadData()
+        }
+
         
         // ----- Загрузка титульного изображения
         
@@ -34,7 +53,7 @@ class FriendsTableViewController: UITableViewController {
         tableViewHeader.imageView.image = UIImage(named: "tableHeader3")
         tableViewHeader.imageView.contentMode = .scaleAspectFill
         tableView.tableHeaderView = tableViewHeader
-        // Получение списка друзей из JSON
+
         
       
     }
@@ -43,7 +62,7 @@ class FriendsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         
-        return friends.count
+        return viewModels.count
     }
     
     
@@ -51,8 +70,7 @@ class FriendsTableViewController: UITableViewController {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "friendsCell", for: indexPath) as! FriendsTableViewCell
         
-        let friend = friends[indexPath.row]
-        cell.configureFriend(with: friend)
+        cell.configureFriend(with: viewModels[indexPath.row])
         
         return cell
     }
@@ -90,12 +108,18 @@ class FriendsTableViewController: UITableViewController {
         
         let getData = FriendsMakeAPIOperation()
         let parceData = FriendsParcingOperation()
+        let realmData = FriendsRealmOperation()
         let displayData = FriendsDisplayOperations(controller: self)
         
         friendsQueue.addOperation(getData)
         parceData.addDependency(getData)
         friendsQueue.addOperation(parceData)
-        displayData.addDependency(parceData)
+        realmData.addDependency(parceData)
+        friendsQueue.addOperation(realmData)
+        displayData.addDependency(realmData)
+        
+
+        
         OperationQueue.main.addOperation(displayData)
     }
 }

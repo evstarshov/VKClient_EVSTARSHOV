@@ -11,14 +11,14 @@ import RealmSwift
 
 final class FriendsMakeAPIOperation: AsyncOperation {
     
-   private(set) var data: Data?
+    private(set) var data: Data?
     
     override func cancel() {
-      request.cancel()
-      super.cancel()
+        request.cancel()
+        super.cancel()
     }
     
-        var request: DataRequest {
+    var request: DataRequest {
         let baseURL = "https://api.vk.com/method"
         let token = Account.shared.token
         let userId = Account.shared.userId
@@ -38,9 +38,9 @@ final class FriendsMakeAPIOperation: AsyncOperation {
         let url = baseURL + method
         
         return AF.request(url, method: .get, parameters: parameters)
-
-        }
         
+    }
+    
     override func main() {
         request.responseData { [weak self]
             response in
@@ -48,13 +48,13 @@ final class FriendsMakeAPIOperation: AsyncOperation {
             self?.state = .finished
         }
     }
-        
+    
     
 }
 
 final class FriendsParcingOperation: AsyncOperation {
     
-   
+    
     private(set) var friendsList: [FriendModel]?
     
     override func main() {
@@ -66,82 +66,124 @@ final class FriendsParcingOperation: AsyncOperation {
     }
 }
 
+final class FriendsRealmOperation: AsyncOperation {
+    
+    private(set) var myfriendsDB = FriendDB()
+    
+    
+    override func main() {
+        guard let realmOperation = self.dependencies.first as? FriendsParcingOperation,
+              let friends = realmOperation.friendsList else { return }
+        if myfriendsDB.load().isEmpty {
+                
+            myfriendsDB.save(friends)
+        }
+        self.state = .finished
+    }
+    
+    
+}
+
 final class FriendsDisplayOperations: AsyncOperation {
     
+    private var adapter = FriendsAdapter()
+    private(set) var myfriends: Results<FriendModel>?
+    private(set) var token: NotificationToken?
     var friendsViewController: FriendsTableViewController
     
     override func main() {
-        guard let parsedFriendsListData = dependencies.first as? FriendsParcingOperation,
-              let friendsList = parsedFriendsListData.friendsList else { return }
-        self.friendsViewController.friends = friendsList
+        guard let parsedFriendsListData = dependencies.first as? FriendsRealmOperation
+        else { return }
+        self.myfriends = parsedFriendsListData.myfriendsDB.load()
+        adapter.getFriends { [weak self] friends in
+            self?.friendsViewController.friends = friends
+            self?.friendsViewController.tableView.reloadData()
+        }
+        self.token = self.myfriends?.observe { [weak self] changes in
+            guard let self = self else { return }
+            
+            switch changes {
+            case .initial:
+                self.friendsViewController.tableView.reloadData()
+            case .update(_, let deletions, let insertions, let modifications):
+                self.friendsViewController.tableView.beginUpdates()
+                self.friendsViewController.tableView.insertRows(at: insertions.map({ IndexPath(row: $0, section: 0) }), with: .automatic)
+                self.friendsViewController.tableView.deleteRows(at: deletions.map({ IndexPath(row: $0, section: 0)}), with: .automatic)
+                self.friendsViewController.tableView.reloadRows(at: modifications.map({ IndexPath(row: $0, section: 0) }), with: .automatic)
+                self.friendsViewController.tableView.endUpdates()
+            case .error(let error):
+                fatalError("\(error)")
+            }
+        }
+        
         friendsViewController.tableView.reloadData()
         self.state = .finished
-        }
+    }
     
     init(controller: FriendsTableViewController) {
         
         self.friendsViewController = controller
-    
+        
     }
 }
 
 
 class AsyncOperation: Operation {
-  
-  enum State: String {
-    case ready, executing, finished
     
-    fileprivate var keyPath: String {
-      return "is" + self.rawValue.capitalized
-    }
-  }
-  
-  var state: State = State.ready {
-    willSet {
-      self.willChangeValue(forKey: self.state.keyPath)
-      self.willChangeValue(forKey: newValue.keyPath)
+    enum State: String {
+        case ready, executing, finished
+        
+        fileprivate var keyPath: String {
+            return "is" + self.rawValue.capitalized
+        }
     }
     
-    didSet {
-      self.didChangeValue(forKey: self.state.keyPath)
-      self.didChangeValue(forKey: oldValue.keyPath)
+    var state: State = State.ready {
+        willSet {
+            self.willChangeValue(forKey: self.state.keyPath)
+            self.willChangeValue(forKey: newValue.keyPath)
+        }
+        
+        didSet {
+            self.didChangeValue(forKey: self.state.keyPath)
+            self.didChangeValue(forKey: oldValue.keyPath)
+        }
     }
-  }
-  
-  let databaseService = FriendDB()
-  
-  override var isAsynchronous: Bool {
-    return true
-  }
-  
-  override var isReady: Bool {
-    return super.isReady && self.state == .ready
-  }
-  
-  override var isExecuting: Bool {
-    return self.state == .executing
-  }
-  
-  override var isFinished: Bool {
-    return self.state == .finished
-  }
-  
-  override func start() {
-    if self.isCancelled {
-      self.state = .finished
-    } else {
-      self.main()
-      self.state = .executing
+    
+    let databaseService = FriendDB()
+    
+    override var isAsynchronous: Bool {
+        return true
     }
-  }
-  
-  override func cancel() {
-    super.cancel()
-    self.state = .finished
-  }
-  
-  func finished() {
-    self.state = .finished
-  }
+    
+    override var isReady: Bool {
+        return super.isReady && self.state == .ready
+    }
+    
+    override var isExecuting: Bool {
+        return self.state == .executing
+    }
+    
+    override var isFinished: Bool {
+        return self.state == .finished
+    }
+    
+    override func start() {
+        if self.isCancelled {
+            self.state = .finished
+        } else {
+            self.main()
+            self.state = .executing
+        }
+    }
+    
+    override func cancel() {
+        super.cancel()
+        self.state = .finished
+    }
+    
+    func finished() {
+        self.state = .finished
+    }
 }
 

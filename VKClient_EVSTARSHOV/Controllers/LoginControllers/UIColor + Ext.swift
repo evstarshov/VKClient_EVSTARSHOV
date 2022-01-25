@@ -1,9 +1,4 @@
-//
-//  UIColor + Ext.swift
-//  Weather1640
-//
-//  Created by Юрий Султанов on 26.08.2021.
-//
+
 
 import UIKit
 

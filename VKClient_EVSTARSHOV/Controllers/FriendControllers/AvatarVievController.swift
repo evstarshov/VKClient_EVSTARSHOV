@@ -71,7 +71,7 @@ class AvatarVievController: UIViewController {
         for _ in imagesArray.enumerated() {
             let indicatorImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 5, height: 5))
             indicatorImageView.image = UIImage(systemName: "circle.fill")
-            indicatorImageView.tintColor = UIColor.systemBlue
+            indicatorImageView.tintColor = UIColor.brandBlue
             indicatorImages.append(indicatorImageView)
         }
     }
@@ -84,9 +84,9 @@ class AvatarVievController: UIViewController {
     
     private func changeSliderIndicator() {
         for item in indicatorImages {
-            item.tintColor = UIColor.systemBlue
+            item.tintColor = UIColor.brandBlue
         }
-        indicatorImages[currentIndex].tintColor = UIColor.red
+        indicatorImages[currentIndex].tintColor = UIColor.brandRed
     }
     
     private func imageViewConfig() {
